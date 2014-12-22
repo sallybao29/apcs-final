@@ -12,7 +12,7 @@ public class Puzzle extends Item{
 
     public String check(String attempt){
 	if (attempt.compareTo(answer) == 0){
-	    solved = true;
+	    solved = true;	    
 	    return smessage;
 	}
 	else {
@@ -20,7 +20,9 @@ public class Puzzle extends Item{
 	}
     }
 
-    public 
+    public static void main(String[] args){
+    
+    }
 
 
 }
