@@ -1,17 +1,23 @@
 public class Item{
     private final String name;
     private String description;
-    private boolean used;
+    private boolean used = false;
+    private boolean usable;
 
-    public Item(String n, String descript){
+    public Item(String n, String descript, boolean a){
 	name = n;
 	description = descript;
-	used = false;
+	usable = a;
     }
 
     public String getName(){
 	return name;
     }
+
+    public String toString(){
+	return getName(); 
+    }
+
     public String getDescript(){
 	return description;
     }
@@ -24,7 +30,11 @@ public class Item{
 	return used;
     }
 
-    public void setStatus(){
+    public boolean canGet(){
+	return usable;
+    }
+
+    public void changeStatus(){
 	used = true;
     }
 
