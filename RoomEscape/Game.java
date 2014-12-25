@@ -15,11 +15,17 @@ public class Game{
 	room.add(new Item("Poster", "A poster of the periodic table of elements.",false));
 	room.add(new Item("Closet", "A closet with sliding doors", false));
 	room.add(new Item("Bathroom door", "The door to the bathroom", false));
+	room.add(new Item("Letter", "Son, we saw your last math test score.\nYou have brought shame to your family.\nBut it's alright, everyone makes mistakes.\nA great man once said, \"A man must be bIg enough to admit his miStakes, smart enough to profIt from them, and strong enough to Correct them.\" So just stay in your room and reflect on your actions for another two days.\nBy then, you will surely have been able to realize the error of your ways and find the solution to your demise./nSincerely, Your Parents", true));
+
     }
 
     public ArrayList<Item> getRoom(){
 	return room;
-    }				   
+    }	
+
+    public boolean gameWon(){
+	return gameWon;
+    }			   
 
     public void interact(Item thing){
 	if (thing.equals(room.get(0))){

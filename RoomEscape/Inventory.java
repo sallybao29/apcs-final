@@ -7,7 +7,7 @@ public class Inventory{
     public void take(Item a){
 	if (a.canGet() == true){
 	    inventory.add(a);
-	    System.out.println("You put the " + a + " into your bag.");
+	    System.out.println("You put the " + a + " away.");
 	}
 	else {
 	    System.out.println("What the devil would you do with a " + a + "? Leave it.");
