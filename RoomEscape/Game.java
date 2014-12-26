@@ -44,13 +44,13 @@ public class Game{
 	    System.out.println("1)Look at books\n2)Now's not the time!");
 	}
 	if(thing.equals(room.get(5))){
-	    System.out.println("1)Take poster\2)Leave it. It looks nice there");
+	    System.out.println("1)Take poster\n2)Leave it. It looks nice there");
 	}
 	if(thing.equals(room.get(6))){
-
+	    System.out.println("1)Slide open left door\n2)Slide open right door"); 
 	}
 	if(thing.equals(room.get(7))){
-
+	    System.out.println("1)Open door\n2)Inspect door");
 	}
     }
 }
