@@ -1,16 +1,17 @@
 import java.util.Scanner;
 
 public class Driver{
+
+    public static void wait(int num){
+	try{
+	    Thread.sleep(num);
+	}
+	catch (Exception e){}
+    }
+
     public static void main(String[] args){
 	Game g = new Game();
 	Inventory stuff = new Inventory();
-
-	public static void wait(int num){
-	    try{
-		Thread.sleep(num);
-	    }
-	    catch (Exception e){}
-	}
 
 	System.out.println("...Huh? Where is this?");
 	wait(2000);
@@ -43,14 +44,49 @@ public class Driver{
 	    
 	    r = new Driver().AskUser("\n[1]Inspect an object, [2]Look at Inventory: ");
 	    if (r.equals("1")){
-	        String inspect = new Driver().AskUser("\nYou want to inspect... [0]Bed, [1]Desk, [2]Bag, [3]Trash can, [4]Rug, [5]Bookshelf, [6]Poster, [7]Closet, [8]Bathroom door");
-		if (inspect.equals("0" || "1" || "2" || "3" || "4" || "5" || "6" || "7" || "8")){
-		    g.getRoom().get(inspect).getDescript();
+		int i = 0;
+		while (i != 1){
+		    String inspect = new Driver().AskUser("\nYou want to inspect... [Bed], [Desk], [Bag], [Trash can], [Rug], [Bookshelf], [Poster], [Closet], [Bathroom door]");
+		    if (inspect.equals("Bed") || 
+			inspect.equals("Desk") || 
+			inspect.equals("Bag") || 
+			inspect.equals("Trash can") ||
+			inspect.equals("Rug") || 
+			inspect.equals("Bookshelf") || 
+			inspect.equals("Poster") || 
+			inspect.equals("Closet") || 
+			inspect.equals("Bathroom door")){
+			g.getRoom().((Item)inspect).getDescript();
+			i = 1;
+		    }
+		    else {
+			System.out.println("\nPlease enter the name of an item.");
+		    }
 		}
-		System.out.println("What do you want to do?");
-		String c = new Driver().AskUser("[1]Inspect further, [2]Move on");
+		System.out.println("\nWhat do you want to do?");
+		i = 0;
+		while (i != 1){
+		    String c = new Driver().AskUser("\n[1]Inspect further, [2]Move on");
+		    if (c.equals("1")){
+			g.interact(g.getRoom().get(inspect));
+			i = 1;
+		    }
+		    else if (c.equals("2")){
+		        i = 1;
+		    }
+		    else{
+			System.out.println("\nPlease enter the number of your choice");
+		    }
+		}
+	    }
+	    else if (r.equals("2")){
+		System.out.println(stuff.list());
+		String c = new Driver().AskUser("\n[1]Inspect an item, [2]Exit Inventory");
 		if (c.equals("1")){
-		    g.interact(g.getRoom().get(inspect));
+		    String inspect = new Driver().AskUser("\nWhich item would you like to inspect?");
+		    stuff.inspect.getDescript();
+		}
+		else if (c.equals("2")){
 		}
 	    }
 	}
@@ -58,7 +94,10 @@ public class Driver{
 	for (int i = 0;i < g.getRoom().size();i++){
 	    System.out.println(g.getRoom().get(i));
 	}
+
+	System.out.println("Yes! You're finally free!");
     }
+
     public String AskUser(String mToUser){
 	String s = "";
 	Scanner sc = new Scanner(System.in);
