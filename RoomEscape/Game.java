@@ -55,6 +55,9 @@ public class Game{
 		else if (c == 3){
 		    i = 1;
 		}
+		else{
+		    System.out.println("\nPlease enter the number of your choice");
+		}
 	    }
 	}
 	if (thing.equals(room.get(1))){
@@ -66,6 +69,9 @@ public class Game{
 		else if (c == 3){}
 		else if (c == 4){
 		    i = 1;
+		}
+		else{
+		    System.out.println("\nPlease enter the number of your choice");
 		}
 	    }
 	}
@@ -95,6 +101,9 @@ public class Game{
 		else if (c == 2){
 		    i = 1;
 		}
+		else{
+		    System.out.println("\nPlease enter the number of your choice");
+		}
 	    }
 	}
 	if (thing.equals(room.get(4))){
@@ -105,6 +114,9 @@ public class Game{
 		else if (c == 2){
 		    i = 1;
 		}
+		else{
+		    System.out.println("\nPlease enter the number of your choice");
+		}
 	    }
 	}
 	if (thing.equals(room.get(5))){
@@ -114,6 +126,9 @@ public class Game{
 		if (c == 1){}
 		else if (c == 2){
 		    i = 1;
+		}
+		else{
+		    System.out.println("\nPlease enter the number of your choice");
 		}
 	    }
 	}
@@ -127,6 +142,9 @@ public class Game{
 		}
 		else if (c == 3){
 		    i = 1;
+		}
+		else{
+		    System.out.println("\nPlease enter the number of your choice");
 		}
 	    }
 	}
@@ -159,7 +177,19 @@ public class Game{
 	    }
 	}
 	if(thing.equals(room.get(8))){
-	    c = new Game().AskUser("\n[1]Open door\n[2]Don't need the toilet right now");
+	    i = 0;
+	    while (i != 1){
+		c = new Game().AskUser("\n[1]Open door\n[2]Don't need the toilet right now");
+		if (c == 1){
+
+		}
+		else if (c == 2){
+		    i = 1;
+		}
+		else{
+		    System.out.println("\nPlease enter the number of your choice");
+		}
+	    }
 	}
     }
 
