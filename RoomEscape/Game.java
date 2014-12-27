@@ -31,32 +31,39 @@ public class Game{
     }
 
     public void interact(Item thing){
+	Scanner sc = new Scanner(System.in);
+	String input = sc.nextLine();
+        int choice = Integer.parseInt(input);
+	
 	if (thing.equals(room.get(0))){
-	    System.out.println("1)Check under the blankets\n2)Check pillow");
+	    System.out.println("[1]Check under the blankets\n[2]Check pillow\n[3]Already saw the bed");
+	    if (choice == 1){
+
+	    }
 	}
 	if (thing.equals(room.get(1))){
-	    System.out.println("1)Check laptop\n2)Check pencil holder\n3)Check drawer"); 
+	    System.out.println("[1]Check laptop\n[2]Check pencil holder\n[3]Check drawer\n[4]Nope"); 
 	}
 	if (thing.equals(room.get(2))){
-	    System.out.println("1)Open bag\n2)Move on");
+	    System.out.println("[1]Open bag\n[2]Move on");
 	}
 	if (thing.equals(room.get(3))){
-	    System.out.println("1)Flip rug\n2)Nah");
+	    System.out.println("[1]Flip rug\n[2]Nah");
 	}
 	if (thing.equals(room.get(4))){
-	    System.out.println("1)Rummage through trash can\n2)How uncivilized!");
+	    System.out.println("[1]Rummage through trash can\n[2]How unsanitary!");
 	}
 	if (thing.equals(room.get(5))){
-	    System.out.println("1)Look at books\n2)Now's not the time!");
+	    System.out.println("[1]Look at books\n[2]Now's not the time!");
 	}
 	if(thing.equals(room.get(6))){
-	    System.out.println("1)Take poster\n2)Leave it. It looks nice there");
+	    System.out.println("[1]Take poster\n[2]Leave it. It looks nice there");
 	}
 	if(thing.equals(room.get(7))){
-	    System.out.println("1)Slide open left door\n2)Slide open right door"); 
+	    System.out.println("[1]Slide open left door\n[2]Slide open right door"); 
 	}
 	if(thing.equals(room.get(8))){
-	    System.out.println("1)Open door\n2)Inspect door");
+	    System.out.println("[1]Open door\n[2]Don't need the toilet right now");
 	}
     }
 }

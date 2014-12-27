@@ -14,9 +14,15 @@ public class Inventory{
 	}
     }
 
+    public ArrayList<Item> getInventory(){
+	return inventory;
+    }
+    
+
     public String list(){
 	String s = "";
 	for (int i = 0;i < inventory.size();i++){
+	    s += "[" + i + "]";
 	    s += inventory.get(i);
 	    s += "\n";
 	}
