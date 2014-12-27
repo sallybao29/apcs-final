@@ -36,9 +36,11 @@ public class Driver{
     
 	System.out.println("\nNow that you've taken a good look at your room, what do you want to do?");
 
-	while (g.gameWon() == false){
-	    
-	    int r = new Driver().AskUser("\n[1]Inspect an object, [2]Look at Inventory\n");
+	boolean endGame = false;
+
+	while (g.gameWon() == false && endGame == false){
+
+	    int r = new Driver().AskUser("\n[1]Inspect an object, [2]Look at Inventory, [3]Exit Game");
 	    if (r == 1){
 		int i = 0;
 		int inspect = new Driver().AskUser("\nYou want to inspect... [0]Bed, [1]Desk, [2]Bag, [3]Trash can, [4]Rug, [5]Bookshelf, [6]Poster, [7]Closet, [8]Bathroom door\n");
@@ -78,14 +80,27 @@ public class Driver{
 		    }
 		}
 	    }
+	    else if (r == 3){
+		endGame = true;
+	    }
+	    else {
+		System.out.println("Please enter the number of your choice");
+	    }
 	}
 	
 
-	for (int i = 0;i < g.getRoom().size();i++){
-	    System.out.println(g.getRoom().get(i));
-	}
+	/*
+	  for (int i = 0;i < g.getRoom().size();i++){
+	  System.out.println(g.getRoom().get(i));
+	  }
+	*/
 
-	System.out.println("Yes! You're finally free!");
+	if (endGame){
+	    System.out.println("What?! You Quit? Such a disappointment.");
+	}
+	else{
+	    System.out.println("Yes! You're finally free!");
+	}
     }
 
     public int AskUser(String mToUser){
@@ -93,6 +108,11 @@ public class Driver{
 	Scanner sc = new Scanner(System.in);
 	System.out.print(mToUser);
 	s = sc.nextLine();
-	return Integer.parseInt(s);
+        try{
+	    return Integer.parseInt(s);
+	}
+	catch(NumberFormatException e){
+	    return -1;
+	}
     }
 }
