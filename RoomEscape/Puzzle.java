@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Puzzle extends Item{
     private final String answer;
     private final String smessage;
-    private boolean solved;
+    private boolean solved = false;
    
 
     public Puzzle(String name, String descript, String ans, String s){
@@ -14,6 +14,10 @@ public class Puzzle extends Item{
 
     public String getAnswer(){
 	return answer;
+    }
+
+    public boolean getSolved(){
+	return solved;
     }
 
     public String check(String attempt){

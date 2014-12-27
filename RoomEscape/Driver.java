@@ -45,7 +45,7 @@ public class Driver{
 		int i = 0;
 		int inspect = new Driver().AskUser("\nYou want to inspect... [0]Bed, [1]Desk, [2]Bag, [3]Trash can, [4]Rug, [5]Bookshelf, [6]Poster, [7]Closet, [8]Bathroom door\n");
 		while (i != 1){
-		    if (inspect >= 0 && inspect < g.getRoom().size()){
+		    if (inspect >= 0 && inspect < 9){
 			g.getRoom().get(inspect).getDescript();
 			i = 1;
 		    }
@@ -88,13 +88,6 @@ public class Driver{
 	    }
 	}
 	
-
-	/*
-	  for (int i = 0;i < g.getRoom().size();i++){
-	  System.out.println(g.getRoom().get(i));
-	  }
-	*/
-
 	if (endGame){
 	    System.out.println("What?! You Quit? Such a disappointment.");
 	}

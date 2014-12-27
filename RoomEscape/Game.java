@@ -18,7 +18,11 @@ public class Game{
 	room.add(new Item("Poster", "A poster of the periodic table of elements.",false));
 	room.add(new Item("Closet", "A closet with sliding doors", false));
 	room.add(new Item("Bathroom door", "The door to the bathroom", false));
-	room.add(new Item("Letter", "Son, we saw your last math test score.\nYou have brought shame to your family.\nBut it's alright, everyone makes mistakes.\nA great man once said, \"A man must be bIg enough to admit his miStakes, smart enough to profIt from them, and strong enough to Correct them.\" So just stay in your room and reflect on your actions for another two days.\nBy then, you will surely have been able to realize the error of your ways and find the solution to your demise.\nSincerely, Your Parents", true));
+	room.add(new Item("Letter", "\n\nSon, we saw your last math test score.\nYou have brought shame to your family.\nBut it's alright, everyone makes mistakes.\nA great man once said, \"A man must be bIg enough to admit his miStakes, smart enough to profIt from them, and strong enough to Correct them.\" So just stay in your room and reflect on your actions for another two days.\nBy then, you will surely have been able to realize the error of your ways and find the solution to your demise.\n\nSincerely, Your Parents", true));
+	room.add(new Puzzle("Laptop", "You can't log on. It seems your parents have changed the password.", "1234", "The display changes to your homescreen. Alright, you're finally on!"));
+	room.add(new Item("Pencil Holder", "Ohh, shiny pencils", false));
+	room.add(new Item("Drawer", "It's locked. You need to find a key", false));
+
 	closet.add(new Item("Screwdriver", "A Phillips screwdriver. This might come in handy", true));
 	closet.add(new Item("Paperclips", "Some colorful paperclips. You know what they are!", true));
     }
@@ -36,9 +40,6 @@ public class Game{
     }
 
     public void interact(Item thing){
-	//Scanner sc = new Scanner(System.in);
-	//String input = sc.nextLine();
-        //int choice = Integer.parseInt(input);
 	int c;
 	int i = 0;
 	
@@ -47,10 +48,10 @@ public class Game{
 	    while (i != 1){
 		c = new Game().AskUser("\n[1]Check under the blankets\n[2]Check pillow\n[3]Already saw the bed");
 		if (c == 1){
-
+		    System.out.println("\nThere's nothing there");
 		}
 		else if (c == 2){
-
+        
 		}
 		else if (c == 3){
 		    i = 1;
@@ -64,9 +65,29 @@ public class Game{
 	    i = 0;
 	    while (i != 1){
 		c = new Game().AskUser("\n[1]Check laptop\n[2]Check pencil holder\n[3]Check drawer\n[4]Nope"); 
-		if (c == 1){}
-		else if (c == 2){}
-		else if (c == 3){}
+		if (c == 1){
+		    if (((Puzzle)room.get(10)).getSolved() == true){
+			room.get(10).changeDescript("An emacs file is open. There is a piece of code on it:\n\nRandom r = new Random();\ndouble stress = r.nextDouble();\nboolean codeWorks = (r.nextInt(2) == 1);\npublic void writeCode()\n\tif (codeWorks){\n\t\tSystem.out.println(\"I am a GOD\");\n\t}\n\telse{\n\t\tif (stress > 0.7){\n\t\t\tsystem.out.println(\"RAGE QUIT\")\n\t\t\tSystem.exit(0);\n\t\t}\n\t\tcry();\n\t}\n}\n\nWhat could it mean?");
+			System.out.println(room.get(10).getDescript());
+		    }
+		    else {   
+			System.out.println(room.get(10).getDescript()); 
+			String ans = "" + this.AskUser("\nEnter Password: ");
+			((Puzzle)room.get(10)).check(ans);
+		    }
+		}
+		else if (c == 2){
+		    System.out.println(room.get(11).getDescript());
+		    if (room.get(11).getStatus() == false){
+			System.out.println("You took a pencil");
+			room.get(11).changeStatus();
+		    }
+		}
+		else if (c == 3){
+		    if (room.get(12).getStatus() == false){
+			System.out.println(room.get(12).getDescript());     
+		    } 
+		}
 		else if (c == 4){
 		    i = 1;
 		}
@@ -76,14 +97,15 @@ public class Game{
 	    }
 	}
 	if (thing.equals(room.get(2))){
+	    System.out.println(room.get(2).getDescript());
 	    i = 0;
 	    while (i != 1){
 		c = new Game().AskUser("\n[1]Open small pocket\n[2]Look through notes\n[3]Move on");
 		if (c == 1){
-		    System.out.println("\nYou find your student metrocard, your student ID, and a few tictacs");
+		    System.out.println("\nYou find your student metrocard, your student ID, and a few TicTacs");
 		}
 		else if (c == 2){
-		    System.out.println("\nYou find the evil math test that has landed you in this mess");
+		    System.out.println("\nYou find the evil math test that has landed you in this mess!");
 		}
 		else if (c == 3){
 		    i = 1;
@@ -97,7 +119,9 @@ public class Game{
 	    i = 0;
 	    while (i != 1){
 		c = new Game().AskUser("\n[1]Flip rug\n[2]Nah");
-		if (c == 1){}
+		if (c == 1){
+		    System.out.println("How disappointing. There's nothing there.");
+		}
 		else if (c == 2){
 		    i = 1;
 		}
@@ -110,7 +134,15 @@ public class Game{
 	    i = 0;
 	    while (i != 1){
 		c = new Game().AskUser("\n[1]Rummage through trash can\n[2]How unsanitary!");
-		if (c == 1){}
+		if (c == 1){
+		    if (room.get(4).getStatus() == false){
+		    System.out.println("You found a rotten fig");
+		    room.get(4).changeStatus();
+		    }
+		    else {
+			System.out.println("There's only trash");
+		    }
+		}
 		else if (c == 2){
 		    i = 1;
 		}
@@ -123,7 +155,10 @@ public class Game{
 	    i = 0;
 	    while (i != 1){
 		c = new Game().AskUser("\n[1]Look at books\n[2]Now's not the time!");
-		if (c == 1){}
+		if (c == 1){
+		    int book = this.AskUser("\nWhich book do you want?\n[1]The Count of Monte Cristo\n[2]Physics Regents Textbook\n[3]300 Most Difficult SAT Words\n[4]Hamlet\n[5]For the Love of Physics\n[6]The Charm of Quarks: Understanding Subatomic Particles\n[7]Romeo and Juliet\n[8]How to Win this Game\n[9]The Cake is a Lie");
+	 
+		}
 		else if (c == 2){
 		    i = 1;
 		}
@@ -135,14 +170,13 @@ public class Game{
 	if(thing.equals(room.get(6))){
 	    i = 0;
 	    while (i != 1){
-		c = new Game().AskUser("\n[1]Inspect Poster\n[2]Take poster\n[3]Leave it. It looks nice there");
-		if (c == 1){}
+		c = new Game().AskUser("\n[1]Inspect Poster\n[2]Leave it.");
+		if (c == 1){
+		    System.out.println("There's a safe behind the poster!");
+		}
 		else if (c == 2){
-		    
-		}
-		else if (c == 3){
 		    i = 1;
-		}
+		}     
 		else{
 		    System.out.println("\nPlease enter the number of your choice");
 		}
