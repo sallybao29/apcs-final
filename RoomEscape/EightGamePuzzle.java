@@ -27,7 +27,6 @@ public class EightGamePuzzle{
 	int c;
         while (n > 0){
 	    c = r.nextInt(4);
-	    System.out.println(c);
 	    if (c-prevc != 2 || c-prevc != -2){
 		if (c == 0 && zposv != 0){
 		    board[zposh][zposv] = board[zposh][zposv-1];
@@ -62,14 +61,14 @@ public class EightGamePuzzle{
 	}
     }
 
-    public void UserSteps(){
-	int zposh = 0;
-	int zposv = 0;
-	while (!solved){
-	    int c = new this.AskUser("Enter your move here(l,u,r,d): ");
-	    if (c == 0 && zposh
-	}
-    }
+    // public void UserSteps(){
+    // 	int zposh = 0;
+    // 	int zposv = 0;
+    // 	while (!solved){
+    // 	    int c = this.AskUser("Enter your move here(l,u,r,d): ");
+    // 	    if (c == 0 && zposh
+    // 	}
+    // }
 
     public String toString(){
 	String s = "";
@@ -95,9 +94,9 @@ public class EightGamePuzzle{
 	}
     }
 
-    public static void main(String[] args){
-	EightGamePuzzle p = new EightGamePuzzle();
-	p.generateGame(3);
-	System.out.println(p);
-    }
+    // public static void main(String[] args){
+    // 	EightGamePuzzle p = new EightGamePuzzle();
+    // 	p.generateGame(3);
+    // 	System.out.println(p);
+    // }
 }

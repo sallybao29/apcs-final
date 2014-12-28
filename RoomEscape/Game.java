@@ -7,6 +7,7 @@ public class Game{
     private ArrayList<Item> closet = new ArrayList<Item>();
     private ArrayList<Item> bathroom = new ArrayList<Item>();
     Inventory inventory = new Inventory();
+    EightGamePuzzle eightGame = new EightGamePuzzle();
 
     public Game(){
 	gameWon = false;
@@ -30,6 +31,7 @@ public class Game{
 	room.add(new Item("Key", "The key to the desk drawer", true));  //17
 	room.add(new Item("Fig", "A dried up fig", true));     //18
 	room.add(new Item("Math test", "The math test you failed", true));  //19
+	room.add(new Item("Phone", "Oh look, your phone. Its screen displays an 8-game puzzle", true));
   
 
 	closet.add(new Item("Screwdriver", "A Phillips screwdriver. This might come in handy", true));
@@ -115,8 +117,30 @@ public class Game{
 	    i = 0;
 	    while (i != 1){
 		c = new Game().AskUser("\n[1]Open small pocket\n[2]Look through notes\n[3]Move on");
+		int i2;
+		int c2;
 		if (c == 1){
-		    System.out.println("\nYou find your student metrocard, your student ID, and a few TicTacs");
+		    System.out.println("\nYou find your student metrocard, your student ID, your phone, and a few TicTacs");
+		    i2 = 0;
+		    while (i2 != 1){
+			c2 = this.AskUser("\n[1]Inspect phone, [2]Take the Tictacs, [3]Eh, I'll move on");
+			if (c2 == 1){
+			    System.out.println("\nYour phone displays an 8-Game Puzzle");
+			    int i3 = 0;
+			    while (i3 != 1){
+				int c3 = this.AskUser("\n[1]I want to play!, [2]No thanks");
+				if (c3 == 1){
+				    eightGame.generateGame(3);
+				    System.out.println(eightGame);
+				}
+				else if (c3 == 2){i3 = 1;}
+				else{System.out.println("\nPlease enter the number of your choice");}
+			    }
+			}
+			else if (c2 == 2){System.out.println("\nEw, these are a few years old. Maybe you should leave them.");}
+			else if (c2 == 3){i2 = 1;}
+			else {System.out.println("\nPlease enter the number of your choice");}
+		    }
 		}
 		else if (c == 2){
 		    System.out.println("\nYou find the evil math test that has landed you in this mess!");
