@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Inventory{
-    private ArrayList<Item> inventory = new ArrayList<Item>();
+    private static ArrayList<Item> inventory = new ArrayList<Item>();
 
     public void take(Item a){
 	if (a.canGet() == true){
