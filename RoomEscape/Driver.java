@@ -12,6 +12,7 @@ public class Driver{
     public static void main(String[] args){
 	Game g = new Game();
 	Inventory stuff = new Inventory();
+	Driver d = new Driver();
 
 	System.out.println("...Huh? Where is this?");
 	wait(2000);
@@ -40,13 +41,13 @@ public class Driver{
 
 	while (g.gameWon() == false && endGame == false){
 
-	    int r = new Driver().AskUser("\n[1]Inspect an object, [2]Look at Inventory, [3]Exit Game");
+	    int r = d.AskUser("\n[1]Inspect an object, [2]Look at Inventory, [3]Exit Game\n");
 	    if (r == 1){
 		int i = 0;
-		int inspect = new Driver().AskUser("\nYou want to inspect... [0]Bed, [1]Desk, [2]Bag, [3]Trash can, [4]Rug, [5]Bookshelf, [6]Poster, [7]Closet, [8]Bathroom door\n[9]Ceiling\n");
+		int inspect = d.AskUser("\nYou want to inspect... \n[0]Bed\n[1]Desk\n[2]Bag\n[3]Trash can\n[4]Rug\n[5]Bookshelf\n[6]Poster\n[7]Closet\n[8]Bathroom door\n[9]Ceiling\n");
 		while (i != 1){
 		    if (inspect >= 0 && inspect < 10){
-			g.getRoom().get(inspect).getDescript();
+			System.out.println(g.getRoom().get(inspect).getDescript());
 			i = 1;
 		    }
 		    else {
@@ -56,7 +57,7 @@ public class Driver{
 		System.out.println("\nWhat do you want to do with it?");
 		i = 0;
 		while (i != 1){
-		    int c = new Driver().AskUser("\n[1]Inspect further, [2]Move on\n");
+		    int c = d.AskUser("\n[1]Inspect further, [2]Move on\n");
 		    if (c == 1){
 			g.interact(g.getRoom().get(inspect));
 			i = 1;
@@ -72,17 +73,11 @@ public class Driver{
 	    else if (r == 2){
 		System.out.println(stuff.list());
 		int c = 0;
-		while (c != 2){
-		    if (stuff.getInventory().size() == 0){
-			System.out.println("There's nothing in your inventory. Get to work");
-			c = 2;
-		    }
-		    else{
-			c = new Driver().AskUser("\n[1]Inspect an item, [2]Exit Inventory");
-			if (c == 1){
-			    int choice = new Driver().AskUser("\nWhich item would you like to inspect?");
-			    System.out.println(stuff.getInventory().get(choice).getDescript());
-			}
+		while (c != 2){		   
+		    c = d.AskUser("\n[1]Inspect an item, [2]Exit Inventory\n");
+		    if (c == 1){
+			int choice = d.AskUser("\nWhich item would you like to inspect?");
+			System.out.println(stuff.getInventory().get(choice).getDescript());		
 		    }
 		}
 	    }
