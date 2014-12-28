@@ -12,4 +12,4 @@ apcs-final
 
 -12/27/14 - Added more items, including collectibles like Key. - Sally
 
--12/28/14 - Added EightGamePuzzle file. The puzzle will be included in the laptop to unlock a clue. - Tiffany
+-12/28/14 - Added EightGamePuzzle file. The puzzle will be included in the phone to unlock a clue. - Tiffany
