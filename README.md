@@ -9,3 +9,5 @@ apcs-final
 -12/27/14 - Fixed above problem of typing nothing or typing punctuation. Added some user input / interactions to Game.java. Added option of quitting game. - Tiffany
 
 -12/27/14 - Added more options to interact. Laptop password is temporary until a puzzle has been made. Areas in need to work: viewing, adding, and combining things in Inventory. - Sally 
+
+-12/27/14 - Added more items, including collectibles like Key. - Sally
