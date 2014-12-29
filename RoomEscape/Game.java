@@ -7,7 +7,7 @@ public class Game{
     private ArrayList<Item> closet = new ArrayList<Item>();
     private ArrayList<Item> bathroom = new ArrayList<Item>();
     Inventory inventory = new Inventory();
-    EightGamePuzzle eightGame = new EightGamePuzzle();
+    EightGamePuzzle eightGame;
 
     public Game(){
 	gameWon = false;
@@ -146,11 +146,23 @@ public class Game{
 			    int i3 = 0;
 			    while (i3 != 1){
 				int c3 = this.AskUser("\n[1]I want to play!, [2]No thanks");
-				if (c3 == 1){
-				    eightGame.generateGame(3);
-				    System.out.println(eightGame);
+				if (c3 == 1 && room.get(20).getStatus() == false){
+				    System.out.println("\nEver played the 8-Game Puzzle? Well either way, here are the directions: \n   Your goal is to get the numbers to be in order from 0 to 9 \n   (with 0-2 in the first row, 3-5 in the second, and 6-8 in the third) \n   by moving the zero in any of the four directions \n   (left, up, right, down). Let's go! :)");
+				    eightGame = new EightGamePuzzle();
+				    eightGame.generateGame(5);
+				    boolean solved = eightGame.userSteps();
+				    if (solved == true){
+					System.out.println("\n\n You see a Red 6.");
+					room.get(20).changeStatus();
+				    }
+				    else if(solved == false){
+					System.out.println("\n\n Maybe next time.");
+				    }
 				}
 				else if (c3 == 2){i3 = 1;}
+				else if (room.get(20).getStatus() == true){
+				    System.out.println("\nYou still see a Red 6.");
+				}
 				else{System.out.println("\nPlease enter the number of your choice");}
 			    }
 			}

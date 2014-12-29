@@ -78,7 +78,7 @@ public class EightGamePuzzle{
 	}
     }
 
-    public void UserSteps(){
+    public boolean userSteps(){
     	int zposh2 = zposh;
     	int zposv2 = zposv;
     	while (solved == false && quit == false){
@@ -118,10 +118,15 @@ public class EightGamePuzzle{
 	    }
 	}
 	if (solved == true){
-	    System.out.println("\nCongrats! :)");
+	    System.out.println("\nCongrats! :) You have unlocked your phone!");
+	    return true;
 	}
 	else if (quit == true){
 	    System.out.println("\nSeriously? You've quit already? :(");
+	    return false;
+	}
+	else{
+	    return false;
 	}
     }
 
@@ -148,6 +153,9 @@ public class EightGamePuzzle{
     public static void main(String[] args){
     	EightGamePuzzle p = new EightGamePuzzle();
     	p.generateGame(5);
-	p.UserSteps();
+	boolean a = p.userSteps();
+	if (!a){
+	    System.out.println("done");
+	}
     }
 }
