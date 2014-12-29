@@ -44,29 +44,31 @@ public class Driver{
 	    int r = d.AskUser("\n[1]Inspect an object, [2]Look at Inventory, [3]Exit Game\n");
 	    if (r == 1){
 		int i = 0;
-		int inspect = d.AskUser("\nYou want to inspect... \n[0]Bed\n[1]Desk\n[2]Bag\n[3]Trash can\n[4]Rug\n[5]Bookshelf\n[6]Poster\n[7]Closet\n[8]Bathroom door\n[9]Ceiling\n");
 		while (i != 1){
+		    int inspect = d.AskUser("\nYou want to inspect... \n[0]Bed\n[1]Desk\n[2]Bag\n[3]Trash can\n[4]Rug\n[5]Bookshelf\n[6]Poster\n[7]Closet\n[8]Bathroom door\n[9]Ceiling\n[10]Nothing. Let's go back to the main menu\n");
 		    if (inspect >= 0 && inspect < 10){
 			System.out.println(g.getRoom().get(inspect).getDescript());
+			int i2 = 0;
+			while (i2 != 1){
+			    System.out.println("\nWhat do you want to do with it?");
+			    int c = d.AskUser("\n[1]Inspect further, [2]Move on\n");
+			    if (c == 1){
+				g.interact(g.getRoom().get(inspect));
+				i2 = 1;
+			    }
+			    else if (c == 2){
+				i2 = 1;
+			    }
+			    else{
+				System.out.println("\nPlease enter the number of your choice\n");
+			    }
+			}
+		    }
+		    else if (inspect == 10){
 			i = 1;
 		    }
 		    else {
 			System.out.println("\nPlease enter the number of an item.");
-		    }
-		}
-		System.out.println("\nWhat do you want to do with it?");
-		i = 0;
-		while (i != 1){
-		    int c = d.AskUser("\n[1]Inspect further, [2]Move on\n");
-		    if (c == 1){
-			g.interact(g.getRoom().get(inspect));
-			i = 1;
-		    }
-		    else if (c == 2){
-			i = 1;
-		    }
-		    else{
-			System.out.println("\nPlease enter the number of your choice\n");
 		    }
 		}
 	    }
@@ -77,7 +79,12 @@ public class Driver{
 		    c = d.AskUser("\n[1]Inspect an item, [2]Exit Inventory\n");
 		    if (c == 1){
 			int choice = d.AskUser("\nWhich item would you like to inspect?");
-			System.out.println(stuff.getInventory().get(choice).getDescript());		
+			try{
+			System.out.println(stuff.getInventory().get(choice).getDescript());
+			}
+			catch(Exception e){
+			    System.out.println("Please enter the number of the item.");
+			}
 		    }
 		}
 	    }

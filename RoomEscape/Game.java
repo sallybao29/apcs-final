@@ -44,7 +44,12 @@ public class Game{
 	closet.add(new Item("Hoodie", "A spiffy hoodie", false));   //3
 	closet.add(new Item("Marble", "You used to play with this marble and make it oribt your basketball", true));  //4
 	closet.add(new Item("Tissues", "A pack of tissues like the kind you get from Chinese vendors", true));  //5
+	closet.add(new Item("Index card", "An index card with four colored dots: Red, Blue, Green, Purple", false)); //6
+	
 
+	bathroom.add(new Item("Forceps", "Just some forceps", true));
+	bathroom.add(new Item("Green Index Card", "A green index card with the number 9", false));
+	bathroom.add(new Item("Purple Index Card", "A purple index card with the number 0", false));
     }
 
     public ArrayList<Item> getRoom(){
@@ -137,38 +142,44 @@ public class Game{
 		int i2;
 		int c2;
 		if (c == 1){
-		    System.out.println("\nYou find your student metrocard, your student ID, your phone, and a few TicTacs");
-		    i2 = 0;
-		    while (i2 != 1){
-			c2 = this.AskUser("\n[1]Inspect phone, [2]Take the Tictacs, [3]Eh, I'll move on");
-			if (c2 == 1){
-			    System.out.println("\nYour phone displays an 8-Game Puzzle");
-			    int i3 = 0;
-			    while (i3 != 1){
-				int c3 = this.AskUser("\n[1]I want to play!, [2]No thanks");
-				if (c3 == 1 && room.get(20).getStatus() == false){
-				    System.out.println("\nEver played the 8-Game Puzzle? Well either way, here are the directions: \n   Your goal is to get the numbers to be in order from 0 to 9 \n   (with 0-2 in the first row, 3-5 in the second, and 6-8 in the third) \n   by moving the zero in any of the four directions \n   (left, up, right, down). Let's go! :)");
-				    eightGame = new EightGamePuzzle();
-				    eightGame.generateGame(5);
-				    boolean solved = eightGame.userSteps();
-				    if (solved == true){
-					System.out.println("\n\n You see a Red 6.");
-					room.get(20).changeStatus();
+		    if (room.get(20).getStatus() == false){
+			System.out.println("\nYou find your student metrocard, your student ID, your phone, and a few TicTacs");
+			i2 = 0;
+			while (i2 != 1){
+			    c2 = this.AskUser("\n[1]Inspect phone, [2]Take the Tictacs, [3]Eh, I'll move on");
+			    if (c2 == 1){
+				System.out.println("\nYour phone displays an 8-Game Puzzle");
+				int i3 = 0;
+				while (i3 != 1){
+				    int c3 = this.AskUser("\n[1]I want to play!, [2]No thanks");
+				    if (c3 == 1 && room.get(20).getStatus() == false){
+					System.out.println("\nEver played the 8-Game Puzzle? Well either way, here are the directions: \n   Your goal is to get the numbers to be in order from 0 to 9 \n   (with 0-2 in the first row, 3-5 in the second, and 6-8 in the third) \n   by moving the zero in any of the four directions \n   (left, up, right, down). Let's go! :)");
+					eightGame = new EightGamePuzzle();
+					eightGame.generateGame(5);
+					boolean solved = eightGame.userSteps();
+					if (solved == true){
+					    System.out.println("\n\n You see a Red 6.");
+					    room.get(20).changeStatus();
+					    room.get(20).changeDescript("\nA phone displaying a Red 6");
+					    inventory.take(room.get(20));
+					    i2 = 1;
+					    i3 = 1;
+					}
+					else if(solved == false){
+					    System.out.println("\n\n Maybe next time.");
+					}
 				    }
-				    else if(solved == false){
-					System.out.println("\n\n Maybe next time.");
-				    }
+				    else if (c3 == 2){i3 = 1;}
+				    else{System.out.println("\nPlease enter the number of your choice");}
 				}
-				else if (c3 == 2){i3 = 1;}
-				else if (room.get(20).getStatus() == true){
-				    System.out.println("\nYou still see a Red 6.");
-				}
-				else{System.out.println("\nPlease enter the number of your choice");}
 			    }
+			    else if (c2 == 2){System.out.println("\nEw, these are a few years old. Maybe you should leave them.");}
+			    else if (c2 == 3){i2 = 1;}
+			    else {System.out.println("\nPlease enter the number of your choice");}
 			}
-			else if (c2 == 2){System.out.println("\nEw, these are a few years old. Maybe you should leave them.");}
-			else if (c2 == 3){i2 = 1;}
-			else {System.out.println("\nPlease enter the number of your choice");}
+		    }
+		    else if (room.get(20).getStatus() == true){
+			System.out.println("\nYou find your student metrocard, your student ID, and a few TicTacs");
 		    }
 		}
 		else if (c == 2){
@@ -283,9 +294,21 @@ public class Game{
 				inventory.take(closet.get(5));
 				closet.get(3).changeStatus();
 			    }
+			    else if (closet.get(3).getStatus() == true){
+				System.out.println("\nJust a bunch of books");
+			    }
 			}
 			else if (c2 == 2){System.out.println("\nNothing interesting. Just some old clothes you plan to donate");}
-			else if (c2 == 3){System.out.println("\nYou find an index card with four colored dots: Red, Blue, Green, and Purple");}
+			else if (c2 == 3){
+			    if (closet.get(6).getStatus() == false){
+				System.out.println("\nYou find an index card with four colored dots: Red, Blue, Green, and Purple");
+				inventory.take(closet.get(6));
+				closet.get(6).changeStatus();
+			    }
+			    else if (closet.get(6).getStatus() == true){
+				System.out.println("\nJust some old books.");
+			    }
+			}
 			else if (c2 == 4){
 			    System.out.println(closet.get(2).getDescript());
 			    if (closet.get(2).getStatus() == false){
@@ -293,6 +316,9 @@ public class Game{
 				inventory.take(closet.get(0));
 				inventory.take(closet.get(1));
 				closet.get(2).changeStatus();
+			    }
+			    else if (closet.get(2).getStatus() == true){
+				System.out.println("\nNothing left to take.");
 			    }
 			}
 			else if (c2 == 5){i2 = 1;}
@@ -315,7 +341,7 @@ public class Game{
 	    while (i != 1){
 		c = this.AskUser("\n[1]Open door\n[2]Don't need the toilet right now\n");
 		if (c == 1){
-
+		    System.out.println("\nYou have entered the bathroom");
 		}
 		else if (c == 2){
 		    i = 1;
