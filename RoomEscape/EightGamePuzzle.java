@@ -4,8 +4,10 @@ import java.io.*;
 public class EightGamePuzzle{
     
     private int[][] board = new int[3][3];
+    private int[][] ans = new int[3][3];
     private ArrayList<Integer> moves = new ArrayList<Integer>();
-    private boolean solved;
+    private boolean solved = false;
+    private boolean quit = false;
 
     public void generateGame(int numScram){
 	int current = 0;
@@ -15,14 +17,21 @@ public class EightGamePuzzle{
 		current += 1;
 	    }
 	}
+	current = 0;
+	for (int i = 0; i < ans.length; i++) {
+	    for (int j = 0; j < ans[i].length; j++) {
+	        ans[i][j] = current;
+		current += 1;
+	    }
+	}
 	boardScrambler(numScram);
     }
 
+    private int zposh = 0;
+    private int zposv = 0;
     public void boardScrambler(int numScram){
 	Random r = new Random();
 	int n = numScram;
-	int zposh = 0;
-	int zposv = 0;
 	int prevc = 0;
 	int c;
         while (n > 0){
@@ -60,15 +69,61 @@ public class EightGamePuzzle{
 	    }
 	}
     }
+    public void check(){
+	if (Arrays.equals(board[0], ans[0])&&
+	    Arrays.equals(board[1], ans[1])&&
+	    Arrays.equals(board[2], ans[2])){
+	    System.out.println("\nFinal board: \n" + toString());
+	    solved = true;
+	}
+    }
 
-    // public void UserSteps(){
-    // 	int zposh = 0;
-    // 	int zposv = 0;
-    // 	while (!solved){
-    // 	    int c = this.AskUser("Enter your move here(l,u,r,d): ");
-    // 	    if (c == 0 && zposh
-    // 	}
-    // }
+    public void UserSteps(){
+    	int zposh2 = zposh;
+    	int zposv2 = zposv;
+    	while (solved == false && quit == false){
+	    System.out.println("Current Board: \n" + toString());
+    	    String c = this.AskUser("Enter your move here(left, up, down, or right): ");
+	    System.out.println("\nYour move: " + c);
+
+	    if (c.equals("quit")){
+		quit = true;
+	    }
+	    else if (c.equals("left") && zposv2 != 0){
+		board[zposh2][zposv2] = board[zposh2][zposv2 - 1];
+		board[zposh2][zposv2 - 1] = 0;
+		zposv2 -= 1;
+		check();
+	    }
+	    else if (c.equals("up") && zposh2 != 0){
+		board[zposh2][zposv2] = board[zposh2 - 1][zposv2];
+		board[zposh2 - 1][zposv2] = 0;
+		zposh2 -= 1;
+	        check();
+	    }
+	    else if (c.equals("right") && zposv2 != 2){
+		board[zposh2][zposv2] = board[zposh2][zposv2 + 1];
+		board[zposh2][zposv2 + 1] = 0;
+		zposv2 += 1;
+		check();
+	    }
+	    else if (c.equals("down") && zposh2 != 2){
+		board[zposh2][zposv2] = board[zposh2 + 1][zposv2];
+		board[zposh2 + 1][zposv2] = 0;
+		zposh2 += 1;
+		check();
+	    }
+	    else{
+		System.out.println("Invalid Move. Please try again.");
+	    }
+	}
+	if (solved == true){
+	    System.out.println("\nCongrats! :)");
+	}
+	else if (quit == true){
+	    System.out.println("\nSeriously? You've quit already? :(");
+	}
+    }
 
     public String toString(){
 	String s = "";
@@ -81,22 +136,18 @@ public class EightGamePuzzle{
 	return s;
     }
 
-    public int AskUser(String mToUser){
+    public String AskUser(String mToUser){
 	String s = "";
 	Scanner sc = new Scanner(System.in);
 	System.out.print(mToUser);
 	s = sc.nextLine();
-	try{
-	    return Integer.parseInt(s);
-	}
-	catch(NumberFormatException e){
-	    return -1;
-	}
+	return s;
     }
 
-    // public static void main(String[] args){
-    // 	EightGamePuzzle p = new EightGamePuzzle();
-    // 	p.generateGame(3);
-    // 	System.out.println(p);
-    // }
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~Testing~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    public static void main(String[] args){
+    	EightGamePuzzle p = new EightGamePuzzle();
+    	p.generateGame(5);
+	p.UserSteps();
+    }
 }
