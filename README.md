@@ -19,3 +19,5 @@ apcs-final
 -12/28/14 - Finished EightGamePuzzle. The puzzle has been included in the phone and is now playable. Solving the puzzle permanently prevents it from appearing again, but quitting the puzzle before solving it causes a new puzzle to be generated for the next try. - Tiffany
 
 -12/29/14 - Fixed two problems in Driver (which were causing an endless loop and an exception). Added more items. - Tiffany
+
+-12/30/14 - Added more items. Added user interactions for the bathroom in Game.java. - Tiffany
