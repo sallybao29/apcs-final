@@ -46,10 +46,11 @@ public class Game{
 	closet.add(new Item("Tissues", "A pack of tissues like the kind you get from Chinese vendors", true));  //5
 	closet.add(new Item("Index card", "An index card with four colored dots: Red, Blue, Green, Purple", false)); //6
 	
-
-	bathroom.add(new Item("Forceps", "Just some forceps", true));
-	bathroom.add(new Item("Green Index Card", "A green index card with the number 9", false));
-	bathroom.add(new Item("Purple Index Card", "A purple index card with the number 0", false));
+	
+	bathroom.add(new Item("Metal box", "Just a tiny metal box", false)); //0
+	bathroom.add(new Item("Forceps", "Just some forceps", true)); //1
+	bathroom.add(new Item("Green Index Card", "A green index card with the number 9", true)); //2
+	bathroom.add(new Item("Purple Index Card", "A purple index card with the number 0", true)); //3
     }
 
     public ArrayList<Item> getRoom(){
@@ -341,7 +342,55 @@ public class Game{
 	    while (i != 1){
 		c = this.AskUser("\n[1]Open door\n[2]Don't need the toilet right now\n");
 		if (c == 1){
-		    System.out.println("\nYou have entered the bathroom");
+		    System.out.println("\nYou have entered the bathroom. There is a medicine cabinet above the sink and a rug at your feet.");
+		    int i2 = 0;
+		    while (i2 != 1){
+			int c2 = this.AskUser("\n[1]Open medicine cabinet doors\n[2]Turn on faucet\n[3]Lift rug\n[4]Leave bathroom");
+			if (c2 == 1){
+			    System.out.println("You see a little metal box, a bunch of toothpaste, and various medicine");
+			    int i3 = 0;
+			    while (i3 != 1){
+				int c3 = this.AskUser("\n[1]Open metal box\n[2]Close medicine cabinet door");
+				if (c3 == 1){
+				    if (closet.get(2).getStatus() == true && bathroom.get(0).getStatus() == false){
+					System.out.println("\nYou have unlocked the box using the paperclips! You find forceps and a Green index card with the number 9");
+					inventory.take(bathroom.get(1));
+					inventory.take(bathroom.get(2));
+					bathroom.get(0).changeStatus();
+				    }
+				    else if (closet.get(2).getStatus() == false){
+					System.out.println("\nHm... It looks like you'll have to pick the lock.");
+				    }
+				    else if (bathroom.get(0).getStatus() == true){
+					System.out.println("\nYou have already unlocked the metal box and taken the items. There is nothing left inside");
+				    }
+				}
+				else if (c3 == 2){
+				    i3 = 1;
+				}
+			    }
+			}
+			else if (c2 == 2){
+			    System.out.println("\nThe water is running.");
+			}
+			else if (c2 == 3){
+			    if (bathroom.get(3).getStatus() == false){
+				System.out.println("You find a Purple index card with the number 0");
+				inventory.take(bathroom.get(3));
+				bathroom.get(3).changeStatus();
+			    }
+			    else{
+				System.out.println("\nThere is nothing under it");
+			    }
+			}
+			else if (c2 == 4){
+			    System.out.println("\nYou are back in your room");
+			    i2 = 1;
+			}
+			else{
+			    System.out.println("\nPlease enter the number of your choice");
+			}
+		    }
 		}
 		else if (c == 2){
 		    i = 1;
