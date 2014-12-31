@@ -45,7 +45,7 @@ public class Driver{
 	    if (r == 1){
 		int i = 0;
 		while (i != 1){
-		    int inspect = d.AskUser("\nYou want to inspect... \n[0]Bed\n[1]Desk\n[2]Bag\n[3]Trash can\n[4]Rug\n[5]Bookshelf\n[6]Poster\n[7]Closet\n[8]Bathroom door\n[9]Ceiling\n[10]Nothing. Let's go back to the main menu\n");
+		    int inspect = d.AskUser("\nYou want to inspect... \n[0]Bed\n[1]Desk\n[2]Bag\n[3]Rug\n[4]Trash can\n[5]Bookshelf\n[6]Poster\n[7]Closet\n[8]Bathroom door\n[9]Ceiling\n[10]Nothing. Let's go back to the main menu\n");
 		    if (inspect >= 0 && inspect < 10){
 			System.out.println(g.getRoom().get(inspect).getDescript());
 			int i2 = 0;
