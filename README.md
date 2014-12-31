@@ -23,3 +23,5 @@ apcs-final
 -12/30/14 - Added more items. Added user interactions for the bathroom in Game.java. - Tiffany
 
 -12/30/14 - Added doors, though they still need proper descriptions. Started checkDoor method for door interactions. Deleted some extraneous conditional statements. - Sally
+
+-12/31/14 - Added more items. Added more interactions to use items found. - Tiffany
