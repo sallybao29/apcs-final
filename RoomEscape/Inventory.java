@@ -17,6 +17,15 @@ public class Inventory{
     public ArrayList<Item> getInventory(){
 	return inventory;
     }
+
+    public Item find(String name){
+	for (int i = 0;i < inventory.size();i++){
+	    if (name.equals(inventory.get(i).getName())){
+		return inventory.get(i);
+	    }
+	}
+	return null;
+    }
     
 
     public String list(){
@@ -27,27 +36,5 @@ public class Inventory{
 	    s += "\n";
 	}
 	return s;
-    }
-
-    /*--------------------------------- TEST ----------------------------*/
-
-    public static void main(String[] args){
-	Inventory bob = new Inventory();
-	Item a = new Item("Potato", "A potato", false);
-	Item b = new Item("Physics Regents Textbook", "A Physics Regents Textbook", true);
-
-	System.out.println("You found " + b + ".");
-	System.out.println("What do you want to do with it?\n1)Take it\n2)Leave it");
-	Scanner sc = new Scanner(System.in);
-	String choice = sc.nextLine();
-	if (choice.equals("1")){
-	    bob.take(b);
-	}
-	else{
-	    System.out.println("You left it.");
-	}
-
-	System.out.println(bob.list());
-   
     }
 }

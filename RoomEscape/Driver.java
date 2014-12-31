@@ -20,9 +20,7 @@ public class Driver{
 	wait(2000);
 	System.out.println("It's too dark to see. You go to flip the lights on, but nothing happens.");
 	wait(2000);
-	System.out.println("Instead, you turn on your lamp. At least you can see now.");
-	wait(2000);
-	System.out.println("It really is your room. For some reason, the door is now a large metal one with no visible handle in sight.");
+	System.out.println("Instead, you turn on your lamp. The room is dimly lit.");
 	wait(2000);
 	System.out.println("There is a piece of paper taped to the door.");
 	wait(2000);
@@ -45,7 +43,7 @@ public class Driver{
 	    if (r == 1){
 		int i = 0;
 		while (i != 1){
-		    int inspect = d.AskUser("\nYou want to inspect... \n[0]Bed\n[1]Desk\n[2]Bag\n[3]Rug\n[4]Trash can\n[5]Bookshelf\n[6]Poster\n[7]Closet\n[8]Bathroom door\n[9]Ceiling\n[10]Nothing. Let's go back to the main menu\n");
+		    int inspect = d.AskUser("\nYou want to inspect... \n[0]Bed\n[1]Desk\n[2]Bag\n[3]Rug\n[4]Trash can\n[5]Bookshelf\n[6]Poster\n[7]Closet\n[8]Bathroom door\n[9]Ceiling\n[10]Door\n[11]Nothing. Let's go back to the main menu\n");
 		    if (inspect >= 0 && inspect < 10){
 			System.out.println(g.getRoom().get(inspect).getDescript());
 			int i2 = 0;
@@ -65,6 +63,9 @@ public class Driver{
 			}
 		    }
 		    else if (inspect == 10){
+			g.checkDoor();
+		    }
+		    else if (inspect == 11){
 			i = 1;
 		    }
 		    else {
@@ -73,12 +74,13 @@ public class Driver{
 		}
 	    }
 	    else if (r == 2){
-		System.out.println(stuff.list());
 		int c = 0;
 		while (c != 2){		   
 		    c = d.AskUser("\n[1]Inspect an item, [2]Exit Inventory\n");
 		    if (c == 1){
-			int choice = d.AskUser("\nWhich item would you like to inspect?");
+			int choice = d.AskUser("\nWhich item would you like to inspect?\n");
+			System.out.println(stuff.list());
+			System.out.println();
 			try{
 			System.out.println(stuff.getInventory().get(choice).getDescript());
 			}
