@@ -21,3 +21,5 @@ apcs-final
 -12/29/14 - Fixed two problems in Driver (which were causing an endless loop and an exception). Added more items. - Tiffany
 
 -12/30/14 - Added more items. Added user interactions for the bathroom in Game.java. - Tiffany
+
+-12/30/14 - Added doors, though they still need proper descriptions. Started checkDoor method for door interactions. Deleted some extraneous conditional statements. - Sally
