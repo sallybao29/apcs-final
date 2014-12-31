@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Game{
+    private int stage;
     private boolean gameWon;
     private ArrayList<Item> room = new ArrayList<Item>();
     private ArrayList<Item> closet = new ArrayList<Item>();
@@ -11,6 +12,7 @@ public class Game{
 
     public Game(){
 	gameWon = false;
+	stage = 1;
 	room.add(new Item("Bed", "Your bed. There's a blanket and a pillow and not much else.", false));        //0
 	room.add(new Item("Desk", "A relatively clean desk with a laptop and a pencil holder on it. It has two drawers.", false));   //1
 	room.add(new Item("Bag", "A bag filled to the brim with notes and school supplies. There is a small pocket on the front and a waterbottle holder on the side.", false));   //2
@@ -34,23 +36,35 @@ public class Game{
 	room.add(new Item("Phone", "Oh look, your phone. Its screen displays an 8-game puzzle", true));  //20
 	room.add(new Item("Apple", "A shiny red Fuji apple", true));  //21
 	room.add(new Puzzle("Safe", "The safe where you stash your loot. There is a keypad.\nIt seems the password is three characters long.", "666", "The door swings open.\nAnd people said the stuff they did on detective movies was fake."));  //22
-	room.add(new Item("Note", "A description is pending", true));   //23
-	room.add(new Item("Acid", "A nice bottle of 100% Hydrochloric Acid", true));
+	room.add(new Item("Note1", "A description is pending", true));   //23
+	room.add(new Item("Note2", "Note", true)); //24
+	room.add(new Item("Note3", "Note", true)); //25
+	room.add(new Item("Note4", "Note", true)); //26
+	room.add(new Item("Note5", "Note", true)); //27
+	room.add(new Item("Acid", "A nice bottle of 100% Hydrochloric Acid", true));  //28
+
+	room.add(new Puzzle("Door1", "", "1238359", ""));  //29
+	room.add(new Puzzle("Door2", "", "6890", ""));  //30
+	room.add(new Puzzle("Door3", "", "Newton", ""));  //31
+	room.add(new Puzzle("Door4", "", "", ""));  //32
+	room.add(new Puzzle("Door5", "", "", ""));  //33
   
 
 	closet.add(new Item("Screwdriver", "A Phillips screwdriver. This might come in handy", true));  //0
 	closet.add(new Item("Paperclips", "Some colorful paperclips. You know what they are!", true));  //1
 	closet.add(new Item("Tin Box", "A silver tin box used for storing cookies", false));            //2
 	closet.add(new Item("Hoodie", "A spiffy hoodie", false));   //3
-	closet.add(new Item("Marble", "You used to play with this marble and make it oribt your basketball", true));  //4
+	closet.add(new Item("Marble", "A dirty marble caked in grease", true));  //4
 	closet.add(new Item("Tissues", "A pack of tissues like the kind you get from Chinese vendors", true));  //5
 	closet.add(new Item("Index card", "An index card with four colored dots: Red, Blue, Green, Purple", false)); //6
+
 	
 	
-	bathroom.add(new Item("Metal box", "Just a tiny metal box", false)); //0
+	bathroom.add(new Item("Metal box", "A tiny metal box. Hm... It looks like you'll have to pick the lock.", false)); //0
 	bathroom.add(new Item("Forceps", "Just some forceps", true)); //1
 	bathroom.add(new Item("Green Index Card", "A green index card with the number 9", true)); //2
 	bathroom.add(new Item("Purple Index Card", "A purple index card with the number 0", true)); //3
+	bathroom.add(new Item("Bathroom rug", "Ok, I know I lied the first time, but there is definitely something under this rug", false)); //4
     }
 
     public ArrayList<Item> getRoom(){
@@ -65,9 +79,36 @@ public class Game{
 	gameWon = true;
     }
 
+    public void checkDoor(){
+	int i = 0;
+	String ans;
+	while (i != 1 && stage < 6){
+	    System.out.println(room.get(stage + 28).getDescript()); 
+	    int c = this.AskUser("\nTry to solve the puzzle?\n[1]Yes\n[2]No\n");
+	    if (c == 1){
+		if (((Puzzle)room.get(stage + 28)).getSolved() == false){
+		    ans = "" + this.AskUser("\nKey-in the passcode: ");
+		    System.out.println(((Puzzle)room.get(stage + 28)).check(ans, ""));
+		}
+		if (((Puzzle)room.get(stage + 28)).getSolved() == false){
+		    System.out.println("\nThe door opens. Alas, there is another door behind it\n");
+		    stage++;       
+		}
+	    }
+	    else if (c == 2){
+		i = 1;
+	    }
+	    else {
+		System.out.println("\nPlease enter the number of your choice");
+	    }
+	}
+    }
+    
+        
+
     public void interact(Item thing){
 	int c;
-	int i = 0;
+	int i;
 	
 	if (thing.equals(room.get(0))){
 	    i = 0;
@@ -98,14 +139,11 @@ public class Game{
 	    while (i != 1){
 		c = this.AskUser("\n[1]Check laptop\n[2]Check pencil holder\n[3]Check drawer\n[4]Nope\n"); 
 		if (c == 1){
-		    if (((Puzzle)room.get(11)).getSolved() == true){
-			room.get(11).changeDescript("An emacs file is open. There is a piece of code on it:\n\nRandom r = new Random();\ndouble stress = r.nextDouble();\nboolean codeWorks = (r.nextInt(2) == 1);\npublic void writeCode()\n\tif (codeWorks){\n\t\tSystem.out.println(\"I am a GOD\");\n\t}\n\telse{\n\t\tif (stress > 0.7){\n\t\t\tsystem.out.println(\"RAGE QUIT\")\n\t\t\tSystem.exit(0);\n\t\t}\n\t\tcry();\n\t}\n}\n\nWhat could it mean?");
-			System.out.println(room.get(11).getDescript());
-		    }
-		    else {   
-			System.out.println(room.get(11).getDescript()); 
+		    System.out.println(room.get(11).getDescript()); 
+		    if (((Puzzle)room.get(11)).getSolved() == false){
 			String ans = "" + this.AskUser("\nEnter Password: ");
-			System.out.println(((Puzzle)room.get(11)).check(ans));
+			System.out.println(((Puzzle)room.get(11)).check(ans, "An emacs file is open. There is a piece of code on it:\n\nRandom r = new Random();\ndouble stress = r.nextDouble();\nboolean codeWorks = (r.nextInt(2) == 1);\npublic void writeCode()\n\tif (codeWorks){\n\t\tSystem.out.println(\"I am a GOD\");\n\t}\n\telse{\n\t\tif (stress > 0.7){\n\t\t\tsystem.out.println(\"RAGE QUIT\")\n\t\t\tSystem.exit(0);\n\t\t}\n\t\tcry();\n\t}\n}\n\nWhat could it mean?"));	       
+			System.out.println(room.get(11).getDescript());
 		    }
 		}
 		else if (c == 2){
@@ -266,7 +304,12 @@ public class Game{
 		    System.out.println(room.get(22).getDescript());
 		    if (((Puzzle)room.get(22)).getSolved() == false){
 		        String ans  = "" + this.AskUser("\nEnter password: ");
-			System.out.println(((Puzzle)room.get(22)).check(ans));
+			System.out.println(((Puzzle)room.get(22)).check(ans, "The safe where you stash your loot"));
+		    }
+		    if (((Puzzle)room.get(22)).getSolved() == true && room.get(22).getStatus() == false){
+			System.out.println("You find a bottle of acid in the safe");
+			inventory.take(room.get(28));
+			room.get(22).changeStatus();
 		    }
 		  
 		}
@@ -295,20 +338,10 @@ public class Game{
 				inventory.take(closet.get(5));
 				closet.get(3).changeStatus();
 			    }
-			    else if (closet.get(3).getStatus() == true){
-				System.out.println("\nJust a bunch of books");
-			    }
 			}
 			else if (c2 == 2){System.out.println("\nNothing interesting. Just some old clothes you plan to donate");}
 			else if (c2 == 3){
-			    if (closet.get(6).getStatus() == false){
-				System.out.println("\nYou find an index card with four colored dots: Red, Blue, Green, and Purple");
-				inventory.take(closet.get(6));
-				closet.get(6).changeStatus();
-			    }
-			    else if (closet.get(6).getStatus() == true){
-				System.out.println("\nJust some old books.");
-			    }
+			    System.out.println("\nYou find an index card with four colored dots: Red, Blue, Green, and Purple");		       
 			}
 			else if (c2 == 4){
 			    System.out.println(closet.get(2).getDescript());
@@ -317,9 +350,6 @@ public class Game{
 				inventory.take(closet.get(0));
 				inventory.take(closet.get(1));
 				closet.get(2).changeStatus();
-			    }
-			    else if (closet.get(2).getStatus() == true){
-				System.out.println("\nNothing left to take.");
 			    }
 			}
 			else if (c2 == 5){i2 = 1;}
@@ -352,17 +382,15 @@ public class Game{
 			    while (i3 != 1){
 				int c3 = this.AskUser("\n[1]Open metal box\n[2]Close medicine cabinet door");
 				if (c3 == 1){
-				    if (closet.get(2).getStatus() == true && bathroom.get(0).getStatus() == false){
-					System.out.println("\nYou have unlocked the box using the paperclips! You find forceps and a Green index card with the number 9");
-					inventory.take(bathroom.get(1));
-					inventory.take(bathroom.get(2));
-					bathroom.get(0).changeStatus();
-				    }
-				    else if (closet.get(2).getStatus() == false){
-					System.out.println("\nHm... It looks like you'll have to pick the lock.");
-				    }
-				    else if (bathroom.get(0).getStatus() == true){
-					System.out.println("\nYou have already unlocked the metal box and taken the items. There is nothing left inside");
+				    if (bathroom.get(0).getStatus() == false){
+					System.out.println(bathroom.get(0).getDescript());
+					if (inventory.getInventory().contains(closet.get(1))){
+					    System.out.println("\nYou have unlocked the box using the paperclips! You find forceps and a Green index card with the number 9");
+					    inventory.take(bathroom.get(1));
+					    inventory.take(bathroom.get(2));
+					    bathroom.get(0).changeDescript("\nYou've already unlocked the box and taken the items. There is nothing left inside");
+					    bathroom.get(0).changeStatus();
+					}
 				    }
 				}
 				else if (c3 == 2){
@@ -374,10 +402,12 @@ public class Game{
 			    System.out.println("\nThe water is running.");
 			}
 			else if (c2 == 3){
-			    if (bathroom.get(3).getStatus() == false){
-				System.out.println("You find a Purple index card with the number 0");
+			    System.out.println(bathroom.get(4).getDescript());
+			    if (bathroom.get(4).getStatus() == false){
+				System.out.println("\nYou flip the rug and find a Purple index card with the number 0.\nSee, I was right.");
 				inventory.take(bathroom.get(3));
-				bathroom.get(3).changeStatus();
+				bathroom.get(4).changeStatus();
+				bathroom.get(4).changeDescript("\nA fuzzy bathroom rug");
 			    }
 			    else{
 				System.out.println("\nThere is nothing under it");

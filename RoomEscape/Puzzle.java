@@ -20,25 +20,14 @@ public class Puzzle extends Item{
 	return solved;
     }
 
-    public String check(String attempt){
+    public String check(String attempt, String newDescript){
 	if (attempt.compareTo(answer) == 0){
-	    solved = true;	    
+	    solved = true;
+	    this.changeDescript(newDescript);	    
 	    return smessage;
 	}
 	else {
 	    return "Son, you have failed. Try again.";
 	}
     }
-
-    /*-------------------------------- Test --------------------------------*/
-
-    public static void main(String[] args){
-	Puzzle p = new Puzzle("Riddle", "Forwards I am heavy, backwards, I am not.", "ton", "Congratulations, you have solved the riddle");
-	Scanner sc = new Scanner(System.in);
-	System.out.println(p.getDescript());
-	System.out.println("What is your answer?");
-	String ans = sc.nextLine();
-	System.out.println(p.check(ans));
-    }
-
 }
