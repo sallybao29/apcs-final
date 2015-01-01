@@ -38,8 +38,8 @@ public class Game{
 	room.add(new Item("Apple", "A shiny red Fuji apple", true));  //21
 	room.add(new Puzzle("Safe", "The safe where you stash your loot. There is a keypad.\nIt seems the password is three characters long.", "666", "The door swings open.\nAnd people said the stuff they did on detective movies was fake."));  //22
 	room.add(new Item("Note1", "A description is pending", true));   //23
-	room.add(new Item("Note2", "Note", true)); //24
-	room.add(new Item("Note3", "Note", true)); //25
+	room.add(new Item("Note2", "Come on, you don't need a hint for something so simple", true)); //24
+	room.add(new Item("Note3", "\nHidden flower\nForbidden fruit\nConvenient tool\nInstructive mute\n", true)); //25
 	room.add(new Item("Note4", "Note", true)); //26
 	room.add(new Item("Note5", "Note", true)); //27
 	room.add(new Item("Acid", "A nice bottle of 100% Hydrochloric Acid", true));  //28
@@ -48,9 +48,9 @@ public class Game{
 	room.add(new Item("Philosophiæ Naturalis Principia Mathematica", "A cool book", true)); //31
   
 
-	room.add(new Puzzle("Door1", "", "1238359", ""));  //32
-	room.add(new Puzzle("Door2", "The sign on the door reads 'Color Code'.", "6890", "\nCongrats! The door swings open, revealing a short but brightly lit tunnel."));  //33
-	room.add(new Puzzle("Door3", "", "Newton", ""));  //34
+	room.add(new Puzzle("Door1", "A high-tech metal door. Lines run down the door, emitting a glowing blue light.\nThere is no handle.\n", "1238359", ""));  //32
+	room.add(new Puzzle("Door2", "The sign on the door reads 'Color Code'.", "6890", "\nCongrats! The door swings open, revealing a short but brightly lit tunnel.\n"));  //33
+	room.add(new Puzzle("Door3", "A large set of imposing, stone doors.\nThere are graphic images carved onto its surface of people being impaled and defenestrated.\nFour small compartments rest at the foot of the door.", "Newton", "With a deliberate creak, the ominous doors give way."));  //34
 	room.add(new Puzzle("Door4", "", "", ""));  //35
 	room.add(new Puzzle("Door5", "", "", ""));  //36
   
@@ -100,7 +100,7 @@ public class Game{
 			gameWon = true;
 		    }
 		    else{
-			System.out.println("\nThe door opens. Alas, there is another door behind it\n");
+			System.out.println("\nAlas, there is another door behind it\n");
 		    }
 		    stage++;
 		}
