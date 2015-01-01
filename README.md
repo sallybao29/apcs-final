@@ -27,3 +27,5 @@ apcs-final
 -12/31/14 - Added more items. Added more interactions to use items found. - Tiffany
 
 -12/31/14 - Added doors to list of available interactions. Made find method for inventory. - Sally
+
+-1/1/14 - Edited Driver and checkDoor method to end the game after the last door has been opened. Added descriptions for door 2. - Tiffany
