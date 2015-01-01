@@ -49,7 +49,7 @@ public class Game{
   
 
 	room.add(new Puzzle("Door1", "", "1238359", ""));  //32
-	room.add(new Puzzle("Door2", "", "6890", ""));  //33
+	room.add(new Puzzle("Door2", "The sign on the door reads 'Color Code'.", "6890", "\nCongrats! The door swings open, revealing a short but brightly lit tunnel."));  //33
 	room.add(new Puzzle("Door3", "", "Newton", ""));  //34
 	room.add(new Puzzle("Door4", "", "", ""));  //35
 	room.add(new Puzzle("Door5", "", "", ""));  //36
@@ -88,7 +88,7 @@ public class Game{
 	int i = 0;
 	String ans;
 	while (i != 1 && stage < 6){
-	    System.out.println(room.get(stage + 31).getDescript()); 
+	    System.out.println("\nYou are at Door " + stage + "\n" + room.get(stage + 31).getDescript()); 
 	    int c = this.AskUser("\nTry to solve the puzzle?\n[1]Yes\n[2]No\n");
 	    if (c == 1){
 		if (((Puzzle)room.get(stage + 31)).getSolved() == false){
@@ -96,9 +96,13 @@ public class Game{
 		    System.out.println(((Puzzle)room.get(stage + 31)).check(ans, ""));
 		}
 		if (((Puzzle)room.get(stage + 31)).getSolved() == true){
-		    System.out.println("\nThe door opens. Alas, there is another door behind it\n");
+		    if (stage == 5){
+			gameWon = true;
+		    }
+		    else{
+			System.out.println("\nThe door opens. Alas, there is another door behind it\n");
+		    }
 		    stage++;
-		    System.out.println(room.get(stage + 31).getDescript());       
 		}
 	    }
 	    else if (c == 2){

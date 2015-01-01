@@ -30,7 +30,6 @@ public class Driver{
 	stuff.take(g.getRoom().get(10));
 
 
-
 	System.out.println("\nYou take a look around. Your bed seems very messy now that you can see it. Your desk is next to your bed, with a trash can underneath it... <Continue with description>");
     
 	System.out.println("\nNow that you've taken a good look at your room, what do you want to do?");
@@ -42,7 +41,7 @@ public class Driver{
 	    int r = d.AskUser("\n[1]Inspect an object, [2]Look at Inventory, [3]Exit Game\n");
 	    if (r == 1){
 		int i = 0;
-		while (i != 1){
+		while (i != 1 && g.gameWon() == false){
 		    int inspect = d.AskUser("\nYou want to inspect... \n[0]Bed\n[1]Desk\n[2]Bag\n[3]Rug\n[4]Trash can\n[5]Bookshelf\n[6]Poster\n[7]Closet\n[8]Bathroom door\n[9]Ceiling\n[10]Door\n[11]Nothing. Let's go back to the main menu\n");
 		    if (inspect >= 0 && inspect < 10){
 			System.out.println(g.getRoom().get(inspect).getDescript());
