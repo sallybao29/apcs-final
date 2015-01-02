@@ -33,6 +33,9 @@ public class Inventory{
 	for (int i = 0;i < inventory.size();i++){
 	    s += "[" + i + "]";
 	    s += inventory.get(i);
+	    if (inventory.get(i).getStatus() == true){
+		s += " - used";
+	    }
 	    s += "\n";
 	}
 	return s;

@@ -77,9 +77,9 @@ public class Driver{
 		while (c != 2){		   
 		    c = d.AskUser("\n[1]Inspect an item, [2]Exit Inventory\n");
 		    if (c == 1){
-			int choice = d.AskUser("\nWhich item would you like to inspect?\n");
 			System.out.println(stuff.list());
 			System.out.println();
+			int choice = d.AskUser("\nWhich item would you like to inspect?\n");
 			try{
 			System.out.println(stuff.getInventory().get(choice).getDescript());
 			}

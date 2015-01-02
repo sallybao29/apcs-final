@@ -19,7 +19,7 @@ public class Game{
 	room.add(new Item("Bag", "A bag filled to the brim with notes and school supplies. There is a small pocket on the front and a waterbottle holder on the side.", false));   //2
 	room.add(new Item("Rug", "A hideous Pikachu rug you bought when you were ten. Maybe there's something under it?", false));  //3
 	room.add(new Item("Trash can", "Something stinks. You haven't taken the trash out for a while.", false));  //4
-	room.add(new Item("Bookshelf", "It's full of test prep books and encyclopedias. Looks like your parents threw out all your manga.", false));  //5
+	room.add(new Item("Bookshelf", "It's full of test prep books and encyclopedias.", false));  //5
 	room.add(new Item("Poster", "A poster of the periodic table of elements.",false));   //6
 	room.add(new Item("Closet", "A closet with sliding doors", false));   //7
 	room.add(new Item("Bathroom door", "The door to the bathroom", false));  //8
@@ -37,11 +37,11 @@ public class Game{
 	room.add(new Item("Phone", "Oh look, your phone. Its screen displays an 8-game puzzle", true));  //20
 	room.add(new Item("Apple", "A shiny red Fuji apple", true));  //21
 	room.add(new Puzzle("Safe", "The safe where you stash your loot. There is a keypad.\nIt seems the password is three characters long.", "666", "The door swings open.\nAnd people said the stuff they did on detective movies was fake."));  //22
-	room.add(new Item("Note1", "A description is pending", true));   //23
-	room.add(new Item("Note2", "Come on, you don't need a hint for something so simple", true)); //24
-	room.add(new Item("Note3", "\nHidden flower\nForbidden fruit\nConvenient tool\nInstructive mute\n", true)); //25
-	room.add(new Item("Note4", "Note", true)); //26
-	room.add(new Item("Note5", "Note", true)); //27
+	room.add(new Item("Note for Door 1", "\nI carry the world between my covers\nYou carry me between your hands\nOf letters I have many\nOf pages I have none\n", true));   //23
+	room.add(new Item("Note for Door 2", "Come on, you don't need a hint for something so simple", true)); //24
+	room.add(new Item("Note for Door 3", "\nHidden flower\nForbidden fruit\nConvenient tool\nInstructive mute\n", true)); //25
+	room.add(new Item("Note for Door 4", "Note", true)); //26
+	room.add(new Item("Note for Door 5", "Note", true)); //27
 	room.add(new Item("Acid", "A nice bottle of 100% Hydrochloric Acid", true));  //28
 	room.add(new Item("Blue Index Card", "A blue index card with the number 8", true)); //29
 	room.add(new Item("Scissors", "A pair of scissors", true)); // 30
@@ -49,7 +49,7 @@ public class Game{
   
 
 	room.add(new Puzzle("Door1", "A high-tech metal door. Lines run down the door, emitting a glowing blue light.\nThere is no handle.\n", "1238359", ""));  //32
-	room.add(new Puzzle("Door2", "The sign on the door reads 'Color Code'.", "6890", "\nCongrats! The door swings open, revealing a short but brightly lit tunnel.\n"));  //33
+	room.add(new Puzzle("Door2", "The sign on the door reads 'Color Code'.", "6890", "\nThe door swings open, revealing a short but brightly lit tunnel.\nAt the end is...?!\n"));  //33
 	room.add(new Puzzle("Door3", "A large set of imposing, stone doors.\nThere are graphic images carved onto its surface of people being impaled and defenestrated.\nFour small compartments rest at the foot of the door.", "Newton", "With a deliberate creak, the ominous doors give way."));  //34
 	room.add(new Puzzle("Door4", "", "", ""));  //35
 	room.add(new Puzzle("Door5", "", "", ""));  //36
@@ -113,8 +113,7 @@ public class Game{
 	    }
 	}
     }
-    
-        
+            
 
     public void interact(Item thing){
 	int c;
@@ -123,20 +122,33 @@ public class Game{
 	if (thing.equals(room.get(0))){
 	    i = 0;
 	    while (i != 1){
-		c = this.AskUser("\n[1]Check under the blankets\n[2]Check pillow\n[3]Already saw the bed\n");
+		c = this.AskUser("\n[1]Check under the blankets\n[2]Check pillow\n[3]Look under bed\n[4]Already saw the bed\n");
 		if (c == 1){
 		    System.out.println("\nThere's nothing there\n");
 		}
 		else if (c == 2){
 		    System.out.println(room.get(15).getDescript());
 		    if (room.get(15).getStatus() == false){
-			System.out.println("You took the note");
-			inventory.take(room.get(23));
+			inventory.take(room.get(24));
 			room.get(15).changeDescript("A fluffy fluff pillow. Just looking at it makes you want to lie down in bed");
 			room.get(15).changeStatus();
 		    }	    
 		}
 		else if (c == 3){
+		    System.out.println("\nA colony of dust bunnies is thriving under the bed");
+		    if (room.get(0).getStatus() == false){
+			System.out.println("\nThere seems to be a piece of paper in the corner");
+			if (inventory.getInventory().contains(bathroom.get(1))){
+			    System.out.println("\nYou used the forceps to grab the paper");
+			    inventory.take(room.get(25));
+			    room.get(0).changeStatus();
+			}
+			else{
+			    System.out.println("\nYou can't seem to reach it");
+			}
+		    }
+		}
+		else if (c == 4){
 		    i = 1;
 		}
 		else{
@@ -170,8 +182,9 @@ public class Game{
 		    if (room.get(13).getStatus() == false){
 			if (inventory.getInventory().contains(room.get(17))){
 			    System.out.println("\nYou unlocked the desk drawer with the key you found.\nIt slides open to reveal some goodies");
-			    System.out.println("\nYou find a Blue index card with the number 8 on it.");
+			    System.out.println("\nYou find a Blue index card with the number 8 on it and a note.");
 			    inventory.take(room.get(29));
+			    inventory.take(room.get(23));
 			    room.get(13).changeDescript("Look at all the nice stuff you have in here.");
 			    room.get(13).changeStatus();
 			    room.get(17).changeStatus();
@@ -332,8 +345,12 @@ public class Game{
 		    System.out.println("\nThere's a safe behind the poster!");
 		    System.out.println(room.get(22).getDescript());
 		    if (((Puzzle)room.get(22)).getSolved() == false){
-			if (inventory.getInventory().contains(room.get(16)) && inventory.getInventory().contains(room.get(30))){
+			if (inventory.getInventory().contains(room.get(16)) && inventory.find("Pencil").getStatus() == false &&
+			    inventory.getInventory().contains(room.get(30)) && inventory.find("Scissors").getStatus() == false){
 			    System.out.println("\nYou use the scissors to shave the pencil.\nThen, you blow the graphite shavings onto the keypad.\nThe fingerprints on the six key become visible");
+			    inventory.find("Pencil").changeStatus();
+			    inventory.find("Scissors").changeStatus();
+			    room.get(22).changeDescript("There are distinctive fingerprint marks on the six key");
 			}
 			else {
 			    System.out.println("\nIf only there were a way to see what had been previously typed...");
@@ -361,11 +378,12 @@ public class Game{
 	    while (i != 1){
 		c = this.AskUser("\n[1]Slide open left door\n[2]Slide open right door\n[3]Move on\n"); 
 		if (c == 1){
-		    if (room.get(28).getStatus() == false){
+		    if (room.get(7).getStatus() == false){
 			System.out.println("\nThe door is stuck. It's been a while since you last greased it.\n");
-			if (inventory.getInventory().contains(room.get(28))){
+			if (inventory.getInventory().contains(room.get(28)) && inventory.find("Acid").getStatus() == false){
 			    System.out.println("\nYou use the acid to melt the hinge\n");
-			    room.get(28).changeStatus();
+			    inventory.find("Acid").changeStatus();
+			    room.get(7).changeStatus();
 			    room.get(7).changeDescript("A closet with sliding doors. There is a gaping hole on the left door and the burning smell of acid");
 			}
 		    }
@@ -452,9 +470,11 @@ public class Game{
 			}
 			else if (c2 == 2){
 			    System.out.println("\nThe water is running.");
-			    if (inventory.getInventory().contains(closet.get(4)) && inventory.find("Marble").getStatus() == false){
-				System.out.println("\nYou washed off the dirt on the marble. There are letters scrawled across it.");
+			    if (inventory.getInventory().contains(closet.get(4)) && inventory.find("Marble").getStatus() == false &&
+				inventory.getInventory().contains(closet.get(5)) && inventory.find("Tissues").getStatus() == false){
+				System.out.println("\nYou washed off the dirt on the marble with the wet tissue. There are letters scrawled across it.");
 				inventory.find("Marble").changeStatus();
+				inventory.find("Tissues").changeStatus();
 				inventory.find("Marble").changeDescript("A lustrous marble. The word Python is written on it.");
 			    }
 			}
