@@ -30,4 +30,4 @@ apcs-final
 
 -1/1/15 - Edited Driver and checkDoor method to end the game after the last door has been opened. Added descriptions for door 2. - Tiffany
 
--1/1/15 - Added descriptions for notes 1 - 3, and for door 1 and 3. Made it so items that have been used will be marked in inventory. 
+-1/1/15 - Added descriptions for notes 1 - 3, and for door 1 and 3. Made it so items that have been used will be marked in inventory. - Sally 
