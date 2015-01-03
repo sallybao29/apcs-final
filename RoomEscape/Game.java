@@ -48,7 +48,7 @@ public class Game{
 	room.add(new Item("Scissors", "A pair of scissors", true)); // 30
 
 
-	room.add(new Puzzle("Door1", "A high-tech metal door. Lines run down the door, emitting a glowing blue light.\nThere is no handle.\n", "1238359", ""));  //31
+	room.add(new Puzzle("Door1", "A high-tech metal door. Gears and rivets run down its center.\nThere is no handle.\n", "1238359", "The password lights up in green and a confirming beep is heard.\nThe gears on the door spin rapidly, and the two sides part."));  //31
 	room.add(new Puzzle("Door2", "The sign on the door reads 'Color Code'.", "6890", "\nThe door swings open, revealing a short but brightly lit tunnel.\nAt the end is...?!\n"));  //32
 	room.add(new Puzzle("Door3", "A large set of imposing, stone doors.\nThere are graphic images carved onto its surface of people being impaled and defenestrated.\nFour small compartments rest at the foot of the door.", "Newton", "With a deliberate creak, the ominous doors give way."));  //33
 	room.add(new Puzzle("Door4", "", "", ""));  //34
@@ -78,8 +78,6 @@ public class Game{
 	bookshelf.add(new Item("Hamlet", "Readers have for the first time, a unique\nopportunity to study the three surviving texts of Hamlet\nexperienced by Shakespeare's contemporaries, fully\nmodernized and edited by leading scholars.\n", false));  //4
 	bookshelf.add(new Item("Philosophiæ Naturalis Principia Mathematica", "\nRational Mechanics will be the science of motions resulting\nfrom any forces whatsoever, and of the forces\nrequired to produce any motions, accurately proposed\nand demonstrated. And therefore we offer this work\nas mathematical principles of philosophy. For all the\ndifficulty of philosophy seems to consist in this: from the\nphenomena of motions to investigate the forces of\nNature, and then from these forces to\ndemonstrate the other phenomena.\n", true));  //5
 	bookshelf.add(new Item("How to Beat this Game", "\nStop reading this and get to work.\n", false));  //6
-
-
     }
 
     public ArrayList<Item> getRoom(){
@@ -94,19 +92,37 @@ public class Game{
 	gameWon = true;
     }
 
+    public boolean checkComp(){
+	if (compartment.size() == 4){
+	    for (int i = 0;i < 4;i++){
+		if (answer.contains(compartment.get(i).getName()) == false){
+		    return false;
+		}
+	    }
+	    return true;
+	}
+	else {
+	    return false;
+	}
+    }
+
     public void fillComp(){
 	int i = 0;
 	int c, option;
-	String list = "";
+	String list;
+	int count;
         while (i != 1){
-	    for (int a = 0;a < 4;a++){
-		list += "[" + (a + 1) + "]";
-		if (compartment.get(a) == null){
-		    list += "empty";
-		}
-		else {
-		    list += compartment.get(a);
-		}
+	    count = 0;
+	    list = "";
+	    for (int a = 0;a < compartment.size();a++){
+		list += "[" + (count) + "]";
+		list += compartment.get(a);
+		list += "\n";
+		count++;
+	    }
+	    for (int b = count;b < 4;b++){
+		list += "[" + b + "]";
+		list += "empty";
 		list += "\n";
 	    }
 	    System.out.println(list);
@@ -117,17 +133,13 @@ public class Game{
 		}
 		else {
 		    System.out.println(inventory.list());
-		    option = this.AskUser("\nWhich object do you want to place?");
+		    option = this.AskUser("\nWhich object do you want to place?\n");
 		    try {
 			System.out.println("\nYou placed the " + inventory.getInventory().get(option) + " in the compartment");
-			for (int pos = 0;pos < 4;pos++){
-			    if (compartment.get(pos) == null){
-				compartment.set(pos, inventory.getInventory().remove(option));
-			    }
+			if (answer.contains(inventory.getInventory().get(option).getName())){
+			    System.out.println("\nThe compartment you place the " + inventory.getInventory().get(option) + " in glows faintly");
 			}
-			    if (answer.contains(compartment.get(option).getName())){
-				System.out.println("\nThe compartment you place the " + compartment.get(option) + " in glows faintly");
-			    }
+			compartment.add(inventory.getInventory().remove(option));
 		    }
 		    catch (Exception e){
 			System.out.println("\nPlease enter the number of your choice");
@@ -141,7 +153,7 @@ public class Game{
 		else {
 		    option = this.AskUser("\nWhich object do you want to take?\n");
 		    try {
-		        inventory.take(compartment.get(option));
+		        inventory.take(compartment.remove(option));
 		    }
 		    catch (Exception e){
 			System.out.println("\nPlease enter a proper choice");
@@ -166,11 +178,15 @@ public class Game{
 	    int c = this.AskUser("\nTry to solve the puzzle?\n[1]Yes\n[2]No\n");
 	    if (c == 1){
 		if (((Puzzle)room.get(stage + 30)).getSolved() == false){
-		    if (stage == 3){
+		    if (stage == 3 && checkComp() == false){
+			System.out.println("\nIt looks like you'll have to fill the compartments first.");
 			fillComp();
+
 		    }
-		    ans = "" + this.AskUser("\nKey-in the passcode: ");
-		    System.out.println(((Puzzle)room.get(stage + 30)).check(ans, ""));
+		    else {
+			ans = "" + this.AskUser("\nKey-in the passcode: ");
+			System.out.println(((Puzzle)room.get(stage + 30)).check(ans, ""));
+		    }
 		}
 		if (((Puzzle)room.get(stage + 30)).getSolved() == true){
 		    System.out.println("\nAlas, there is another door behind it\n");
@@ -397,7 +413,7 @@ public class Game{
 		    System.out.println(bookshelf.get(book - 1).getDescript());
 		    int c2 = this.AskUser("\nTake book? [1]Yes, [2]No\n");
 		    if (c2 == 1){ 
-			inventory.take(bookshelf.get(book - 1));
+			inventory.take(bookshelf.remove(book - 1));
 		    }
 		    else if (c2 == 2){ 
 			System.out.println("You left it.");
@@ -531,8 +547,8 @@ public class Game{
 			    while (i3 != 1){
 				int c3 = this.AskUser("\n[1]Open metal box\n[2]Close medicine cabinet door");
 				if (c3 == 1){
-				    if (bathroom.get(0).getStatus() == false){
-					System.out.println(bathroom.get(0).getDescript());
+				    System.out.println(bathroom.get(0).getDescript());
+				    if (bathroom.get(0).getStatus() == false){	     
 					if (inventory.getInventory().contains(closet.get(1))){
 					    System.out.println("\nYou have unlocked the box using the paperclips! You find forceps and a Green index card with the number 9");
 					    inventory.take(bathroom.get(1));
