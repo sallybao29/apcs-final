@@ -39,5 +39,6 @@ public class Inventory{
 	    s += "\n";
 	}
 	return s;
+
     }
 }

@@ -83,7 +83,7 @@ public class EightGamePuzzle{
     	int zposv2 = zposv;
     	while (solved == false && quit == false){
 	    System.out.println("Current Board: \n" + toString());
-    	    String c = this.AskUser("Enter your move here(left, up, down, or right): ");
+    	    String c = this.AskUser("Enter your move here(left, up, down, or right) or quit: ");
 	    System.out.println("\nYour move: " + c);
 
 	    if (c.equals("quit")){

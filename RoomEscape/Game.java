@@ -6,8 +6,9 @@ public class Game{
     private ArrayList<Item> room = new ArrayList<Item>();
     private ArrayList<Item> closet = new ArrayList<Item>();
     private ArrayList<Item> bathroom = new ArrayList<Item>();
-    private ArrayList<String> bookshelf = new ArrayList<String>(Arrays.asList("The Count of Monte Cristo", "Physics Regents Textbook", "300 Most Difficult SAT Words", "Hamlet", "For the Love of Physics", "The Charm of Quarks", "Romeo and Juliet", "How to Beat this Game", "The Cake is a Lie", "Philosophiæ Naturalis Principia Mathematica", "Chickens"));
-    private Item[] compartment = new Item[4];
+    private ArrayList<Item> bookshelf = new ArrayList<Item>();
+    private ArrayList<Item> compartment = new ArrayList<Item>();
+    private ArrayList<String> answer = new ArrayList<String>(Arrays.asList("Apple", "Forceps", "Fig", "Philosophiæ Naturalis Principia Mathematica"));
     Inventory inventory = new Inventory();
     EightGamePuzzle eightGame;
 
@@ -45,14 +46,13 @@ public class Game{
 	room.add(new Item("Acid", "A nice bottle of 100% Hydrochloric Acid", true));  //28
 	room.add(new Item("Blue Index Card", "A blue index card with the number 8", true)); //29
 	room.add(new Item("Scissors", "A pair of scissors", true)); // 30
-	room.add(new Item("Philosophiæ Naturalis Principia Mathematica", "A cool book", true)); //31
-  
 
-	room.add(new Puzzle("Door1", "A high-tech metal door. Lines run down the door, emitting a glowing blue light.\nThere is no handle.\n", "1238359", ""));  //32
-	room.add(new Puzzle("Door2", "The sign on the door reads 'Color Code'.", "6890", "\nThe door swings open, revealing a short but brightly lit tunnel.\nAt the end is...?!\n"));  //33
-	room.add(new Puzzle("Door3", "A large set of imposing, stone doors.\nThere are graphic images carved onto its surface of people being impaled and defenestrated.\nFour small compartments rest at the foot of the door.", "Newton", "With a deliberate creak, the ominous doors give way."));  //34
-	room.add(new Puzzle("Door4", "", "", ""));  //35
-	room.add(new Puzzle("Door5", "", "", ""));  //36
+
+	room.add(new Puzzle("Door1", "A high-tech metal door. Lines run down the door, emitting a glowing blue light.\nThere is no handle.\n", "1238359", ""));  //31
+	room.add(new Puzzle("Door2", "The sign on the door reads 'Color Code'.", "6890", "\nThe door swings open, revealing a short but brightly lit tunnel.\nAt the end is...?!\n"));  //32
+	room.add(new Puzzle("Door3", "A large set of imposing, stone doors.\nThere are graphic images carved onto its surface of people being impaled and defenestrated.\nFour small compartments rest at the foot of the door.", "Newton", "With a deliberate creak, the ominous doors give way."));  //33
+	room.add(new Puzzle("Door4", "", "", ""));  //34
+	room.add(new Puzzle("Door5", "", "", ""));  //35
   
 
 	closet.add(new Item("Screwdriver", "A Phillips screwdriver. This might come in handy", true));  //0
@@ -70,6 +70,16 @@ public class Game{
 	bathroom.add(new Item("Green Index Card", "A green index card with the number 9", true)); //2
 	bathroom.add(new Item("Purple Index Card", "A purple index card with the number 0", true)); //3
 	bathroom.add(new Item("Bathroom rug", "There is definitely not something under this rug", false)); //4
+
+
+	bookshelf.add(new Item("For the Love of Physics", "\nFrom the End of the Rainbow ot the Edge of Time\nA Journey Through\nthe Wonders of Physics", false));  //0
+	bookshelf.add(new Item("The Oepdipus Cycle", "\nThe ancient myth of Oedipus, which still reverberates\nto this day, provided Sophocles with material for three\ngrea tragedies <i>Oedipus Rex, Oedipus at Colonus</i> and <i>Antigone</i> that\ntogether recount the downfall of Oedipus, king of Thebes, his\ndeath in exile, and the action carried out after his death by his\ndaughter Antigone.\n", false));  //1
+	bookshelf.add(new Item("Principles of Quantum Mechanics", "It's full of equations and greek letters\n", false)); //3
+	bookshelf.add(new Item("Hamlet", "Readers have for the first time, a unique\nopportunity to study the three surviving texts of Hamlet\nexperienced by Shakespeare's contemporaries, fully\nmodernized and edited by leading scholars.\n", false));  //4
+	bookshelf.add(new Item("Philosophiæ Naturalis Principia Mathematica", "\nRational Mechanics will be the science of motions resulting\nfrom any forces whatsoever, and of the forces\nrequired to produce any motions, accurately proposed\nand demonstrated. And therefore we offer this work\nas mathematical principles of philosophy. For all the\ndifficulty of philosophy seems to consist in this: from the\nphenomena of motions to investigate the forces of\nNature, and then from these forces to\ndemonstrate the other phenomena.\n", true));  //5
+	bookshelf.add(new Item("How to Beat this Game", "\nStop reading this and get to work.\n", false));  //6
+
+
     }
 
     public ArrayList<Item> getRoom(){
@@ -84,24 +94,86 @@ public class Game{
 	gameWon = true;
     }
 
+    public void fillComp(){
+	int i = 0;
+	int c, option;
+	String list = "";
+        while (i != 1){
+	    for (int a = 0;a < 4;a++){
+		list += "[" + (a + 1) + "]";
+		if (compartment.get(a) == null){
+		    list += "empty";
+		}
+		else {
+		    list += compartment.get(a);
+		}
+		list += "\n";
+	    }
+	    System.out.println(list);
+	    c = this.AskUser("\n[1]Place an object\n[2]Take an object\n[3]Back to door\n");
+	    if (c == 1){
+		if (compartment.size() > 4){
+		    System.out.println("\nAll spots are filled");
+		}
+		else {
+		    System.out.println(inventory.list());
+		    option = this.AskUser("\nWhich object do you want to place?");
+		    try {
+			System.out.println("\nYou placed the " + inventory.getInventory().get(option) + " in the compartment");
+			for (int pos = 0;pos < 4;pos++){
+			    if (compartment.get(pos) == null){
+				compartment.set(pos, inventory.getInventory().remove(option));
+			    }
+			}
+			    if (answer.contains(compartment.get(option).getName())){
+				System.out.println("\nThe compartment you place the " + compartment.get(option) + " in glows faintly");
+			    }
+		    }
+		    catch (Exception e){
+			System.out.println("\nPlease enter the number of your choice");
+		    }
+		}
+	    }
+	    else if (c == 2){
+		if (compartment.isEmpty()){
+		    System.out.println("\nThere's nothing to take");
+		}
+		else {
+		    option = this.AskUser("\nWhich object do you want to take?\n");
+		    try {
+		        inventory.take(compartment.get(option));
+		    }
+		    catch (Exception e){
+			System.out.println("\nPlease enter a proper choice");
+		    }
+		}
+	    }
+	    else if (c == 3){
+		i = 1;
+	    }
+	    else {
+		System.out.println("\nPlease enter the number of your choice");
+	    }
+	}
+
+    }
+
     public void checkDoor(){
 	int i = 0;
 	String ans;
 	while (i != 1 && stage < 6){
-	    System.out.println("\nYou are at Door " + stage + "\n" + room.get(stage + 31).getDescript()); 
+	    System.out.println("\nYou are at Door " + stage + "\n" + room.get(stage + 30).getDescript()); 
 	    int c = this.AskUser("\nTry to solve the puzzle?\n[1]Yes\n[2]No\n");
 	    if (c == 1){
-		if (((Puzzle)room.get(stage + 31)).getSolved() == false){
+		if (((Puzzle)room.get(stage + 30)).getSolved() == false){
+		    if (stage == 3){
+			fillComp();
+		    }
 		    ans = "" + this.AskUser("\nKey-in the passcode: ");
-		    System.out.println(((Puzzle)room.get(stage + 31)).check(ans, ""));
+		    System.out.println(((Puzzle)room.get(stage + 30)).check(ans, ""));
 		}
-		if (((Puzzle)room.get(stage + 31)).getSolved() == true){
-		    if (stage == 5){
-			gameWon = true;
-		    }
-		    else{
-			System.out.println("\nAlas, there is another door behind it\n");
-		    }
+		if (((Puzzle)room.get(stage + 30)).getSolved() == true){
+		    System.out.println("\nAlas, there is another door behind it\n");
 		    stage++;
 		}
 	    }
@@ -111,6 +183,9 @@ public class Game{
 	    else {
 		System.out.println("\nPlease enter the number of your choice");
 	    }
+	}
+	if (stage > 5){
+	    gameWon = true;
 	}
     }
             
@@ -173,7 +248,6 @@ public class Game{
 		    if (room.get(12).getStatus() == false){
 			System.out.println("\nYou took a pencil");
 			inventory.take(room.get(16));
-			room.get(16).changeStatus();
 			room.get(12).changeStatus();
 		    }
 		}
@@ -317,14 +391,20 @@ public class Game{
 		booklist += bookshelf.get(a);
 		booklist += "\n";
 	    }
-		c = this.AskUser("\n[1]Look at books\n[2]Now's not the time!\n");
+		c = this.AskUser("\n[1]Look at book\n[2]Now's not the time!\n");
 		if (c == 1){
 		    int book = this.AskUser(booklist);
-		    if (book == 10){
-			System.out.println("\nAh, a classic. Good choice");
-			inventory.take(room.get(31));
-			bookshelf.remove(9);
-		    }	 
+		    System.out.println(bookshelf.get(book - 1).getDescript());
+		    int c2 = this.AskUser("\nTake book? [1]Yes, [2]No\n");
+		    if (c2 == 1){ 
+			inventory.take(bookshelf.get(book - 1));
+		    }
+		    else if (c2 == 2){ 
+			System.out.println("You left it.");
+		    }
+		    else {
+			System.out.println("\nPlease enter the number of your choice");
+		    } 	 
 		}
 		else if (c == 2){
 		    i = 1;
@@ -361,7 +441,6 @@ public class Game{
 		    if (((Puzzle)room.get(22)).getSolved() == true && room.get(22).getStatus() == false){
 			System.out.println("You find a bottle of acid in the safe");
 			inventory.take(room.get(28));
-			room.get(28).changeStatus();
 			room.get(22).changeStatus();
 		    }
 		}
@@ -380,7 +459,7 @@ public class Game{
 		if (c == 1){
 		    if (room.get(7).getStatus() == false){
 			System.out.println("\nThe door is stuck. It's been a while since you last greased it.\n");
-			if (inventory.getInventory().contains(room.get(28)) && inventory.find("Acid").getStatus() == false){
+			if (inventory.getInventory().contains(room.get(28))){
 			    System.out.println("\nYou use the acid to melt the hinge\n");
 			    inventory.find("Acid").changeStatus();
 			    room.get(7).changeStatus();
