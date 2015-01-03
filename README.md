@@ -33,3 +33,5 @@ apcs-final
 -1/1/15 - Added descriptions for notes 1 - 3, and for door 1 and 3. Made it so items that have been used will be marked in inventory. - Sally 
 
 -1/2/15 - Added checkComp for stage 3. Fixed bookshelf + added descriptions to books. -  Sally
+
+-1/3/15 - Fixed checkComp. Door 3 should be solvable. - Sally
