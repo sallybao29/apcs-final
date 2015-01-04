@@ -35,3 +35,5 @@ apcs-final
 -1/2/15 - Added checkComp for stage 3. Fixed bookshelf + added descriptions to books. -  Sally
 
 -1/3/15 - Fixed checkComp. Door 3 should be solvable. - Sally
+
+-1/3/15 - Added anagram puzzle for door 4. Added descriptions for doors 4 and 5. - Tiffany
