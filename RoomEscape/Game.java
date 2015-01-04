@@ -49,10 +49,10 @@ public class Game{
 
 
 	room.add(new Puzzle("Door1", "A high-tech metal door. Gears and rivets run down its center.\nThere is no handle.\n", "1238359", "The password lights up in green and a confirming beep is heard.\nThe gears on the door spin rapidly, and the two sides part."));  //31
-	room.add(new Puzzle("Door2", "The sign on the door reads 'Color Code'.", "6890", "\nThe door swings open, revealing a short but brightly lit tunnel.\nAt the end is...?!\n"));  //32
-	room.add(new Puzzle("Door3", "A large set of imposing, stone doors.\nThere are graphic images carved onto its surface of people being impaled and defenestrated.\nFour small compartments rest at the foot of the door.", "Newton", "With a deliberate creak, the ominous doors give way."));  //33
-	room.add(new Puzzle("Door4", "", "", ""));  //34
-	room.add(new Puzzle("Door5", "", "", ""));  //35
+	room.add(new Puzzle("Door2", "The sign on the door reads 'Color Code'.\n", "6890", "\nThe door swings open, revealing a short but brightly lit tunnel.\nAt the end is...?!\n"));  //32
+	room.add(new Puzzle("Door3", "A large set of imposing, stone doors.\nThere are graphic images carved onto its surface of people being impaled and defenestrated.\nFour small compartments rest at the foot of the door.\n", "Newton", "With a deliberate creak, the ominous doors give way to reveal a small room.\nThere is a couch to the right and a coffee table with a photo album on it."));  //33
+	room.add(new Puzzle("Door4", "A sign on the door ahead reads 'Bananagram Anagrams'.\nUnderneath it is a chalkboard. From it, you read: \n  Find the anagram (rearrange the letters) of the words.\n  Enter the first letter of each word into the keypad.\n  Then enter 'r'.\n   1. Reef\n   2. One tip\n   3.United\n", "four", "You easily slide the door open."));  //34
+	room.add(new Puzzle("Door5", "A door with random math symbols carved into it.\n", "", "You hear a click and slowly slide the door open."));  //35
   
 
 	closet.add(new Item("Screwdriver", "A Phillips screwdriver. This might come in handy", true));  //0
@@ -73,7 +73,7 @@ public class Game{
 
 
 	bookshelf.add(new Item("For the Love of Physics", "\nFrom the End of the Rainbow ot the Edge of Time\nA Journey Through\nthe Wonders of Physics", false));  //0
-	bookshelf.add(new Item("The Oepdipus Cycle", "\nThe ancient myth of Oedipus, which still reverberates\nto this day, provided Sophocles with material for three\ngrea tragedies <i>Oedipus Rex, Oedipus at Colonus</i> and <i>Antigone</i> that\ntogether recount the downfall of Oedipus, king of Thebes, his\ndeath in exile, and the action carried out after his death by his\ndaughter Antigone.\n", false));  //1
+	bookshelf.add(new Item("The Oedipus Cycle", "\nThe ancient myth of Oedipus, which still reverberates\nto this day, provided Sophocles with material for three\ngrea tragedies <i>Oedipus Rex, Oedipus at Colonus</i> and <i>Antigone</i> that\ntogether recount the downfall of Oedipus, king of Thebes, his\ndeath in exile, and the action carried out after his death by his\ndaughter Antigone.\n", false));  //1
 	bookshelf.add(new Item("Principles of Quantum Mechanics", "It's full of equations and greek letters\n", false)); //3
 	bookshelf.add(new Item("Hamlet", "Readers have for the first time, a unique\nopportunity to study the three surviving texts of Hamlet\nexperienced by Shakespeare's contemporaries, fully\nmodernized and edited by leading scholars.\n", false));  //4
 	bookshelf.add(new Item("Philosophiæ Naturalis Principia Mathematica", "\nRational Mechanics will be the science of motions resulting\nfrom any forces whatsoever, and of the forces\nrequired to produce any motions, accurately proposed\nand demonstrated. And therefore we offer this work\nas mathematical principles of philosophy. For all the\ndifficulty of philosophy seems to consist in this: from the\nphenomena of motions to investigate the forces of\nNature, and then from these forces to\ndemonstrate the other phenomena.\n", true));  //5
