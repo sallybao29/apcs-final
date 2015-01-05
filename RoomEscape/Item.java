@@ -2,12 +2,14 @@ public class Item{
     private final String name;
     private String description;
     private boolean used = false;
-    private boolean usable;
+    private final boolean takeable;
+    private String compatible = null;
+    private String newform = null;
 
     public Item(String n, String descript, boolean a){
 	name = n;
 	description = descript;
-	usable = a;
+	takeable = a;
     }
 
     public String getName(){
@@ -22,6 +24,22 @@ public class Item{
 	return description;
     }
 
+    public String getCompat(){
+	return compatible;
+    }
+
+    public void setCompat(String compat){
+	compatible = compat;
+    }
+
+    public String getNewForm(){
+	return newform;
+    }
+
+    public void setNewForm(String n){
+	newform = n;
+    }
+    
     public void changeDescript(String s){
 	description = s;
     }
@@ -31,18 +49,12 @@ public class Item{
     }
 
     public boolean canGet(){
-	return usable;
+	return takeable;
     }
 
     public void changeStatus(){
 	used = true;
     }
 
-    /* public static void main(String[] args){
-	Item book = new Item("Physics Regents Textbook", "A Physics Regents textbook. The cover is ripped off. Look! There's a note on page 120. Want to check it out?");
-	System.out.println(book.getName());
-	System.out.println(book.getDescript());
-	System.out.println(book.getStatus());
-    }
-    */
+
 }
