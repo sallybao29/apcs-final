@@ -95,8 +95,7 @@ public class Driver{
 	    else {
 		System.out.println("Please enter the number of your choice");
 	    }
-	}
-	
+	}	
 	if (endGame){
 	    System.out.println("What?! You Quit? Such a disappointment.");
 	}

@@ -26,7 +26,7 @@ public class Game{
 	room.add(new Item("Bathroom door", "The door to the bathroom", false));  //8
 	room.add(new Item("Ceiling", "There's a vent on the ceiling. Even in the dark, something glistens.", false));  //9
 	room.add(new Item("Letter", "\n\nSon, we saw your last math test score.\nYou have brought shame to your family.\nBut it's alright, everyone makes mistakes.\nA great man once said, \"A man must be bIg enough to admit his miStakes, smart enough to profIt from them, and strong enough to Correct them.\" So just stay in your room and reflect on your actions for another two days.\nBy then, you will surely have been able to realize the error of your ways and find the solution to your demise.\n\nSincerely, Your Parents", true));   //10
-	room.add(new Puzzle("Laptop", "You can't log on. It seems your parents have changed the password.", "1234", "The display changes to your homescreen. Alright, you're finally on!"));    //11
+	room.add(new Puzzle("Laptop", "You can't log on. It seems your parents have changed the password.", "Python", "The display changes to your homescreen. Alright, you're finally on!"));    //11
 	room.add(new Item("Pencil Holder", "Ohh, shiny pencils", false));  //12
 	room.add(new Item("Drawer", "It's locked. You need to find a key", false));   //13
 	room.add(new Item("Vent", "It's stuck. You're gonna need a screwdriver", false));   //14
@@ -41,7 +41,7 @@ public class Game{
 	room.add(new Item("Note for Door 1", "\nI carry the world between my covers\nYou carry me between your hands\nOf letters I have many\nOf pages I have none\n", true));   //23
 	room.add(new Item("Note for Door 2", "Come on, you don't need a hint for something so simple", true)); //24
 	room.add(new Item("Note for Door 3", "\nHidden flower\nForbidden fruit\nConvenient tool\nInstructive mute\n", true)); //25
-	room.add(new Item("Note for Door 4", "Note", true)); //26
+	room.add(new Item("Note for Door 4", "Did you mean: nag a ram?", true)); //26
 	room.add(new Item("Note for Door 5", "Note", true)); //27
 	room.add(new Item("Acid", "A nice bottle of 100% Hydrochloric Acid", true));  //28
 	room.add(new Item("Blue Index Card", "A blue index card with the number 8", true)); //29
@@ -92,6 +92,13 @@ public class Game{
 	gameWon = true;
     }
 
+    public static void wait(int num){
+	try{
+	    Thread.sleep(num);
+	}
+	catch (Exception e){}
+    }
+
     public boolean checkComp(){
 	if (compartment.size() == 4){
 	    for (int i = 0;i < 4;i++){
@@ -114,6 +121,7 @@ public class Game{
         while (i != 1){
 	    count = 0;
 	    list = "";
+	    list += "<< The Compartments >>\n\n";
 	    for (int a = 0;a < compartment.size();a++){
 		list += "[" + (count) + "]";
 		list += compartment.get(a);
@@ -167,7 +175,6 @@ public class Game{
 		System.out.println("\nPlease enter the number of your choice");
 	    }
 	}
-
     }
 
     public void checkDoor(){
@@ -189,7 +196,10 @@ public class Game{
 		    }
 		}
 		if (((Puzzle)room.get(stage + 30)).getSolved() == true){
-		    System.out.println("\nAlas, there is another door behind it\n");
+		    if (stage < 5){
+			wait(1000);
+			System.out.println("\nAlas, there is another door behind it\n");
+		    }
 		    stage++;
 		}
 	    }
@@ -228,7 +238,7 @@ public class Game{
 		else if (c == 3){
 		    System.out.println("\nA colony of dust bunnies is thriving under the bed");
 		    if (room.get(0).getStatus() == false){
-			System.out.println("\nThere seems to be a piece of paper in the corner");
+			System.out.println("There seems to be a piece of paper in the corner");
 			if (inventory.getInventory().contains(bathroom.get(1))){
 			    System.out.println("\nYou used the forceps to grab the paper");
 			    inventory.take(room.get(25));
@@ -256,7 +266,6 @@ public class Game{
 		    if (((Puzzle)room.get(11)).getSolved() == false){
 			String ans = "" + this.AskUser("\nEnter Password: ");
 			System.out.println(((Puzzle)room.get(11)).check(ans, "An emacs file is open. There is a piece of code on it:\n\nRandom r = new Random();\ndouble stress = r.nextDouble();\nboolean codeWorks = (r.nextInt(2) == 1);\npublic void writeCode()\n\tif (codeWorks){\n\t\tSystem.out.println(\"I am a GOD\");\n\t}\n\telse{\n\t\tif (stress > 0.7){\n\t\t\tsystem.out.println(\"RAGE QUIT\")\n\t\t\tSystem.exit(0);\n\t\t}\n\t\tcry();\n\t}\n}\n\nWhat could it mean?"));	       
-			System.out.println(room.get(11).getDescript());
 		    }
 		}
 		else if (c == 2){
