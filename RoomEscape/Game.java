@@ -8,7 +8,7 @@ public class Game{
     private ArrayList<Item> bathroom = new ArrayList<Item>();
     private ArrayList<Item> bookshelf = new ArrayList<Item>();
     private ArrayList<Item> compartment = new ArrayList<Item>();
-    private ArrayList<String> answer = new ArrayList<String>(Arrays.asList("Apple", "Forceps", "Fig", "Philosophiæ Naturalis Principia Mathematica"));
+    private ArrayList<String> answer = new ArrayList<String>(Arrays.asList("Apple", "Forceps", "Fig", "Philosophi"+(char)145+" Naturalis Principia Mathematica"));
     Inventory inventory = new Inventory();
     EightGamePuzzle eightGame;
 
@@ -76,7 +76,7 @@ public class Game{
 	bookshelf.add(new Item("The Oedipus Cycle", "\nThe ancient myth of Oedipus, which still reverberates\nto this day, provided Sophocles with material for three\ngrea tragedies <i>Oedipus Rex, Oedipus at Colonus</i> and <i>Antigone</i> that\ntogether recount the downfall of Oedipus, king of Thebes, his\ndeath in exile, and the action carried out after his death by his\ndaughter Antigone.\n", false));  //1
 	bookshelf.add(new Item("Principles of Quantum Mechanics", "It's full of equations and greek letters\n", false)); //3
 	bookshelf.add(new Item("Hamlet", "Readers have for the first time, a unique\nopportunity to study the three surviving texts of Hamlet\nexperienced by Shakespeare's contemporaries, fully\nmodernized and edited by leading scholars.\n", false));  //4
-	bookshelf.add(new Item("Philosophiæ Naturalis Principia Mathematica", "\nRational Mechanics will be the science of motions resulting\nfrom any forces whatsoever, and of the forces\nrequired to produce any motions, accurately proposed\nand demonstrated. And therefore we offer this work\nas mathematical principles of philosophy. For all the\ndifficulty of philosophy seems to consist in this: from the\nphenomena of motions to investigate the forces of\nNature, and then from these forces to\ndemonstrate the other phenomena.\n", true));  //5
+	bookshelf.add(new Item("Philosophi"+(char)145+" Naturalis Principia Mathematica", "\nRational Mechanics will be the science of motions resulting\nfrom any forces whatsoever, and of the forces\nrequired to produce any motions, accurately proposed\nand demonstrated. And therefore we offer this work\nas mathematical principles of philosophy. For all the\ndifficulty of philosophy seems to consist in this: from the\nphenomena of motions to investigate the forces of\nNature, and then from these forces to\ndemonstrate the other phenomena.\n", true));  //5
 	bookshelf.add(new Item("How to Beat this Game", "\nStop reading this and get to work.\n", false));  //6
     }
 
@@ -374,7 +374,7 @@ public class Game{
 			room.get(3).changeDescript("An ugly Pikachu rug.");
 		    }
 		    else {
-			System.out.println("How disappoinging. There's nothing under it");
+			System.out.println("How disappointing. There's nothing under it");
 		    }
 		}
 		else if (c == 2){
