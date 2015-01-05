@@ -10,7 +10,7 @@ public class Inventory{
 	    System.out.println("<< Added " + a + " to your inventory >>");
 	}
 	else {
-	    System.out.println("What the devil would you do with a " + a + "? Leave it.");
+	    System.out.println("<< What the devil would you do with a " + a + "? Leave it >>");
 	}
     }
 
@@ -25,6 +25,12 @@ public class Inventory{
 	    }
 	}
 	return null;
+    }
+
+    public String combine(Item a, Item b){
+	if (a.getCompat().equals(b.getName())){
+
+	}
     }
     
 
