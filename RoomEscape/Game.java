@@ -95,7 +95,6 @@ public class Game{
 	room.get(30).setCompat("Pencil");
 	closet.get(5).setCompat("Marble");
 	closet.get(4).setCompat("Wet Tissues");
-
 	
     }
 

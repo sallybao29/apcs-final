@@ -14,23 +14,28 @@ public class Driver{
 	Inventory stuff = new Inventory();
 	Driver d = new Driver();
 
-	System.out.println("...Huh? Where is this?");
-	wait(2000);
-	System.out.println("You are lying in bed...Is this your room?");
-	wait(2000);
-	System.out.println("It's too dark to see. You go to flip the lights on, but nothing happens.");
-	wait(2000);
-	System.out.println("Instead, you turn on your lamp. The room is dimly lit.");
-	wait(2000);
-	System.out.println("There is a piece of paper taped to the door.");
-	wait(2000);
-	System.out.println("It says: "+ g.getRoom().get(10).getDescript());
-	wait(5000);
-	System.out.println("...alright, let's get out of here.");
+	int player = d.AskUser("Are you a new player? [1]Yes [2]No");
+	if (player == 1){
+	    System.out.println("...Huh? Where is this?");
+	    wait(2000);
+	    System.out.println("You are lying in bed...Is this your room?");
+	    wait(2000);
+	    System.out.println("It's too dark to see. You go to flip the lights on, but nothing happens.");
+	    wait(2000);
+	    System.out.println("Instead, you turn on your lamp. The room is dimly lit.");
+	    wait(2000);
+	    System.out.println("There is a piece of paper taped to the door.");
+	    wait(2000);
+	    System.out.println("It says: "+ g.getRoom().get(10).getDescript());
+	    wait(5000);
+	}
+
+	System.out.println("\n...alright, let's get out of here.\n");
+
 	stuff.take(g.getRoom().get(10));
 
 
-	System.out.println("\nYou take a look around. Your bed seems very messy now that you can see it. Your desk is next to your bed, with a trash can underneath it... <Continue with description>");
+	System.out.println("\nYou take a look around. Your bed seems very messy now that you can see it. Your desk is next to your bed, with a trash can underneath it. Your bag sits on the floor next to your desk, and there is a large rug in the center of the room. There is a bookshelf in the corner and a poster on the wall. You also see your closet doors and the door to the bathroom.");
     
 	System.out.println("\nNow that you've taken a good look at your room, what do you want to do?");
 
