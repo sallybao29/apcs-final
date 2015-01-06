@@ -27,9 +27,12 @@ public class Inventory{
 	return null;
     }
 
-    public String combine(Item a, Item b){
+    public void combine(Item a, Item b){
 	if (a.getCompat().equals(b.getName())){
-
+	    System.out.println("Created " + a.getNewForm() + " from " + a " and " + b);
+	}
+	else {
+	    System.out.println("Are you crazy? What could you make from " + a " and " + b + "?!");
 	}
     }
     
