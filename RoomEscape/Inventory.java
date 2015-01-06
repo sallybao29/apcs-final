@@ -27,12 +27,13 @@ public class Inventory{
 	return null;
     }
 
+    /*
     public String combine(Item a, Item b){
 	if (a.getCompat().equals(b.getName())){
 
 	}
     }
-    
+    */
 
     public String list(){
 	String s = "";
