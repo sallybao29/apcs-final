@@ -15,6 +15,9 @@ public class Game{
     public Game(){
 	gameWon = false;
 	stage = 1;
+	
+	/*------------------------------ The Main Room Stuff -----------------------------------------*/
+	
 	room.add(new Item("Bed", "Your bed. There's a blanket and a pillow and not much else.", false));        //0
 	room.add(new Item("Desk", "A relatively clean desk with a laptop and a pencil holder on it. It has two drawers.", false));   //1
 	room.add(new Item("Bag", "A bag filled to the brim with notes and school supplies. There is a small pocket on the front and a waterbottle holder on the side.", false));   //2
@@ -38,23 +41,29 @@ public class Game{
 	room.add(new Item("Phone", "Oh look, your phone. Its screen displays an 8-game puzzle", true));  //20
 	room.add(new Item("Apple", "A shiny red Fuji apple", true));  //21
 	room.add(new Puzzle("Safe", "The safe where you stash your loot. There is a keypad.\nIt seems the password is three characters long.", "666", "The door swings open.\nAnd people said the stuff they did on detective movies was fake."));  //22
+
+	/*------------------------------ Notes  -----------------------------------------*/
 	room.add(new Item("Note for Door 1", "\nI carry the world between my covers\nYou carry me between your hands\nOf letters I have many\nOf pages I have none\n", true));   //23
 	room.add(new Item("Note for Door 2", "Come on, you don't need a hint for something so simple", true)); //24
 	room.add(new Item("Note for Door 3", "\nHidden flower\nForbidden fruit\nConvenient tool\nInstructive mute\n", true)); //25
 	room.add(new Item("Note for Door 4", "Did you mean: nag a ram?", true)); //26
 	room.add(new Item("Note for Door 5", "Note", true)); //27
+	
 	room.add(new Item("Acid", "A nice bottle of 100% Hydrochloric Acid", true));  //28
 	room.add(new Item("Blue Index Card", "A blue index card with the number 8", true)); //29
 	room.add(new Item("Scissors", "A pair of scissors", true)); // 30
 
-
+	/*------------------------------ The Doors -----------------------------------------*/
+	
 	room.add(new Puzzle("Door1", "A high-tech metal door. Gears and rivets run down its center.\nThere is no handle.\n", "1238359", "The password lights up in green and a confirming beep is heard.\nThe gears on the door spin rapidly, and the two sides part."));  //31
 	room.add(new Puzzle("Door2", "The sign on the door reads 'Color Code'.\n", "6890", "\nThe door swings open, revealing a short but brightly lit tunnel.\nAt the end is...?!\n"));  //32
 	room.add(new Puzzle("Door3", "A large set of imposing, stone doors.\nThere are graphic images carved onto its surface of people being impaled and defenestrated.\nFour small compartments rest at the foot of the door.\n", "Newton", "With a deliberate creak, the ominous doors give way to reveal a small room.\nThere is a couch to the right and a coffee table with a photo album on it."));  //33
 	room.add(new Puzzle("Door4", "A sign on the door ahead reads 'Bananagram Anagrams'.\nUnderneath it is a chalkboard. From it, you read: \n  Find the anagram (rearrange the letters) of the words.\n  Enter the first letter of each word into the keypad.\n  Then enter 'r'.\n   1. Reef\n   2. One tip\n   3.United\n", "four", "You easily slide the door open."));  //34
 	room.add(new Puzzle("Door5", "A door with random math symbols carved into it.\n", "", "You hear a click and slowly slide the door open."));  //35
-  
 
+      
+	/*------------------------------ The Closet -----------------------------------------*/
+	
 	closet.add(new Item("Screwdriver", "A Phillips screwdriver. This might come in handy", true));  //0
 	closet.add(new Item("Paperclips", "Some colorful paperclips. You know what they are!", true));  //1
 	closet.add(new Item("Tin Box", "A silver tin box used for storing cookies", false));            //2
@@ -64,6 +73,7 @@ public class Game{
 	closet.add(new Item("Index card", "An index card with four colored dots: Red, Blue, Green, Purple", true)); //6
 	closet.add(new Item("Books", "Some old books", false)); //7
 	
+	/*------------------------------ The Bathroom -----------------------------------------*/
 	
 	bathroom.add(new Item("Metal box", "A tiny metal box. Hm... It looks like you'll have to pick the lock.", false)); //0
 	bathroom.add(new Item("Forceps", "Just some forceps", true)); //1
@@ -71,13 +81,22 @@ public class Game{
 	bathroom.add(new Item("Purple Index Card", "A purple index card with the number 0", true)); //3
 	bathroom.add(new Item("Bathroom rug", "There is definitely not something under this rug", false)); //4
 
-
+	/*------------------------------ The Bookshelf -----------------------------------------*/
+	
 	bookshelf.add(new Item("For the Love of Physics", "\nFrom the End of the Rainbow ot the Edge of Time\nA Journey Through\nthe Wonders of Physics", false));  //0
 	bookshelf.add(new Item("The Oedipus Cycle", "\nThe ancient myth of Oedipus, which still reverberates\nto this day, provided Sophocles with material for three\ngrea tragedies <i>Oedipus Rex, Oedipus at Colonus</i> and <i>Antigone</i> that\ntogether recount the downfall of Oedipus, king of Thebes, his\ndeath in exile, and the action carried out after his death by his\ndaughter Antigone.\n", false));  //1
 	bookshelf.add(new Item("Principles of Quantum Mechanics", "It's full of equations and greek letters\n", false)); //3
 	bookshelf.add(new Item("Hamlet", "Readers have for the first time, a unique\nopportunity to study the three surviving texts of Hamlet\nexperienced by Shakespeare's contemporaries, fully\nmodernized and edited by leading scholars.\n", false));  //4
 	bookshelf.add(new Item("Philosophi"+(char)145+" Naturalis Principia Mathematica", "\nRational Mechanics will be the science of motions resulting\nfrom any forces whatsoever, and of the forces\nrequired to produce any motions, accurately proposed\nand demonstrated. And therefore we offer this work\nas mathematical principles of philosophy. For all the\ndifficulty of philosophy seems to consist in this: from the\nphenomena of motions to investigate the forces of\nNature, and then from these forces to\ndemonstrate the other phenomena.\n", true));  //5
 	bookshelf.add(new Item("How to Beat this Game", "\nStop reading this and get to work.\n", false));  //6
+
+	room.get(16).setCompat("Scissors");
+	room.get(16).setNewForm("Pencil Shavings");
+	room.get(30).setCompat("Pencil");
+	closet.get(5).setCompat("Marble");
+	closet.get(4).setCompat("Wet Tissues");
+
+	
     }
 
     public ArrayList<Item> getRoom(){
