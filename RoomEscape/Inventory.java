@@ -1,4 +1,3 @@
-import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Inventory{
@@ -27,20 +26,26 @@ public class Inventory{
 	return null;
     }
 
-<<<<<<< HEAD
     public void combine(Item a, Item b){
-=======
-    /*
-    public String combine(Item a, Item b){
->>>>>>> ba821f6f9b013d3cffd8da25192b53c951a2f4a5
+	String name;
 	if (a.getCompat().equals(b.getName())){
-	    System.out.println("Created " + a.getNewForm() + " from " + a " and " + b);
+	    if (!a.getNewForm().equals("None")){
+	        a.setName(a.getNewForm());
+		a.changeDescript(a.getNDescript());
+		name = a.getNewForm();
+	    }
+	    else {
+	        b.setName(b.getNewForm());
+		b.changeDescript(b.getNDescript());
+		name = b.getNewForm();
+	    }
+	    System.out.println("Created " + name + " from " + a + " and " + b);
 	}
 	else {
-	    System.out.println("Are you crazy? What could you make from " + a " and " + b + "?!");
+	    System.out.println("Why would you combine " + a + " and " + b + "?");
 	}
     }
-    */
+
 
     public String list(){
 	String s = "";

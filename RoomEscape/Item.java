@@ -1,23 +1,25 @@
 public class Item{
-    private final String name;
-    private String description;
-    private boolean used = false;
+    private String name, description, compatible, newform, newDescript;
+    private boolean used;
     private final boolean takeable;
-    private String compatible;
-    private boolean changeable;
-    private String newform;
+
 
     public Item(String n, String descript, boolean a){
 	name = n;
 	description = descript;
 	takeable = a;
+	used = false;
 	compatible = "None";
 	newform = "None";
-
+	newDescript = "None";
     }
 
     public String getName(){
 	return name;
+    }
+
+    public void setName(String n){
+	name = n;
     }
 
     public String toString(){
@@ -27,6 +29,19 @@ public class Item{
     public String getDescript(){
 	return description;
     }
+
+    public void changeDescript(String s){
+	description = s;
+    }
+
+    public String getNDescript(){
+	return newDescript;
+    }
+
+    public void setNDescript(String s){
+	newDescript = s;
+    }
+
 
     public String getCompat(){
 	return compatible;
@@ -42,18 +57,6 @@ public class Item{
 
     public void setNewForm(String n){
 	newform = n;
-    }
-
-    public boolean getChangeable(){
-	return changeable;
-    }
-
-    public void setChangeable(boolean b){
-	changeable = b;
-    }
-    
-    public void changeDescript(String s){
-	description = s;
     }
 
     public boolean getStatus(){

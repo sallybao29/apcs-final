@@ -11,6 +11,7 @@ public class Game{
     private ArrayList<String> answer = new ArrayList<String>(Arrays.asList("Apple", "Forceps", "Fig", "Philosophi"+(char)145+" Naturalis Principia Mathematica"));
     Inventory inventory = new Inventory();
     EightGamePuzzle eightGame;
+    private String msg = "\nPlease enter the number of your choice";
 
     public Game(){
 	gameWon = false;
@@ -28,6 +29,8 @@ public class Game{
 	room.add(new Item("Closet", "A closet with sliding doors", false));   //7
 	room.add(new Item("Bathroom door", "The door to the bathroom", false));  //8
 	room.add(new Item("Ceiling", "There's a vent on the ceiling. Even in the dark, something glistens.", false));  //9
+
+
 	room.add(new Item("Letter", "\n\nSon, we saw your last math test score.\nYou have brought shame to your family.\nBut it's alright, everyone makes mistakes.\nA great man once said, \"A man must be bIg enough to admit his miStakes, smart enough to profIt from them, and strong enough to Correct them.\" So just stay in your room and reflect on your actions for another two days.\nBy then, you will surely have been able to realize the error of your ways and find the solution to your demise.\n\nSincerely, Your Parents", true));   //10
 	room.add(new Puzzle("Laptop", "You can't log on. It seems your parents have changed the password.", "Python", "The display changes to your homescreen. Alright, you're finally on!"));    //11
 	room.add(new Item("Pencil Holder", "Ohh, shiny pencils", false));  //12
@@ -69,7 +72,7 @@ public class Game{
 	closet.add(new Item("Tin Box", "A silver tin box used for storing cookies", false));            //2
 	closet.add(new Item("Hoodie", "A spiffy hoodie", false));   //3
 	closet.add(new Item("Marble", "A dirty marble caked in grease", true));  //4
-	closet.add(new Item("Tissues", "A pack of tissues like the kind you get from Chinese vendors", true));  //5
+	closet.add(new Item("Tissues", "A pack of tissues like the kind you get from Chinese people on the street", true));  //5
 	closet.add(new Item("Index card", "An index card with four colored dots: Red, Blue, Green, Purple", true)); //6
 	closet.add(new Item("Books", "Some old books", false)); //7
 	
@@ -92,9 +95,13 @@ public class Game{
 
 	room.get(16).setCompat("Scissors");
 	room.get(16).setNewForm("Pencil Shavings");
+	room.get(16).setNDescript("A pile of pencil shavings.");
 	room.get(30).setCompat("Pencil");
 	closet.get(5).setCompat("Marble");
+	closet.get(5).setNewForm("Wet Tissues");
+	closet.get(5).setNDescript("A pack of slightly wet tissues");
 	closet.get(4).setCompat("Wet Tissues");
+	closet.get(4).setNDescript("A lustrous marble. The word Python is written on it");
 	
     }
 
@@ -168,7 +175,7 @@ public class Game{
 			compartment.add(inventory.getInventory().remove(option));
 		    }
 		    catch (Exception e){
-			System.out.println("\nPlease enter the number of your choice");
+			System.out.println(msg);
 		    }
 		}
 	    }
@@ -190,7 +197,7 @@ public class Game{
 		i = 1;
 	    }
 	    else {
-		System.out.println("\nPlease enter the number of your choice");
+		System.out.println(msg);
 	    }
 	}
     }
@@ -225,7 +232,7 @@ public class Game{
 		i = 1;
 	    }
 	    else {
-		System.out.println("\nPlease enter the number of your choice");
+		System.out.println(msg);
 	    }
 	}
 	if (stage > 5){
@@ -271,7 +278,7 @@ public class Game{
 		    i = 1;
 		}
 		else{
-		    System.out.println("\nPlease enter the number of your choice");
+		    System.out.println(msg);
 		}
 	    }
 	}
@@ -312,7 +319,7 @@ public class Game{
 		    i = 1;
 		}
 		else{
-		    System.out.println("\nPlease enter the number of your choice");
+		    System.out.println(msg);
 		}
 	    }
 	}
@@ -357,7 +364,7 @@ public class Game{
 			    }
 			    else if (c2 == 2){System.out.println("\nEw, these are a few years old. Maybe you should leave them.");}
 			    else if (c2 == 3){i2 = 1;}
-			    else {System.out.println("\nPlease enter the number of your choice");}
+			    else {System.out.println(msg);}
 			}
 		    }
 		    else if (room.get(20).getStatus() == true){
@@ -376,7 +383,7 @@ public class Game{
 		    i = 1;
 		}
 		else{
-		    System.out.println("\nPlease enter the number of your choice");
+		    System.out.println(msg);
 		}
 	    }
 	}
@@ -399,7 +406,7 @@ public class Game{
 		    i = 1;
 		}
 		else{
-		    System.out.println("\nPlease enter the number of your choice");
+		    System.out.println(msg);
 		}
 	    }
 	}
@@ -421,7 +428,7 @@ public class Game{
 		    i = 1;
 		}
 		else{
-		    System.out.println("\nPlease enter the number of your choice");
+		    System.out.println(msg);
 		}
 	    }
 	}
@@ -443,17 +450,17 @@ public class Game{
 			inventory.take(bookshelf.remove(book - 1));
 		    }
 		    else if (c2 == 2){ 
-			System.out.println("You left it.");
+			i = 1;
 		    }
 		    else {
-			System.out.println("\nPlease enter the number of your choice");
+			System.out.println(msg);
 		    } 	 
 		}
 		else if (c == 2){
 		    i = 1;
 		}
 		else{
-		    System.out.println("\nPlease enter the number of your choice");
+		    System.out.println(msg);
 		}
 	    }
 	}
@@ -491,7 +498,7 @@ public class Game{
 		    i = 1;
 		}     
 		else{
-		    System.out.println("\nPlease enter the number of your choice");
+		    System.out.println(msg);
 		}
 	    }
 	}
@@ -544,7 +551,7 @@ public class Game{
 				}
 			    }
 			    else if (c2 == 5){i2 = 1;}
-			    else{System.out.println("\nPlease enter the number of your choice");}
+			    else{System.out.println(msg);}
 			}
 		    }
 		}
@@ -555,7 +562,7 @@ public class Game{
 		    i = 1;
 		}
 		else{
-		    System.out.println("\nPlease enter the number of your choice");
+		    System.out.println(msg);
 		}
 	    }
 	}
@@ -614,7 +621,7 @@ public class Game{
 			    i2 = 1;
 			}
 			else{
-			    System.out.println("\nPlease enter the number of your choice");
+			    System.out.println(msg);
 			}
 		    }
 		}
@@ -622,7 +629,7 @@ public class Game{
 		    i = 1;
 		}
 		else{
-		    System.out.println("\nPlease enter the number of your choice");
+		    System.out.println(msg);
 		}
 	    }
 	}
@@ -646,9 +653,25 @@ public class Game{
 		    i = 1;
 		}
 		else{
-		    System.out.println("\nPlease enter the number of your choice");
+		    System.out.println(msg);
 		}
 	    }
+	}
+    }
+
+    public void toCombine(){
+	int i = 0;
+	int a, b;
+	while (i != 2){
+	    a = this.AskUser("\nObject " + (i + 1) + ": ");
+	    if (a >= 0 && a < inventory.getInventory().size()){
+	        inventory.getInventory().add(inventory.getInventory().remove(a));
+		i++;
+	    }
+	    else {
+		System.out.println(msg);
+	    }
+	    inventory.combine(inventory.getInventory().get(inventory.getInventory().size() - 1), inventory.getInventory().get(inventory.getInventory().size() - 2));
 	}
     }
 
