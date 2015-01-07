@@ -12,6 +12,8 @@ public class Game{
     Inventory inventory = new Inventory();
     EightGamePuzzle eightGame;
     private String msg = "\nPlease enter the number of your choice";
+    private String equip = "None";
+    private String qsg = "Type 'quit' to exit";
 
     public Game(){
 	gameWon = false;
@@ -661,7 +663,7 @@ public class Game{
 
     public void toCombine(){
 	int i = 0;
-	int a, b;
+	int a;
 	while (i != 2){
 	    a = this.AskUser("\nObject " + (i + 1) + ": ");
 	    if (a >= 0 && a < inventory.getInventory().size()){
@@ -671,7 +673,31 @@ public class Game{
 	    else {
 		System.out.println(msg);
 	    }
-	    inventory.combine(inventory.getInventory().get(inventory.getInventory().size() - 1), inventory.getInventory().get(inventory.getInventory().size() - 2));
+	}
+	inventory.combine(inventory.getInventory().get(inventory.getInventory().size() - 1), inventory.getInventory().get(inventory.getInventory().size() - 2));
+    }
+
+    public void toEquip(){
+	int i = 0;
+	int c;
+	while (i != 1){
+	    if (equip.equals("None")){
+		System.out.println("Nothing is equipped");
+	    }
+	    else {
+		System.out.println(equip + " is currently equipped");
+	    }
+	    System.out.println(qsg);
+	    c = this.AskUser("\nEquip: ");
+	    if (c >= 0 && c < inventory.getInventory().size()){
+		System.out.println("<< Equipped " + inventory.getInventory().get(c) + " >>"); 
+	    }
+	    else if (c == -2){
+		i = 1;
+	    }
+	    else {
+		System.out.println(msg);
+	    }
 	}
     }
 
@@ -684,6 +710,9 @@ public class Game{
 	    return Integer.parseInt(s);
 	}
 	catch(NumberFormatException e){
+	    if (s.equals("quit")){
+		return -2;
+	    }
 	    return -1;
 	}
     }
