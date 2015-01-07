@@ -34,7 +34,6 @@ public class Driver{
 
 	stuff.take(g.getRoom().get(10));
 
-
 	System.out.println("\nYou take a look around. Your bed seems very messy now that you can see it. Your desk is next to your bed, with a trash can underneath it. Your bag sits on the floor next to your desk, and there is a large rug in the center of the room. There is a bookshelf in the corner and a poster on the wall. You also see your closet doors and the door to the bathroom.");
     
 	System.out.println("\nNow that you've taken a good look at your room, what do you want to do?");
@@ -62,7 +61,7 @@ public class Driver{
 				i2 = 1;
 			    }
 			    else{
-				System.out.println("\nPlease enter the number of your choice\n");
+				System.out.println("\nPlease enter the number of your choice.");
 			    }
 			}
 		    }
@@ -79,8 +78,8 @@ public class Driver{
 	    }
 	    else if (r == 2){
 		int c = 0;
-		while (c != 2){		   
-		    c = d.AskUser("\n[1]Inspect an item, [2]Exit Inventory\n");
+		while (c != 4){		   
+		    c = d.AskUser("\n[1]Inspect an item, [2]Combine items, [3]Equip items, [4]Exit Inventory\n");
 		    if (c == 1){
 			System.out.println(stuff.list());
 			System.out.println();
@@ -89,8 +88,14 @@ public class Driver{
 			System.out.println(stuff.getInventory().get(choice).getDescript());
 			}
 			catch(Exception e){
-			    System.out.println("Please enter the number of the item.");
+			    System.out.println("\nPlease enter the number of the item.");
 			}
+		    }
+		    else if (c == 2){
+			g.toCombine();
+		    }
+		    else if (c == 3){
+			g.toEquip();
 		    }
 		}
 	    }
@@ -98,7 +103,7 @@ public class Driver{
 		endGame = true;
 	    }
 	    else {
-		System.out.println("Please enter the number of your choice");
+		System.out.println("Please enter the number of your choice.");
 	    }
 	}	
 	if (endGame){
