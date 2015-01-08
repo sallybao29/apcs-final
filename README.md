@@ -39,3 +39,5 @@ apcs-final
 -1/3/15 - Added anagram puzzle for door 4. Added descriptions for doors 4 and 5. - Tiffany
 
 -1/6/15 - Added combine method to Inventory and toCombine method to Game. Both are implementations that allow the player to manipulate the items. - Sally
+
+-1/7/15 - Added toUse method and edited check method. Equipping and combining items is now possible. - Sally 
