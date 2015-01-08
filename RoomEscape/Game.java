@@ -133,6 +133,13 @@ public class Game{
 	gameWon = true;
     }
 
+    public String getM(){
+	return msg;
+    }
+    public String getQ(){
+	return qsg;
+    }
+
     public static void wait(int num){
 	try{
 	    Thread.sleep(num);
@@ -184,11 +191,11 @@ public class Game{
 		    System.out.println(inventory.list());
 		    option = this.AskUser("\nWhich object do you want to place?\n");
 		    try {
-			System.out.println("\nYou placed the " + inventory.getInventory().get(option) + " in the compartment");
-			if (answer.contains(inventory.getInventory().get(option).getName())){
-			    System.out.println("\nThe compartment you place the " + inventory.getInventory().get(option) + " in glows faintly");
+			System.out.println("\nYou placed the " + inventory.get().get(option) + " in the compartment");
+			if (answer.contains(inventory.get().get(option).getName())){
+			    System.out.println("\nThe compartment you place the " + inventory.get().get(option) + " in glows faintly");
 			}
-			compartment.add(inventory.getInventory().remove(option));
+			compartment.add(inventory.get().remove(option));
 		    }
 		    catch (Exception e){
 			System.out.println(msg);
@@ -652,8 +659,8 @@ public class Game{
 	int a;
 	while (i != 2){
 	    a = this.AskUser("\nObject " + (i + 1) + ": ");
-	    if (a >= 0 && a < inventory.getInventory().size()){
-	        inventory.getInventory().add(inventory.getInventory().remove(a));
+	    if (a >= 0 && a < inventory.get().size()){
+	        inventory.get().add(inventory.get().remove(a));
 		i++;
 	    }
 	    else if (a == -2){
@@ -663,7 +670,7 @@ public class Game{
 		System.out.println(msg);
 	    }
 	}
-	inventory.combine(inventory.getInventory().get(inventory.getInventory().size() - 1), inventory.getInventory().get(inventory.getInventory().size() - 2));
+	inventory.combine(inventory.get().get(inventory.get().size() - 2), inventory.get().get(inventory.get().size() - 1));
     }
 
     public void toEquip(){
@@ -678,9 +685,9 @@ public class Game{
 	    }
 	    System.out.println(qsg);
 	    c = this.AskUser("\nEquip: ");
-	    if (c >= 0 && c < inventory.getInventory().size()){
-		equip = inventory.getInventory().get(c).getName();
-		System.out.println("<< Equipped " + inventory.getInventory().get(c) + " >>"); 
+	    if (c >= 0 && c < inventory.get().size()){
+		equip = inventory.get().get(c).getName();
+		System.out.println("<< Equipped " + inventory.get().get(c) + " >>"); 
 		i = 1;
 	    }
 	    else if (c == -2){

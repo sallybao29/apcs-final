@@ -14,7 +14,7 @@ public class Driver{
 	Inventory stuff = new Inventory();
 	Driver d = new Driver();
 
-	int player = d.AskUser("Are you a new player? [1]Yes [2]No");
+	int player = d.AskUser("Are you a new player? [1]Yes [2]No\n");
 	if (player == 1){
 	    System.out.println("...Huh? Where is this?");
 	    wait(2000);
@@ -52,7 +52,7 @@ public class Driver{
 			int i2 = 0;
 			while (i2 != 1){
 			    System.out.println("\nWhat do you want to do with it?");
-			    int c = d.AskUser("\n[1]Inspect further, [2]Move on\n");
+			    int c = d.AskUser("[1]Inspect further, [2]Move on\n");
 			    if (c == 1){
 				g.interact(g.getRoom().get(inspect));
 				i2 = 1;
@@ -78,14 +78,13 @@ public class Driver{
 	    }
 	    else if (r == 2){
 		int c = 0;
-		while (c != 4){		   
+		while (c != 4){
+		    	System.out.println(stuff.list() + "\n");
 		    c = d.AskUser("\n[1]Inspect an item, [2]Combine items, [3]Equip items, [4]Exit Inventory\n");
 		    if (c == 1){
-			System.out.println(stuff.list());
-			System.out.println();
 			int choice = d.AskUser("\nWhich item would you like to inspect?\n");
 			try{
-			System.out.println(stuff.getInventory().get(choice).getDescript());
+			System.out.println(stuff.get().get(choice).getDescript());
 			}
 			catch(Exception e){
 			    System.out.println("\nPlease enter the number of the item.");
