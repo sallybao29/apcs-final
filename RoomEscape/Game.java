@@ -11,9 +11,9 @@ public class Game{
     private ArrayList<String> answer = new ArrayList<String>(Arrays.asList("Apple", "Forceps", "Fig", "Philosophi"+(char)145+" Naturalis Principia Mathematica"));
     Inventory inventory = new Inventory();
     EightGamePuzzle eightGame;
-    private String msg = "\nPlease enter the number of your choice";
+    private String msg = "\nPlease enter the number of your choice", qsg = "Type 'quit' to exit";
     private String equip = "None";
-    private String qsg = "Type 'quit' to exit";
+
 
     public Game(){
 	gameWon = false;
@@ -33,7 +33,7 @@ public class Game{
 	room.add(new Item("Ceiling", "There's a vent on the ceiling. Even in the dark, something glistens.", false));  //9
 
 
-	room.add(new Item("Letter", "\n\nSon, we saw your last math test score.\nYou have brought shame to your family.\nBut it's alright, everyone makes mistakes.\nA great man once said, \"A man must be bIg enough to admit his miStakes, smart enough to profIt from them, and strong enough to Correct them.\" So just stay in your room and reflect on your actions for another two days.\nBy then, you will surely have been able to realize the error of your ways and find the solution to your demise.\n\nSincerely, Your Parents", true));   //10
+	room.add(new Item("Letter", "\n\nSon, we saw your last math test score.\nYou have brought shame to your family.\n\"A man must be bIg enough to admit his miStakes, smart enough to profIt from them, and strong enough to Correct them.\"Reflect on your actions for another two days.\nBy then, you will surely have been able to realize the error of your ways and find the solution to your demise.\n\nSincerely, Your Parents", true));   //10
 	room.add(new Puzzle("Laptop", "You can't log on. It seems your parents have changed the password.", "Python", "The display changes to your homescreen. Alright, you're finally on!"));    //11
 	room.add(new Item("Pencil Holder", "Ohh, shiny pencils", false));  //12
 	room.add(new Item("Drawer", "It's locked. You need to find a key", false));   //13
@@ -45,7 +45,7 @@ public class Game{
 	room.add(new Item("Math test", "The math test you failed", true));  //19
 	room.add(new Item("Phone", "Oh look, your phone. Its screen displays an 8-game puzzle", true));  //20
 	room.add(new Item("Apple", "A shiny red Fuji apple", true));  //21
-	room.add(new Puzzle("Safe", "The safe where you stash your loot. There is a keypad.\nIt seems the password is three characters long.", "666", "The door swings open.\nAnd people said the stuff they did on detective movies was fake."));  //22
+	room.add(new Puzzle("Safe", "There is a keypad.\nIt seems the password is three characters long.", "666", "The door swings open.\nAnd people said the stuff they did on detective movies was fake."));  //22
 
 	/*------------------------------ Notes  -----------------------------------------*/
 	room.add(new Item("Note for Door 1", "\nI carry the world between my covers\nYou carry me between your hands\nOf letters I have many\nOf pages I have none\n", true));   //23
@@ -85,6 +85,7 @@ public class Game{
 	bathroom.add(new Item("Green Index Card", "A green index card with the number 9", true)); //2
 	bathroom.add(new Item("Purple Index Card", "A purple index card with the number 0", true)); //3
 	bathroom.add(new Item("Bathroom rug", "There is definitely not something under this rug", false)); //4
+	bathroom.add(new Item("Faucet", "The water is running", false));    //5
 
 	/*------------------------------ The Bookshelf -----------------------------------------*/
 	
@@ -95,15 +96,28 @@ public class Game{
 	bookshelf.add(new Item("Philosophi"+(char)145+" Naturalis Principia Mathematica", "\nRational Mechanics will be the science of motions resulting\nfrom any forces whatsoever, and of the forces\nrequired to produce any motions, accurately proposed\nand demonstrated. And therefore we offer this work\nas mathematical principles of philosophy. For all the\ndifficulty of philosophy seems to consist in this: from the\nphenomena of motions to investigate the forces of\nNature, and then from these forces to\ndemonstrate the other phenomena.\n", true));  //5
 	bookshelf.add(new Item("How to Beat this Game", "\nStop reading this and get to work.\n", false));  //6
 
-	room.get(16).setCompat("Scissors");
-	room.get(16).setNewForm("Pencil Shavings");
+	room.get(7).setCompat("Acid");      //Closet
+	room.get(7).setNDescript("A closet with sliding doors. There is a gaping hole on the left door and the burning smell of acid.");
+	room.get(13).setCompat("Key");       //Drawer
+	room.get(13).setNDescript("Look at all the nice stuff you have in here.");
+	room.get(16).setCompat("Scissors");   // Pencil
+	room.get(16).setNewForm("Pencil Shavings");   
 	room.get(16).setNDescript("A pile of pencil shavings.");
-	room.get(30).setCompat("Pencil");
-	closet.get(5).setCompat("Marble");
-	closet.get(5).setNewForm("Wet Tissues");
+	room.get(30).setCompat("Pencil");     //Scissors
+	room.get(22).setCompat("Pencil Shavings");   //Safe
+	room.get(22).setNDescript("There are distinctive fingerprint marks on the six key");
+	room.get(14).setCompat("ScrewDriver");   //Vent
+	room.get(14).setNDescript("The vent cover has been removed. There is only darkness within.");
+	room.get(0).setCompat("Forceps");    //Bed
+	closet.get(5).setCompat("Marble");    //Tissues
+	closet.get(5).setNewForm("Wet Tissues");  
 	closet.get(5).setNDescript("A pack of slightly wet tissues");
-	closet.get(4).setCompat("Wet Tissues");
+	closet.get(4).setCompat("Wet Tissues");       //Marble
 	closet.get(4).setNDescript("A lustrous marble. The word Python is written on it");
+	bathroom.get(0).setCompat("Paperclips");         
+	bathroom.get(0).setNDescript("You've already unlocked the box and taken the items. There is nothing left inside.");
+	bathroom.get(5).setCompat("Tissues");
+
 	
     }
 
@@ -117,6 +131,13 @@ public class Game{
     
     public void editStatus(){
 	gameWon = true;
+    }
+
+    public String getM(){
+	return msg;
+    }
+    public String getQ(){
+	return qsg;
     }
 
     public static void wait(int num){
@@ -170,11 +191,11 @@ public class Game{
 		    System.out.println(inventory.list());
 		    option = this.AskUser("\nWhich object do you want to place?\n");
 		    try {
-			System.out.println("\nYou placed the " + inventory.getInventory().get(option) + " in the compartment");
-			if (answer.contains(inventory.getInventory().get(option).getName())){
-			    System.out.println("\nThe compartment you place the " + inventory.getInventory().get(option) + " in glows faintly");
+			System.out.println("\nYou placed the " + inventory.get().get(option) + " in the compartment");
+			if (answer.contains(inventory.get().get(option).getName())){
+			    System.out.println("\nThe compartment you place the " + inventory.get().get(option) + " in glows faintly");
 			}
-			compartment.add(inventory.getInventory().remove(option));
+			compartment.add(inventory.get().remove(option));
 		    }
 		    catch (Exception e){
 			System.out.println(msg);
@@ -266,14 +287,12 @@ public class Game{
 		    System.out.println("\nA colony of dust bunnies is thriving under the bed");
 		    if (room.get(0).getStatus() == false){
 			System.out.println("There seems to be a piece of paper in the corner");
-			if (inventory.getInventory().contains(bathroom.get(1))){
-			    System.out.println("\nYou used the forceps to grab the paper");
+			if (room.get(0).toUse(inventory.find(equip), "You used the forceps to grab the paper") == true){
 			    inventory.take(room.get(25));
-			    room.get(0).changeStatus();
 			}
-			else{
-			    System.out.println("\nYou can't seem to reach it");
-			}
+		    }
+		    else{
+			System.out.println("You can't seem to reach it");
 		    }
 		}
 		else if (c == 4){
@@ -306,14 +325,9 @@ public class Game{
 		else if (c == 3){
 		    System.out.println(room.get(13).getDescript());
 		    if (room.get(13).getStatus() == false){
-			if (inventory.getInventory().contains(room.get(17))){
-			    System.out.println("\nYou unlocked the desk drawer with the key you found.\nIt slides open to reveal some goodies");
-			    System.out.println("\nYou find a Blue index card with the number 8 on it and a note.");
+			if (room.get(13).toUse(inventory.find(equip), "\nYou unlocked the desk drawer with the key you found.\nIt slides open to reveal some goodies.\nYou find a Blue index card with the number 8 on it and a note.") == true){
 			    inventory.take(room.get(29));
 			    inventory.take(room.get(23));
-			    room.get(13).changeDescript("Look at all the nice stuff you have in here.");
-			    room.get(13).changeStatus();
-			    room.get(17).changeStatus();
 			} 	   
 		    }
 		}
@@ -333,8 +347,8 @@ public class Game{
 		int i2;
 		int c2;
 		if (c == 1){
+		    System.out.println("\nYou find your student metrocard, your student ID, your phone, and a few TicTacs");
 		    if (room.get(20).getStatus() == false){
-			System.out.println("\nYou find your student metrocard, your student ID, your phone, and a few TicTacs");
 			i2 = 0;
 			while (i2 != 1){
 			    c2 = this.AskUser("\n[1]Inspect phone, [2]Take the Tictacs, [3]Eh, I'll move on\n");
@@ -344,7 +358,7 @@ public class Game{
 				while (i3 != 1){
 				    int c3 = this.AskUser("\n[1]I want to play!\n[2]No thanks\n");
 				    if (c3 == 1 && room.get(20).getStatus() == false){
-					System.out.println("\nEver played the 8-Game Puzzle? Well either way, here are the directions: \n   Your goal is to get the numbers to be in order from 0 to 9 \n   (with 0-2 in the first row, 3-5 in the second, and 6-8 in the third) \n   by moving the zero in any of the four directions \n   (left, up, right, down). Let's go! :)");
+					System.out.println("\nEver played the 8-Game Puzzle? Here are the directions: \n   Your goal is to get the numbers to be in order from 0 to 9 \n   (with 0-2 in the first row, 3-5 in the second, and 6-8 in the third) \n   by moving the zero in any of the four directions \n   (left, up, right, down). Let's go! :)");
 					eightGame = new EightGamePuzzle();
 					eightGame.generateGame(5);
 					boolean solved = eightGame.userSteps();
@@ -361,16 +375,13 @@ public class Game{
 					}
 				    }
 				    else if (c3 == 2){i3 = 1;}
-				    else{System.out.println("\nPlease enter the number of your choice");}
+				    else{System.out.println(msg);}
 				}
 			    }
 			    else if (c2 == 2){System.out.println("\nEw, these are a few years old. Maybe you should leave them.");}
 			    else if (c2 == 3){i2 = 1;}
 			    else {System.out.println(msg);}
 			}
-		    }
-		    else if (room.get(20).getStatus() == true){
-			System.out.println("\nYou find your student metrocard, your student ID, and a few TicTacs");
 		    }
 		}
 		else if (c == 2){
@@ -398,7 +409,7 @@ public class Game{
 			System.out.println("\nYou find a pair of scissors.");
 			inventory.take(room.get(30));
 			room.get(3).changeStatus();
-			room.get(3).changeDescript("An ugly Pikachu rug.");
+			room.get(3).changeDescript("An ugly Pikachu rug");
 		    }
 		    else {
 			System.out.println("How disappointing. There's nothing under it");
@@ -476,24 +487,17 @@ public class Game{
 		else if (c == 2){      
 		    System.out.println("\nThere's a safe behind the poster!");
 		    System.out.println(room.get(22).getDescript());
-		    if (((Puzzle)room.get(22)).getSolved() == false){
-			if (inventory.getInventory().contains(room.get(16)) && inventory.find("Pencil").getStatus() == false &&
-			    inventory.getInventory().contains(room.get(30)) && inventory.find("Scissors").getStatus() == false){
-			    System.out.println("\nYou use the scissors to shave the pencil.\nThen, you blow the graphite shavings onto the keypad.\nThe fingerprints on the six key become visible");
-			    inventory.find("Pencil").changeStatus();
-			    inventory.find("Scissors").changeStatus();
-			    room.get(22).changeDescript("There are distinctive fingerprint marks on the six key");
-			}
-			else {
+		    if (room.get(22).getStatus() == false){
+			if (room.get(22).toUse(inventory.find(equip), "You blow the pencil shavings onto the keypad.\nThe fingerprints on the six key become visible") == false){
 			    System.out.println("\nIf only there were a way to see what had been previously typed...");
 			}
-		        String ans  = "" + this.AskUser("\nEnter password: ");
-			System.out.println(((Puzzle)room.get(22)).check(ans, "The safe where you stash your loot"));
 		    }
-		    if (((Puzzle)room.get(22)).getSolved() == true && room.get(22).getStatus() == false){
-			System.out.println("You find a bottle of acid in the safe");
-			inventory.take(room.get(28));
-			room.get(22).changeStatus();
+		    if (((Puzzle)room.get(22)).getSolved() == false){			
+			String ans  = "" + this.AskUser("\nEnter password: ");
+			if (((Puzzle)room.get(22)).check(ans, "The safe where you stash your loot") == true){
+			    System.out.println("You find a bottle of acid in the safe");
+			    inventory.take(room.get(28));
+			}
 		    }
 		}
 		else if (c == 3){
@@ -509,13 +513,9 @@ public class Game{
 	    while (i != 1){
 		c = this.AskUser("\n[1]Slide open left door\n[2]Slide open right door\n[3]Move on\n"); 
 		if (c == 1){
-		    if (room.get(7).getStatus() == false){
-			System.out.println("\nThe door is stuck. It's been a while since you last greased it.\n");
-			if (inventory.getInventory().contains(room.get(28))){
-			    System.out.println("\nYou use the acid to melt the hinge\n");
-			    inventory.find("Acid").changeStatus();
-			    room.get(7).changeStatus();
-			    room.get(7).changeDescript("A closet with sliding doors. There is a gaping hole on the left door and the burning smell of acid");
+		    if (room.get(7).getStatus() == false){	      
+			if (room.get(7).toUse(inventory.find(equip), "You use the acid to melt the hinge.") == false){
+			    System.out.println("\nThe door is stuck. It's been a while since you last greased it.\n");
 			}
 		    }
 		    else {
@@ -584,13 +584,10 @@ public class Game{
 				int c3 = this.AskUser("\n[1]Open metal box\n[2]Close medicine cabinet door");
 				if (c3 == 1){
 				    System.out.println(bathroom.get(0).getDescript());
-				    if (bathroom.get(0).getStatus() == false){	     
-					if (inventory.getInventory().contains(closet.get(1))){
-					    System.out.println("\nYou have unlocked the box using the paperclips! You find forceps and a Green index card with the number 9");
+				    if (bathroom.get(0).getStatus() == false){	 
+					if (bathroom.get(0).toUse(inventory.find(equip), "You have unlocked the box using the paperclips! You find forceps and a Green index card with the number 9") == true){    
 					    inventory.take(bathroom.get(1));
 					    inventory.take(bathroom.get(2));
-					    bathroom.get(0).changeDescript("\nYou've already unlocked the box and taken the items. There is nothing left inside");
-					    bathroom.get(0).changeStatus();
 					}
 				    }
 				}
@@ -600,13 +597,11 @@ public class Game{
 			    }
 			}
 			else if (c2 == 2){
-			    System.out.println("\nThe water is running.");
-			    if (inventory.getInventory().contains(closet.get(4)) && inventory.find("Marble").getStatus() == false &&
-				inventory.getInventory().contains(closet.get(5)) && inventory.find("Tissues").getStatus() == false){
-				System.out.println("\nYou washed off the dirt on the marble with the wet tissue. There are letters scrawled across it.");
-				inventory.find("Marble").changeStatus();
-				inventory.find("Tissues").changeStatus();
-				inventory.find("Marble").changeDescript("A lustrous marble. The word Python is written on it.");
+			    System.out.println(bathroom.get(5).getDescript());
+			    if (bathroom.get(5).getStatus() == false){
+				if (bathroom.get(5).toUse(inventory.find(equip), "You soaked the tissues in the water.") == true){
+				    inventory.find(equip).setName(inventory.find(equip).getNewForm());
+				}
 			    }
 			}
 			else if (c2 == 3){
@@ -642,12 +637,10 @@ public class Game{
 		if (c == 1){
 		    System.out.println(room.get(14).getDescript());
 		    if (room.get(14).getStatus() == false){
-			if (inventory.getInventory().contains(closet.get(0))){
-			    System.out.println("\nYou used the Phillips screwdriver to unscrew the cover.\nYou find a key and an apple inside\n");
+			if (room.get(14).toUse(inventory.find(equip), "You used the Phillips screwdriver to unscrew the cover.\nYou find a key and an apple inside.") == true){
 			    inventory.take(room.get(17));
 			    inventory.take(room.get(21));
 			    room.get(14).changeDescript("\nThe vent cover has been removed. There is only darkness within.\n");
-			    room.get(14).changeStatus();
 			}	        
 		    }
 		}
@@ -666,15 +659,18 @@ public class Game{
 	int a;
 	while (i != 2){
 	    a = this.AskUser("\nObject " + (i + 1) + ": ");
-	    if (a >= 0 && a < inventory.getInventory().size()){
-	        inventory.getInventory().add(inventory.getInventory().remove(a));
+	    if (a >= 0 && a < inventory.get().size()){
+	        inventory.get().add(inventory.get().remove(a));
 		i++;
+	    }
+	    else if (a == -2){
+		System.out.println(qsg);
 	    }
 	    else {
 		System.out.println(msg);
 	    }
 	}
-	inventory.combine(inventory.getInventory().get(inventory.getInventory().size() - 1), inventory.getInventory().get(inventory.getInventory().size() - 2));
+	inventory.combine(inventory.get().get(inventory.get().size() - 2), inventory.get().get(inventory.get().size() - 1));
     }
 
     public void toEquip(){
@@ -689,8 +685,10 @@ public class Game{
 	    }
 	    System.out.println(qsg);
 	    c = this.AskUser("\nEquip: ");
-	    if (c >= 0 && c < inventory.getInventory().size()){
-		System.out.println("<< Equipped " + inventory.getInventory().get(c) + " >>"); 
+	    if (c >= 0 && c < inventory.get().size()){
+		equip = inventory.get().get(c).getName();
+		System.out.println("<< Equipped " + inventory.get().get(c) + " >>"); 
+		i = 1;
 	    }
 	    else if (c == -2){
 		i = 1;
@@ -700,6 +698,7 @@ public class Game{
 	    }
 	}
     }
+  
 
     public int AskUser(String mToUser){
 	String s = "";

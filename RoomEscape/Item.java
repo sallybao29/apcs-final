@@ -71,5 +71,20 @@ public class Item{
 	used = true;
     }
 
+    public boolean toUse(Item other, String message){
+	if (other == null){
+	    return false;
+	}
+	if (this.compatible.equals(other.name)){
+	    System.out.println(message);
+	    if (!this.newDescript.equals("None")){
+		this.description = this.newDescript;
+	    }
+	    this.used = true;
+	    other.used = true;
+	}
+	return this.used;
+    }
+
 
 }
