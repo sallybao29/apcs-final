@@ -28,6 +28,8 @@ public class Inventory{
 
     public void combine(Item a, Item b){
 	String name;
+	String aname = a.getName(),
+	    bname = b.getName();
 	if (a.getCompat().equals(b.getName())){
 	    if (!a.getNewForm().equals("None")){
 	        a.setName(a.getNewForm());
@@ -39,10 +41,10 @@ public class Inventory{
 		b.changeDescript(b.getNDescript());
 		name = b.getNewForm();
 	    }
-	    System.out.println("Created " + name + " from " + a + " and " + b);
+	    System.out.println("Created " + name + " from " + aname + " and " + bname);
 	}
 	else {
-	    System.out.println("Why would you combine " + a + " and " + b + "?");
+	    System.out.println("Why would you combine " + aname + " and " + bname + "?");
 	}
     }
 
