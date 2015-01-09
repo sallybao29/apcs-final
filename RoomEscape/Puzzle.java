@@ -21,10 +21,12 @@ public class Puzzle extends Item{
 	return solved;
     }
 
-    public boolean check(String attempt, String newDescript){
+    public boolean check(String attempt){
 	if (attempt.equals(answer)){
 	    solved = true;
-	    this.changeDescript(newDescript);	    
+	    if (!this.getNDescript().equals("None")){
+		this.changeDescript(this.getNDescript);
+	    }
 	    System.out.println(smessage);
 	}
 	else {

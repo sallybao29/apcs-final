@@ -11,9 +11,9 @@ public class Game{
     private ArrayList<String> answer = new ArrayList<String>(Arrays.asList("Apple", "Forceps", "Fig", "Philosophi"+(char)145+" Naturalis Principia Mathematica"));
     Inventory inventory = new Inventory();
     EightGamePuzzle eightGame;
-    private String msg = "\nPlease enter the number of your choice", qsg = "Type 'quit' to exit";
+    private String msg = "\nPlease enter a valid choice", qsg = "Type 'quit' to exit";
     private String equip = "None";
-
+    private int grade = 100, sgrade = -10, fgrade = -1;
 
     public Game(){
 	gameWon = false;
@@ -28,7 +28,7 @@ public class Game{
 	room.add(new Item("Trash can", "Something stinks. You haven't taken the trash out for a while.", false));  //4
 	room.add(new Item("Bookshelf", "It's full of test prep books and encyclopedias.", false));  //5
 	room.add(new Item("Poster", "A poster of the periodic table of elements.",false));   //6
-	room.add(new Item("Closet", "A closet with sliding doors", false));   //7
+	room.add(new Item("Closet", "A closet with sliding doors", "A closet with sliding doors. There is a gaping hole on the left door and the burning smell of acid.", false));   //7
 	room.add(new Item("Bathroom door", "The door to the bathroom", false));  //8
 	room.add(new Item("Ceiling", "There's a vent on the ceiling. Even in the dark, something glistens.", false));  //9
 
@@ -36,10 +36,10 @@ public class Game{
 	room.add(new Item("Letter", "\n\nSon, we saw your last math test score.\nYou have brought shame to your family.\n\"A man must be bIg enough to admit his miStakes, smart enough to profIt from them, and strong enough to Correct them.\"Reflect on your actions for another two days.\nBy then, you will surely have been able to realize the error of your ways and find the solution to your demise.\n\nSincerely, Your Parents", true));   //10
 	room.add(new Puzzle("Laptop", "You can't log on. It seems your parents have changed the password.", "Python", "The display changes to your homescreen. Alright, you're finally on!"));    //11
 	room.add(new Item("Pencil Holder", "Ohh, shiny pencils", false));  //12
-	room.add(new Item("Drawer", "It's locked. You need to find a key", false));   //13
-	room.add(new Item("Vent", "It's stuck. You're gonna need a screwdriver", false));   //14
+	room.add(new Item("Drawer", "It's locked. You need to find a key", "Look at all the nice stuff you have in here.", false));   //13
+	room.add(new Item("Vent", "It's stuck. You're gonna need a screwdriver", "The vent cover has been removed. There is only darkness within.", false));   //14
 	room.add(new Item("Pillow", "A fluffy fluff pillow. There's a note inside the cover", false));   //15
-	room.add(new Item("Pencil", "A 2B Ticonderoga pencil", true));  //16
+	room.add(new Item("Pencil", "A 2B Ticonderoga pencil", "A pile of pencil shavings.", true));  //16
 	room.add(new Item("Key", "The key to the desk drawer", true));  //17
 	room.add(new Item("Fig", "A dried up fig", true));     //18
 	room.add(new Item("Math test", "The math test you failed", true));  //19
@@ -73,14 +73,14 @@ public class Game{
 	closet.add(new Item("Paperclips", "Some colorful paperclips. You know what they are!", true));  //1
 	closet.add(new Item("Tin Box", "A silver tin box used for storing cookies", false));            //2
 	closet.add(new Item("Hoodie", "A spiffy hoodie", false));   //3
-	closet.add(new Item("Marble", "A dirty marble caked in grease", true));  //4
-	closet.add(new Item("Tissues", "A pack of tissues like the kind you get from Chinese people on the street", true));  //5
+	closet.add(new Item("Marble", "A dirty marble caked in grease", "A lustrous marble. The word Python is written on it", true));  //4
+	closet.add(new Item("Tissues", "A pack of tissues like the kind you get from Chinese people on the street", "A pack of slightly wet tissues", true));  //5
 	closet.add(new Item("Index card", "An index card with four colored dots: Red, Blue, Green, Purple", true)); //6
 	closet.add(new Item("Books", "Some old books", false)); //7
 	
 	/*------------------------------ The Bathroom -----------------------------------------*/
 	
-	bathroom.add(new Item("Metal box", "A tiny metal box. Hm... It looks like you'll have to pick the lock.", false)); //0
+	bathroom.add(new Item("Metal box", "A tiny metal box. Hm... It looks like you'll have to pick the lock.", "You've already unlocked the box and taken the items. There is nothing left inside.", false)); //0
 	bathroom.add(new Item("Forceps", "Just some forceps", true)); //1
 	bathroom.add(new Item("Green Index Card", "A green index card with the number 9", true)); //2
 	bathroom.add(new Item("Purple Index Card", "A purple index card with the number 0", true)); //3
@@ -97,25 +97,18 @@ public class Game{
 	bookshelf.add(new Item("How to Beat this Game", "\nStop reading this and get to work.\n", false));  //6
 
 	room.get(7).setCompat("Acid");      //Closet
-	room.get(7).setNDescript("A closet with sliding doors. There is a gaping hole on the left door and the burning smell of acid.");
 	room.get(13).setCompat("Key");       //Drawer
-	room.get(13).setNDescript("Look at all the nice stuff you have in here.");
 	room.get(16).setCompat("Scissors");   // Pencil
 	room.get(16).setNewForm("Pencil Shavings");   
-	room.get(16).setNDescript("A pile of pencil shavings.");
 	room.get(30).setCompat("Pencil");     //Scissors
 	room.get(22).setCompat("Pencil Shavings");   //Safe
 	room.get(22).setNDescript("There are distinctive fingerprint marks on the six key");
 	room.get(14).setCompat("ScrewDriver");   //Vent
-	room.get(14).setNDescript("The vent cover has been removed. There is only darkness within.");
 	room.get(0).setCompat("Forceps");    //Bed
 	closet.get(5).setCompat("Marble");    //Tissues
 	closet.get(5).setNewForm("Wet Tissues");  
-	closet.get(5).setNDescript("A pack of slightly wet tissues");
 	closet.get(4).setCompat("Wet Tissues");       //Marble
-	closet.get(4).setNDescript("A lustrous marble. The word Python is written on it");
 	bathroom.get(0).setCompat("Paperclips");         
-	bathroom.get(0).setNDescript("You've already unlocked the box and taken the items. There is nothing left inside.");
 	bathroom.get(5).setCompat("Tissues");
 
 	
@@ -123,7 +116,7 @@ public class Game{
 
     public ArrayList<Item> getRoom(){
 	return room;
-    }	
+    }
 
     public boolean gameWon(){
 	return gameWon;
@@ -145,6 +138,12 @@ public class Game{
 	    Thread.sleep(num);
 	}
 	catch (Exception e){}
+    }
+
+    public void lostPoint(int num, String ans){
+	if (((Puzzle)room.get(num)).check(ans)){
+
+	}
     }
 
     public boolean checkComp(){
@@ -212,7 +211,7 @@ public class Game{
 		        inventory.take(compartment.remove(option));
 		    }
 		    catch (Exception e){
-			System.out.println("\nPlease enter a proper choice");
+			System.out.println(msg);
 		    }
 		}
 	    }
@@ -236,11 +235,12 @@ public class Game{
 		    if (stage == 3 && checkComp() == false){
 			System.out.println("\nIt looks like you'll have to fill the compartments first.");
 			fillComp();
-
 		    }
 		    else {
 			ans = "" + this.AskUser("\nKey-in the passcode: ");
-			System.out.println(((Puzzle)room.get(stage + 30)).check(ans, ""));
+			if (((Puzzle)room.get(stage + 30)).check(ans, "")){
+
+			}
 		    }
 		}
 		if (((Puzzle)room.get(stage + 30)).getSolved() == true){
