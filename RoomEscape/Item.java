@@ -4,14 +4,14 @@ public class Item{
     private final boolean takeable;
 
 
-    public Item(String n, String descript, boolean a){
+    public Item(String n, String descript, String nd, boolean a){
 	name = n;
 	description = descript;
 	takeable = a;
+	newDescript = nd;
 	used = false;
 	compatible = "None";
 	newform = "None";
-	newDescript = "None";
     }
 
     public String getName(){

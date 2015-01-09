@@ -61,7 +61,7 @@ public class Driver{
 				i2 = 1;
 			    }
 			    else{
-				System.out.println("\nPlease enter the number of your choice.");
+				System.out.println(g.getM());
 			    }
 			}
 		    }
@@ -72,7 +72,7 @@ public class Driver{
 			i = 1;
 		    }
 		    else {
-			System.out.println("\nPlease enter the number of an item.");
+			System.out.println(g.getM());
 		    }
 		}
 	    }
@@ -87,7 +87,7 @@ public class Driver{
 			System.out.println(stuff.get().get(choice).getDescript());
 			}
 			catch(Exception e){
-			    System.out.println("\nPlease enter the number of the item.");
+			    System.out.println(g.getM());
 			}
 		    }
 		    else if (c == 2){
@@ -102,7 +102,7 @@ public class Driver{
 		endGame = true;
 	    }
 	    else {
-		System.out.println("Please enter the number of your choice.");
+		System.out.println(g.getM());
 	    }
 	}	
 	if (endGame){
