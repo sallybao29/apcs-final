@@ -8,6 +8,8 @@ public class EightGamePuzzle{
     private ArrayList<Integer> moves = new ArrayList<Integer>();
     private boolean solved = false;
     private boolean quit = false;
+    private int zposh = 0;
+    private int zposv = 0;
 
     public void generateGame(int numScram){
 	int current = 0;
@@ -18,17 +20,10 @@ public class EightGamePuzzle{
 	    }
 	}
 	current = 0;
-	for (int i = 0; i < ans.length; i++) {
-	    for (int j = 0; j < ans[i].length; j++) {
-	        ans[i][j] = current;
-		current += 1;
-	    }
-	}
+	ans = board;
 	boardScrambler(numScram);
     }
 
-    private int zposh = 0;
-    private int zposv = 0;
     public void boardScrambler(int numScram){
 	Random r = new Random();
 	int n = numScram;
@@ -119,15 +114,11 @@ public class EightGamePuzzle{
 	}
 	if (solved == true){
 	    System.out.println("\nCongrats! :) You have unlocked your phone!");
-	    return true;
 	}
 	else if (quit == true){
 	    System.out.println("\nSeriously? You've quit already? :(");
-	    return false;
 	}
-	else{
-	    return false;
-	}
+	return solved;
     }
 
     public String toString(){
@@ -151,11 +142,12 @@ public class EightGamePuzzle{
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~Testing~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public static void main(String[] args){
-    	EightGamePuzzle p = new EightGamePuzzle();
-    	p.generateGame(5);
+	EightGamePuzzle p = new EightGamePuzzle();
+	p.generateGame(5);
 	boolean a = p.userSteps();
 	if (!a){
-	    System.out.println("done");
+	    System.out.println("done"); 
 	}
     }
+    
 }

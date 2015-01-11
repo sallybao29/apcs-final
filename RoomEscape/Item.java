@@ -14,6 +14,10 @@ public class Item{
 	newform = "None";
     }
 
+    public Item(String n, String descript, boolean a){
+	this(n, descript, "None", a);
+    }
+
     public String getName(){
 	return name;
     }

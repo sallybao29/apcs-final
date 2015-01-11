@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class Puzzle extends Item{
     private final String answer;
     private final String smessage;
@@ -21,17 +19,21 @@ public class Puzzle extends Item{
 	return solved;
     }
 
-    public boolean check(String attempt){
+    public int check(String attempt){
 	if (attempt.equals(answer)){
 	    solved = true;
 	    if (!this.getNDescript().equals("None")){
-		this.changeDescript(this.getNDescript);
+		this.changeDescript(this.getNDescript());
 	    }
 	    System.out.println(smessage);
+	    return 1;
+	}
+	else if (attempt.equals("skip")){
+	    return 2;
 	}
 	else {
 	    System.out.println("Son, you have failed. Try again.");
+	    return 3;
 	}
-	return solved;
     }
 }

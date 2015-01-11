@@ -11,7 +11,7 @@ public class Game{
     private ArrayList<String> answer = new ArrayList<String>(Arrays.asList("Apple", "Forceps", "Fig", "Philosophi"+(char)145+" Naturalis Principia Mathematica"));
     Inventory inventory = new Inventory();
     EightGamePuzzle eightGame;
-    private String msg = "\nPlease enter a valid choice", qsg = "Type 'quit' to exit";
+    private String msg = "\nPlease enter a valid choice", qsg = "Type 'return' to exit current option";
     private String equip = "None";
     private int grade = 100, sgrade = -10, fgrade = -1;
 
@@ -61,9 +61,9 @@ public class Game{
 	/*------------------------------ The Doors -----------------------------------------*/
 	
 	room.add(new Puzzle("Door1", "A high-tech metal door. Gears and rivets run down its center.\nThere is no handle.\n", "1238359", "The password lights up in green and a confirming beep is heard.\nThe gears on the door spin rapidly, and the two sides part."));  //31
-	room.add(new Puzzle("Door2", "The sign on the door reads 'Color Code'.\n", "6890", "\nThe door swings open, revealing a short but brightly lit tunnel.\nAt the end is...?!\n"));  //32
-	room.add(new Puzzle("Door3", "A large set of imposing, stone doors.\nThere are graphic images carved onto its surface of people being impaled and defenestrated.\nFour small compartments rest at the foot of the door.\n", "Newton", "With a deliberate creak, the ominous doors give way to reveal a small room.\nThere is a couch to the right and a coffee table with a photo album on it."));  //33
-	room.add(new Puzzle("Door4", "A sign on the door ahead reads 'Bananagram Anagrams'.\nUnderneath it is a chalkboard. From it, you read: \n  Find the anagram (rearrange the letters) of the words.\n  Enter the first letter of each word into the keypad.\n  Then enter 'r'.\n   1. Reef\n   2. One tip\n   3.United\n", "four", "You easily slide the door open."));  //34
+	room.add(new Puzzle("Door2", "The sign on the door reads 'Color Code'.\n", "6890", "\nThe door slides upwards, revealing...?!\n"));  //32
+	room.add(new Puzzle("Door3", "A large set of imposing, stone doors.\nThere are graphic images carved onto its surface of people being impaled and defenestrated.\nFour small compartments rest at the foot of the door.\n", "Newton", "Without warning, the doors come crashing down. You manage to jump out of the way just they impact the floor and shatter into a milion pieces."));  //33
+	room.add(new Puzzle("Door4", "The door is divided into four separate sections that fit together like puzzle pieces. Mounted at their intersection is a shiny interface that displays some text:\n\nCaptain: What happen?\nMechanic: Somebody set up us the bomb.\nOperator: We get signal.\nCaptain: What!\nOperator: ---- ------ turn on.\nCaptain: It's you!!\nCATS: How are you gentlemen!!\nCATS: --- ---- ---- --- ------ -- --\nCATS: You are on the way to destruction.\nCaptain: What you say!!\nCATS: You have no chance to survive make your time.\nCATS: Ha ha ha ha...\nOperator: -------!!\nCaptain: Take off every 'ZIG'!!\nCaptain: You know what you doing.\nCaptain: Move 'ZIG'.\nCaptain: For great justice.\n\n", "Mac", "You easily slide the door open."));  //34
 	room.add(new Puzzle("Door5", "A door with random math symbols carved into it.\n", "", "You hear a click and slowly slide the door open."));  //35
 
       
@@ -84,19 +84,20 @@ public class Game{
 	bathroom.add(new Item("Forceps", "Just some forceps", true)); //1
 	bathroom.add(new Item("Green Index Card", "A green index card with the number 9", true)); //2
 	bathroom.add(new Item("Purple Index Card", "A purple index card with the number 0", true)); //3
-	bathroom.add(new Item("Bathroom rug", "There is definitely not something under this rug", false)); //4
+	bathroom.add(new Item("Bathroom rug", "There is definitely not something under this rug", "A fuzzy bathroom rug. There is nothing under it", false)); //4
 	bathroom.add(new Item("Faucet", "The water is running", false));    //5
 
 	/*------------------------------ The Bookshelf -----------------------------------------*/
 	
 	bookshelf.add(new Item("For the Love of Physics", "\nFrom the End of the Rainbow ot the Edge of Time\nA Journey Through\nthe Wonders of Physics", false));  //0
-	bookshelf.add(new Item("The Oedipus Cycle", "\nThe ancient myth of Oedipus, which still reverberates\nto this day, provided Sophocles with material for three\ngrea tragedies <i>Oedipus Rex, Oedipus at Colonus</i> and <i>Antigone</i> that\ntogether recount the downfall of Oedipus, king of Thebes, his\ndeath in exile, and the action carried out after his death by his\ndaughter Antigone.\n", false));  //1
-	bookshelf.add(new Item("Principles of Quantum Mechanics", "It's full of equations and greek letters\n", false)); //3
-	bookshelf.add(new Item("Hamlet", "Readers have for the first time, a unique\nopportunity to study the three surviving texts of Hamlet\nexperienced by Shakespeare's contemporaries, fully\nmodernized and edited by leading scholars.\n", false));  //4
+	bookshelf.add(new Item("The Oedipus Cycle", "\nThe ancient myth of Oedipus, which still reverberates\nto this day, provided Sophocles with material for three\ngrea tragedies <i>Oedipus Rex, Oedipus at Colonus</i> and <i>Antigone</i> that\ntogether recount the downfall of Oedipus, king of Thebes, his\ndeath in exile, and the action carried out after his death by his\ndaughter Antigone.\n", true));  //1
+	bookshelf.add(new Item("Principles of Quantum Mechanics", "It's full of equations and greek letters\n", true)); //3
+	bookshelf.add(new Item("Hamlet", "Readers have for the first time, a unique\nopportunity to study the three surviving texts of Hamlet\nexperienced by Shakespeare's contemporaries, fully\nmodernized and edited by leading scholars.\n", true));  //4
 	bookshelf.add(new Item("Philosophi"+(char)145+" Naturalis Principia Mathematica", "\nRational Mechanics will be the science of motions resulting\nfrom any forces whatsoever, and of the forces\nrequired to produce any motions, accurately proposed\nand demonstrated. And therefore we offer this work\nas mathematical principles of philosophy. For all the\ndifficulty of philosophy seems to consist in this: from the\nphenomena of motions to investigate the forces of\nNature, and then from these forces to\ndemonstrate the other phenomena.\n", true));  //5
-	bookshelf.add(new Item("How to Beat this Game", "\nStop reading this and get to work.\n", false));  //6
+	bookshelf.add(new Item("How to Beat this Game", "\nStop reading this and get to work.\n", true));  //6
 
 	room.get(7).setCompat("Acid");      //Closet
+	room.get(11).setNDescript("An emacs file is open. There is a piece of code on it:\n\nRandom r = new Random();\ndouble stress = r.nextDouble();\nboolean codeWorks = (r.nextInt(2) == 1);\npublic void writeCode()\n\tif (codeWorks){\n\t\tSystem.out.println(\"I am a GOD\");\n\t}\n\telse{\n\t\tif (stress > 0.7){\n\t\t\tsystem.out.println(\"RAGE QUIT\")\n\t\t\tSystem.exit(0);\n\t\t}\n\t\tcry();\n\t}\n}\n\nWhat could it mean?");   //Laptop
 	room.get(13).setCompat("Key");       //Drawer
 	room.get(16).setCompat("Scissors");   // Pencil
 	room.get(16).setNewForm("Pencil Shavings");   
@@ -140,10 +141,15 @@ public class Game{
 	catch (Exception e){}
     }
 
-    public void lostPoint(int num, String ans){
-	if (((Puzzle)room.get(num)).check(ans)){
-
+    public boolean evaluate(int num, String ans){
+	int choice = ((Puzzle)room.get(num)).check(ans);
+	if (choice == 2){
+	    grade += sgrade;
 	}
+	else if(choice == 3){
+	    grade += fgrade;
+	}
+	return choice < 3;
     }
 
     public boolean checkComp(){
@@ -181,14 +187,14 @@ public class Game{
 		list += "\n";
 	    }
 	    System.out.println(list);
-	    c = this.AskUser("\n[1]Place an object\n[2]Take an object\n[3]Back to door\n");
+	    c = this.AskUserI("\n[1]Place an object\n[2]Take an object\n[3]Back to door\n");
 	    if (c == 1){
 		if (compartment.size() > 4){
 		    System.out.println("\nAll spots are filled");
 		}
 		else {
 		    System.out.println(inventory.list());
-		    option = this.AskUser("\nWhich object do you want to place?\n");
+		    option = this.AskUserI("\nWhich object do you want to place?\n");
 		    try {
 			System.out.println("\nYou placed the " + inventory.get().get(option) + " in the compartment");
 			if (answer.contains(inventory.get().get(option).getName())){
@@ -206,7 +212,7 @@ public class Game{
 		    System.out.println("\nThere's nothing to take");
 		}
 		else {
-		    option = this.AskUser("\nWhich object do you want to take?\n");
+		    option = this.AskUserI("\nWhich object do you want to take?\n");
 		    try {
 		        inventory.take(compartment.remove(option));
 		    }
@@ -229,7 +235,7 @@ public class Game{
 	String ans;
 	while (i != 1 && stage < 6){
 	    System.out.println("\nYou are at Door " + stage + "\n" + room.get(stage + 30).getDescript()); 
-	    int c = this.AskUser("\nTry to solve the puzzle?\n[1]Yes\n[2]No\n");
+	    int c = this.AskUserI("\nTry to solve the puzzle?\n[1]Yes\n[2]No\n");
 	    if (c == 1){
 		if (((Puzzle)room.get(stage + 30)).getSolved() == false){
 		    if (stage == 3 && checkComp() == false){
@@ -237,18 +243,16 @@ public class Game{
 			fillComp();
 		    }
 		    else {
-			ans = "" + this.AskUser("\nKey-in the passcode: ");
-			if (((Puzzle)room.get(stage + 30)).check(ans, "")){
-
+			ans = this.AskUserS("\nKey-in the passcode: ");
+			wait(1000);
+		        if (evaluate(stage + 30, ans) == true){
+			    if (stage < 5){
+				wait(2000);
+				System.out.println("\nAlas, there is another door behind it\n");
+			    }
+			    stage++;
 			}
 		    }
-		}
-		if (((Puzzle)room.get(stage + 30)).getSolved() == true){
-		    if (stage < 5){
-			wait(1000);
-			System.out.println("\nAlas, there is another door behind it\n");
-		    }
-		    stage++;
 		}
 	    }
 	    else if (c == 2){
@@ -263,7 +267,6 @@ public class Game{
 	}
     }
             
-
     public void interact(Item thing){
 	int c;
 	int i;
@@ -271,7 +274,7 @@ public class Game{
 	if (thing.equals(room.get(0))){
 	    i = 0;
 	    while (i != 1){
-		c = this.AskUser("\n[1]Check under the blankets\n[2]Check pillow\n[3]Look under bed\n[4]Already saw the bed\n");
+		c = this.AskUserI("\n[1]Check under the blankets\n[2]Check pillow\n[3]Look under bed\n[4]Already saw the bed\n");
 		if (c == 1){
 		    System.out.println("\nThere's nothing there\n");
 		}
@@ -306,12 +309,15 @@ public class Game{
 	if (thing.equals(room.get(1))){
 	    i = 0;
 	    while (i != 1){
-		c = this.AskUser("\n[1]Check laptop\n[2]Check pencil holder\n[3]Check drawer\n[4]Nope\n"); 
+		c = this.AskUserI("\n[1]Check laptop\n[2]Check pencil holder\n[3]Check drawer\n[4]Nope\n"); 
 		if (c == 1){
 		    System.out.println(room.get(11).getDescript()); 
 		    if (((Puzzle)room.get(11)).getSolved() == false){
-			String ans = "" + this.AskUser("\nEnter Password: ");
-			System.out.println(((Puzzle)room.get(11)).check(ans, "An emacs file is open. There is a piece of code on it:\n\nRandom r = new Random();\ndouble stress = r.nextDouble();\nboolean codeWorks = (r.nextInt(2) == 1);\npublic void writeCode()\n\tif (codeWorks){\n\t\tSystem.out.println(\"I am a GOD\");\n\t}\n\telse{\n\t\tif (stress > 0.7){\n\t\t\tsystem.out.println(\"RAGE QUIT\")\n\t\t\tSystem.exit(0);\n\t\t}\n\t\tcry();\n\t}\n}\n\nWhat could it mean?"));	       
+			String ans = this.AskUserS("\nEnter Password: ");
+			wait(1000);
+			if (evaluate(11, ans) == true){
+			    System.out.println(room.get(11).getDescript());
+			}	       
 		    }
 		}
 		else if (c == 2){
@@ -343,7 +349,7 @@ public class Game{
 	    System.out.println(room.get(2).getDescript());
 	    i = 0;
 	    while (i != 1){
-		c = this.AskUser("\n[1]Open small pocket\n[2]Look through notes\n[3]Move on\n");
+		c = this.AskUserI("\n[1]Open small pocket\n[2]Look through notes\n[3]Move on\n");
 		int i2;
 		int c2;
 		if (c == 1){
@@ -351,12 +357,12 @@ public class Game{
 		    if (room.get(20).getStatus() == false){
 			i2 = 0;
 			while (i2 != 1){
-			    c2 = this.AskUser("\n[1]Inspect phone, [2]Take the Tictacs, [3]Eh, I'll move on\n");
+			    c2 = this.AskUserI("\n[1]Inspect phone, [2]Take the Tictacs, [3]Eh, I'll move on\n");
 			    if (c2 == 1){
 				System.out.println("\nYour phone displays an 8-Game Puzzle");
 				int i3 = 0;
 				while (i3 != 1){
-				    int c3 = this.AskUser("\n[1]I want to play!\n[2]No thanks\n");
+				    int c3 = this.AskUserI("\n[1]I want to play!\n[2]No thanks\n");
 				    if (c3 == 1 && room.get(20).getStatus() == false){
 					System.out.println("\nEver played the 8-Game Puzzle? Here are the directions: \n   Your goal is to get the numbers to be in order from 0 to 9 \n   (with 0-2 in the first row, 3-5 in the second, and 6-8 in the third) \n   by moving the zero in any of the four directions \n   (left, up, right, down). Let's go! :)");
 					eightGame = new EightGamePuzzle();
@@ -370,7 +376,8 @@ public class Game{
 					    i2 = 1;
 					    i3 = 1;
 					}
-					else if(solved == false){
+					else {
+					    grade += fgrade;
 					    System.out.println("\n\n Maybe next time.");
 					}
 				    }
@@ -403,7 +410,7 @@ public class Game{
 	if (thing.equals(room.get(3))){
 	    i = 0;
 	    while (i != 1){
-		c = this.AskUser("\n[1]Flip rug\n[2]Nah\n");
+		c = this.AskUserI("\n[1]Flip rug\n[2]Nah\n");
 		if (c == 1){
 		    if (room.get(3).getStatus() == false){
 			System.out.println("\nYou find a pair of scissors.");
@@ -426,7 +433,7 @@ public class Game{
 	if (thing.equals(room.get(4))){
 	    i = 0;
 	    while (i != 1){
-		c = this.AskUser("\n[1]Rummage through trash can\n[2]How unsanitary!\n");
+		c = this.AskUserI("\n[1]Rummage through trash can\n[2]How unsanitary!\n");
 		if (c == 1){
 		    if (room.get(4).getStatus() == false){
 		    System.out.println("\nYou found a rotten fig");
@@ -454,20 +461,25 @@ public class Game{
 		booklist += bookshelf.get(a);
 		booklist += "\n";
 	    }
-		c = this.AskUser("\n[1]Look at book\n[2]Now's not the time!\n");
+		c = this.AskUserI("\n[1]Look at book\n[2]Now's not the time!\n");
 		if (c == 1){
-		    int book = this.AskUser(booklist);
+		    int book = this.AskUserI(booklist);
 		    System.out.println(bookshelf.get(book - 1).getDescript());
-		    int c2 = this.AskUser("\nTake book? [1]Yes, [2]No\n");
-		    if (c2 == 1){ 
-			inventory.take(bookshelf.remove(book - 1));
-		    }
-		    else if (c2 == 2){ 
-			i = 1;
-		    }
-		    else {
-			System.out.println(msg);
-		    } 	 
+		    int c2;
+		    int i2 = 0;
+		    while (i2 != 1){
+			c2 = this.AskUserI("\nTake book? [1]Yes, [2]No\n");
+			if (c2 == 1){ 
+			    inventory.take(bookshelf.remove(book - 1));
+			    i2 = 1;
+			}
+			else if (c2 == 2){ 
+			    i2 = 1;
+			}
+			else {
+			    System.out.println(msg);
+			} 	
+		    } 
 		}
 		else if (c == 2){
 		    i = 1;
@@ -480,7 +492,7 @@ public class Game{
 	if(thing.equals(room.get(6))){
 	    i = 0;
 	    while (i != 1){
-		c = this.AskUser("\n[1]Inspect poster\n[2]Flip poster\n[3]Leave it\n");
+		c = this.AskUserI("\n[1]Inspect poster\n[2]Flip poster\n[3]Leave it\n");
 		if (c == 1){
 		    System.out.println("Something");
 		}
@@ -491,10 +503,14 @@ public class Game{
 			if (room.get(22).toUse(inventory.find(equip), "You blow the pencil shavings onto the keypad.\nThe fingerprints on the six key become visible") == false){
 			    System.out.println("\nIf only there were a way to see what had been previously typed...");
 			}
+			else {
+			    room.get(22).setNDescript("The safe where you stash your loot");
+			}
 		    }
 		    if (((Puzzle)room.get(22)).getSolved() == false){			
-			String ans  = "" + this.AskUser("\nEnter password: ");
-			if (((Puzzle)room.get(22)).check(ans, "The safe where you stash your loot") == true){
+			String ans  = this.AskUserS("\nEnter password: ");
+			wait(1000);
+			if (evaluate(22, ans) == true){
 			    System.out.println("You find a bottle of acid in the safe");
 			    inventory.take(room.get(28));
 			}
@@ -511,7 +527,7 @@ public class Game{
 	if(thing.equals(room.get(7))){
 	    i = 0;
 	    while (i != 1){
-		c = this.AskUser("\n[1]Slide open left door\n[2]Slide open right door\n[3]Move on\n"); 
+		c = this.AskUserI("\n[1]Slide open left door\n[2]Slide open right door\n[3]Move on\n"); 
 		if (c == 1){
 		    if (room.get(7).getStatus() == false){	      
 			if (room.get(7).toUse(inventory.find(equip), "You use the acid to melt the hinge.") == false){
@@ -522,7 +538,7 @@ public class Game{
 			System.out.println("\nYour clothes hang neatly in the closet, with a few storage boxes below it and a pile of books. A silver tin box sits on top of the pile");
 			int i2 = 0;
 			while (i2 != 1){
-			    int c2 = this.AskUser("\n[1]Check the pockets of your hoodie\n[2]Open storage boxes\n[3]Flip through books\n[4]Open tin box\n[5]Move on\n");
+			    int c2 = this.AskUserI("\n[1]Check the pockets of your hoodie\n[2]Open storage boxes\n[3]Flip through books\n[4]Open tin box\n[5]Move on\n");
 			    if (c2 == 1){
 				System.out.println(closet.get(3).getDescript());
 				if (closet.get(3).getStatus() == false){
@@ -571,17 +587,17 @@ public class Game{
 	if(thing.equals(room.get(8))){
 	    i = 0;
 	    while (i != 1){
-		c = this.AskUser("\n[1]Open door\n[2]Don't need the toilet right now\n");
+		c = this.AskUserI("\n[1]Open door\n[2]Don't need the toilet right now\n");
 		if (c == 1){
 		    System.out.println("\nYou have entered the bathroom. There is a medicine cabinet above the sink and a rug at your feet.");
 		    int i2 = 0;
 		    while (i2 != 1){
-			int c2 = this.AskUser("\n[1]Open medicine cabinet doors\n[2]Turn on faucet\n[3]Lift rug\n[4]Leave bathroom");
+			int c2 = this.AskUserI("\n[1]Open medicine cabinet doors\n[2]Turn on faucet\n[3]Lift rug\n[4]Leave bathroom");
 			if (c2 == 1){
 			    System.out.println("You see a little metal box, a bunch of toothpaste, and various medicine");
 			    int i3 = 0;
 			    while (i3 != 1){
-				int c3 = this.AskUser("\n[1]Open metal box\n[2]Close medicine cabinet door");
+				int c3 = this.AskUserI("\n[1]Open metal box\n[2]Close medicine cabinet door");
 				if (c3 == 1){
 				    System.out.println(bathroom.get(0).getDescript());
 				    if (bathroom.get(0).getStatus() == false){	 
@@ -633,14 +649,13 @@ public class Game{
 	if(thing.equals(room.get(9))){
 	    i = 0;
 	    while (i != 1){
-		c = this.AskUser("\n[1]Check vent\n[2]Who cares?\n");
+		c = this.AskUserI("\n[1]Check vent\n[2]Who cares?\n");
 		if (c == 1){
 		    System.out.println(room.get(14).getDescript());
 		    if (room.get(14).getStatus() == false){
 			if (room.get(14).toUse(inventory.find(equip), "You used the Phillips screwdriver to unscrew the cover.\nYou find a key and an apple inside.") == true){
 			    inventory.take(room.get(17));
 			    inventory.take(room.get(21));
-			    room.get(14).changeDescript("\nThe vent cover has been removed. There is only darkness within.\n");
 			}	        
 		    }
 		}
@@ -657,20 +672,25 @@ public class Game{
     public void toCombine(){
 	int i = 0;
 	int a;
+	boolean choiceMade = false;
 	while (i != 2){
-	    a = this.AskUser("\nObject " + (i + 1) + ": ");
+	    a = this.AskUserI("\nItem " + (i + 1) + ": ");
 	    if (a >= 0 && a < inventory.get().size()){
 	        inventory.get().add(inventory.get().remove(a));
 		i++;
+		choiceMade = true;
 	    }
 	    else if (a == -2){
-		System.out.println(qsg);
+		choiceMade = false;
+		i = 2;
 	    }
 	    else {
 		System.out.println(msg);
 	    }
 	}
-	inventory.combine(inventory.get().get(inventory.get().size() - 2), inventory.get().get(inventory.get().size() - 1));
+	if (choiceMade == true){
+	    inventory.combine(inventory.get().get(inventory.get().size() - 2), inventory.get().get(inventory.get().size() - 1));
+	}
     }
 
     public void toEquip(){
@@ -681,13 +701,12 @@ public class Game{
 		System.out.println("Nothing is equipped");
 	    }
 	    else {
-		System.out.println(equip + " is currently equipped");
+		System.out.println("Currently Equipped: " + equip);
 	    }
-	    System.out.println(qsg);
-	    c = this.AskUser("\nEquip: ");
+	    c = this.AskUserI("\nChoose an item: ");
 	    if (c >= 0 && c < inventory.get().size()){
 		equip = inventory.get().get(c).getName();
-		System.out.println("<< Equipped " + inventory.get().get(c) + " >>"); 
+		System.out.println("<< Equipped " + equip + " >>"); 
 		i = 1;
 	    }
 	    else if (c == -2){
@@ -699,8 +718,15 @@ public class Game{
 	}
     }
   
+    public String AskUserS(String mToUser){
+	String s = "";
+	Scanner sc = new Scanner(System.in);
+	System.out.println(mToUser);
+	s = sc.nextLine();
+	return s;
+    }
 
-    public int AskUser(String mToUser){
+    public int AskUserI(String mToUser){
 	String s = "";
 	Scanner sc = new Scanner(System.in);
 	System.out.print(mToUser);
@@ -709,7 +735,7 @@ public class Game{
 	    return Integer.parseInt(s);
 	}
 	catch(NumberFormatException e){
-	    if (s.equals("quit")){
+	    if (s.equals("return")){
 		return -2;
 	    }
 	    return -1;
