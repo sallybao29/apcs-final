@@ -8,7 +8,8 @@ public class SudokuPuzzle{
     private int[][] sections = new int[9][9];
     private int[][] rows = new int[9][9];
     private int[][] columns = new int[9][9];
-    private int upTo = 0;
+    private int s;
+    private int[] upTo = new int[9];
 
     public void generateGame(){
 	Random r = new Random();
@@ -16,23 +17,26 @@ public class SudokuPuzzle{
 	int c;
 	for (int i = 0; i < 9; i++){
 	    while (j < 9){
+		//System.out.println( i + "," + j);
 		c = r.nextInt(9) + 1;
 		if (possible(c,i,j)){
 
 		    // add to board
 		    board[i][j] = c;
-		    j += 1;
 
 		    // keeping track... 
-		    rows[r][c] = c;
-		    columns[c][r] = c;
+		    rows[i][j] = c;
+		    columns[j][i] = c;
 
-		    sections[s][upTo] = c;
-		    upTo += 1;
+		    sections[s][upTo[s]] = c;
+
+		    upTo[s] += 1;
 
 		    j += 1;
 		}
 	    } 
+	    upTo[s] = 0;
+	    j = 0;
 	}
     }
 
@@ -41,7 +45,6 @@ public class SudokuPuzzle{
 	for (int i = 0; i < 9; i++){
 	    if (rows[r][i] == num){
 		return false;
-		break;
 	    }
 	}
 
@@ -49,17 +52,15 @@ public class SudokuPuzzle{
 	for (int i = 0; i < 9; i++){
 	    if (columns[c][i] == num){
 		return false;
-		break;
 	    }
 	}
 
 	//checking 3 by 3 sections
-	int s = findsection(r, c);
+	s = findsection(r, c);
 
 	for (int i = 0; i < 9; i++){
 	    if (sections[s][i] == num){
 		return false;
-		break;
 	    }
 	}
 
@@ -82,5 +83,30 @@ public class SudokuPuzzle{
 	    else if (c < 6){return 7;}
 	    else {return 8;}
 	}
+    }
+
+    public void showBoard(){
+	String ret = "";
+
+	for (int i = 0; i < 9; i++){
+	    for (int j = 0; j < 9; j++){
+		ret += board[i][j];
+		if (j == 2 || j == 5){
+		    ret += "|";
+		}
+	    }
+	    ret += "\n";
+	    if (i == 2 || i == 5){
+		ret += "---+---+---\n";
+	    }
+	}
+
+	System.out.println(ret);
+    }
+
+    public static void main(String[] args){
+	SudokuPuzzle s = new SudokuPuzzle();
+	s.generateGame();
+	s.showBoard();
     }
 }
