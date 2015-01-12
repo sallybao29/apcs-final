@@ -373,6 +373,12 @@ public class Game{
 					    room.get(20).changeStatus();
 					    room.get(20).changeDescript("\nA phone displaying a Red 6");
 					    inventory.take(room.get(20));
+					    if (eightGame.getSkip()){
+						grade += sgrade;
+					    }
+					    else {
+						grade += fgrade;
+					    }
 					    i2 = 1;
 					    i3 = 1;
 					}

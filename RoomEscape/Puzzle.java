@@ -20,16 +20,16 @@ public class Puzzle extends Item{
     }
 
     public int check(String attempt){
-	if (attempt.equals(answer)){
+	if (attempt.equals(answer) || attempt.equals("skip")){
 	    solved = true;
 	    if (!this.getNDescript().equals("None")){
 		this.changeDescript(this.getNDescript());
 	    }
 	    System.out.println(smessage);
+	    if (attempt.equals("skip")){
+		return 2;
+	    }
 	    return 1;
-	}
-	else if (attempt.equals("skip")){
-	    return 2;
 	}
 	else {
 	    System.out.println("Son, you have failed. Try again.");
