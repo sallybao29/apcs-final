@@ -8,6 +8,11 @@ public class EightGamePuzzle{
     private ArrayList<Integer> moves = new ArrayList<Integer>();
     private boolean solved = false;
     private boolean quit = false;
+    private boolean skip = false;
+
+    public boolean getSkip(){
+	return skip;
+    }
 
     public void generateGame(int numScram){
 	int current = 0;
@@ -81,13 +86,16 @@ public class EightGamePuzzle{
     public boolean userSteps(){
     	int zposh2 = zposh;
     	int zposv2 = zposv;
-    	while (solved == false && quit == false){
+    	while (solved == false && quit == false && skip == false){
 	    System.out.println("Current Board: \n" + toString());
     	    String c = this.AskUser("Enter your move here(left, up, down, or right) or quit: ");
 	    System.out.println("\nYour move: " + c);
 
 	    if (c.equals("quit")){
 		quit = true;
+	    }
+	    else if (c.equals("skip")){
+		skip = true;
 	    }
 	    else if (c.equals("left") && zposv2 != 0){
 		board[zposh2][zposv2] = board[zposh2][zposv2 - 1];
@@ -119,15 +127,14 @@ public class EightGamePuzzle{
 	}
 	if (solved == true){
 	    System.out.println("\nCongrats! :) You have unlocked your phone!");
-	    return true;
+	}
+	else if (skip == true){
+	    System.out.println("\n:( You skipped? Oh well... Your phone is unlocked anyways.");
 	}
 	else if (quit == true){
 	    System.out.println("\nSeriously? You've quit already? :(");
-	    return false;
 	}
-	else{
-	    return false;
-	}
+	return solved;
     }
 
     public String toString(){
