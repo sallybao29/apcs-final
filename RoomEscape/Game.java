@@ -479,21 +479,23 @@ public class Game{
 		c = this.AskUserI("\n[1]Look at book\n[2]Now's not the time!\n");
 		if (c == 1){
 		    int book = this.AskUserI(booklist);
-		    System.out.println(bookshelf.get(book - 1).getDescript());
-		    int c2;
-		    int i2 = 0;
-		    while (i2 != 1){
-			c2 = this.AskUserI("\nTake book? [1]Yes, [2]No\n");
-			if (c2 == 1){ 
-			    inventory.take(bookshelf.remove(book - 1));
-			    i2 = 1;
+		    if (book >= 0 && book < bookshelf.size()){
+			System.out.println(bookshelf.get(book - 1).getDescript());
+			int c2;
+			int i2 = 0;
+			while (i2 != 1){
+			    c2 = this.AskUserI("\nTake book? [1]Yes, [2]No\n");
+			    if (c2 == 1){ 
+				inventory.take(bookshelf.remove(book - 1));
+				i2 = 1;
+			    }
+			    else if (c2 == 2){ 
+				i2 = 1;
+			    } 	
 			}
-			else if (c2 == 2){ 
-			    i2 = 1;
-			}
-			else {
-			    System.out.println(msg);
-			} 	
+		    }
+		    else {
+			System.out.println(msg);
 		    } 
 		}
 		else if (c == 2){
