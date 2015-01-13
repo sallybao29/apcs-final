@@ -9,8 +9,8 @@ public class EightGamePuzzle{
     private boolean solved = false;
     private boolean quit = false;
     private boolean skip = false;
-    private int zposh = 0;
-    private int zposv = 0;
+    private int zposh = 0; //horizontal position of user
+    private int zposv = 0; //vertical position of user
 
 
     public boolean getSkip(){
@@ -18,6 +18,7 @@ public class EightGamePuzzle{
     }
 
     public void generateGame(int numScram){
+    	//creates the unscrambled board that every random board given to the user is based on
 	int current = 0;
 	for (int i = 0; i < board.length; i++) {
 	    for (int j = 0; j < board[i].length; j++) {
@@ -26,18 +27,22 @@ public class EightGamePuzzle{
 	    }
 	}
 	current = 0;
-	ans = board;
-	boardScrambler(numScram);
+	ans = board; //sets the unscrambled board as the answer to the puzzle
+	boardScrambler(numScram); //scrambles the board for every new play
     }
 
+    //scrambles the board by moving the zero random directions
     public void boardScrambler(int numScram){
 	Random r = new Random();
-	int n = numScram;
+	int n = numScram; //chooses around how many moves are needed to solve (changes difficulty)
 	int prevc = 0;
 	int c;
         while (n > 0){
 	    c = r.nextInt(4);
-	    if (c-prevc != 2 || c-prevc != -2){
+	    if (c-prevc != 2 || c-prevc != -2){ 
+	    	// ^ prevents each random movement from cancelling out the previous one 
+	    	// (ex: move right, then move left is not allowed)
+	    	
 		if (c == 0 && zposv != 0){
 		    board[zposh][zposv] = board[zposh][zposv-1];
 		    board[zposh][zposv-1] = 0;
@@ -70,6 +75,8 @@ public class EightGamePuzzle{
 	    }
 	}
     }
+    
+    //checks to see if the board is unscrambled after the user's new move
     public void check(){
 	if (Arrays.equals(board[0], ans[0])&&
 	    Arrays.equals(board[1], ans[1])&&
@@ -86,13 +93,18 @@ public class EightGamePuzzle{
 	    System.out.println("Current Board: \n" + toString());
     	    String c = this.AskUser("Enter your move here(left, up, down, or right) or quit: ");
 	    System.out.println("\nYour move: " + c);
-
+	    
+	    // allows the user to temporarily quit the puzzle
 	    if (c.equals("quit")){
 		quit = true;
 	    }
+	    
+	    // allows the user to permanently skip the puzzle
 	    else if (c.equals("skip")){
 		skip = true;
 	    }
+	    
+	    //board movements
 	    else if (c.equals("left") && zposv2 != 0){
 		board[zposh2][zposv2] = board[zposh2][zposv2 - 1];
 		board[zposh2][zposv2 - 1] = 0;
@@ -153,6 +165,7 @@ public class EightGamePuzzle{
     }
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~Testing~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    /*
     public static void main(String[] args){
 	EightGamePuzzle p = new EightGamePuzzle();
 	p.generateGame(5);
@@ -161,5 +174,6 @@ public class EightGamePuzzle{
 	    System.out.println("done"); 
 	}
     }
+    */
     
 }
