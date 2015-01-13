@@ -3,19 +3,19 @@ import java.util.*;
 public class Game{
     private int stage;
     private boolean gameWon;
+    Inventory inventory = new Inventory();
+    EightGamePuzzle eightGame;
     private ArrayList<Item> room = new ArrayList<Item>();
     private ArrayList<Item> closet = new ArrayList<Item>();
     private ArrayList<Item> bathroom = new ArrayList<Item>();
     private ArrayList<Item> bookshelf = new ArrayList<Item>();
     private ArrayList<Item> compartment = new ArrayList<Item>();
-    private ArrayList<String> answer = new ArrayList<String>(Arrays.asList("Apple", "Forceps", "Fig", "Philosophi"+(char)145+" Naturalis Principia Mathematica"));
-    Inventory inventory = new Inventory();
-    EightGamePuzzle eightGame;
-    private String msg = "\nPlease enter a valid choice", qsg = "Type 'return' to exit current option";
+    private ArrayList<String> answer = new ArrayList<String>(Arrays.asList("Apple", "Forceps", "Fig", "Philosophiae Naturalis Principia Mathematica"));
+    private String msg = "\nPlease enter a valid choice", qsg = "Type 'return' to exit current option", ssg = "Type 'skip' to bypass a puzzle";
     private String equip = "None";
     private int grade = 100, sgrade = -10, fgrade = -1;
 
-    public Game(){
+    public Game(){   ///Setting up every single item in the room, labeled for convenience
 	gameWon = false;
 	stage = 1;
 	
@@ -89,11 +89,11 @@ public class Game{
 
 	/*------------------------------ The Bookshelf -----------------------------------------*/
 	
-	bookshelf.add(new Item("For the Love of Physics", "\nFrom the End of the Rainbow ot the Edge of Time\nA Journey Through\nthe Wonders of Physics", false));  //0
-	bookshelf.add(new Item("The Oedipus Cycle", "\nThe ancient myth of Oedipus, which still reverberates\nto this day, provided Sophocles with material for three\ngrea tragedies <i>Oedipus Rex, Oedipus at Colonus</i> and <i>Antigone</i> that\ntogether recount the downfall of Oedipus, king of Thebes, his\ndeath in exile, and the action carried out after his death by his\ndaughter Antigone.\n", true));  //1
+	bookshelf.add(new Item("For the Love of Physics", "\nFrom the End of the Rainbow to the Edge of Time\nA Journey Through\nthe Wonders of Physics\nThe title page has been ripped out. The words 'sincere man' are scrawled across the first page\n", false));  //0
+	bookshelf.add(new Item("The Oedipus Cycle", "\nThe ancient myth of Oedipus, which still reverberates\nto this day, provided Sophocles with material for three\ngrea tragedies <i>Oedipus Rex, Oedipus at Colonus</i> and <i>Antigone</i> that\ntogether show how nobles are outragously lab, by\nrecounting the downfall of Oedipus, king of Thebes, his\ndeath in exile, and the action carried out after his death by his\ndaughter Antigone.\n", true));  //1
 	bookshelf.add(new Item("Principles of Quantum Mechanics", "It's full of equations and greek letters\n", true)); //3
 	bookshelf.add(new Item("Hamlet", "Readers have for the first time, a unique\nopportunity to study the three surviving texts of Hamlet\nexperienced by Shakespeare's contemporaries, fully\nmodernized and edited by leading scholars.\n", true));  //4
-	bookshelf.add(new Item("Philosophi"+(char)145+" Naturalis Principia Mathematica", "\nRational Mechanics will be the science of motions resulting\nfrom any forces whatsoever, and of the forces\nrequired to produce any motions, accurately proposed\nand demonstrated. And therefore we offer this work\nas mathematical principles of philosophy. For all the\ndifficulty of philosophy seems to consist in this: from the\nphenomena of motions to investigate the forces of\nNature, and then from these forces to\ndemonstrate the other phenomena.\n", true));  //5
+	bookshelf.add(new Item("Philosophiae Naturalis Principia Mathematica", "\nRational Mechanics will be the science of motions resulting\nfrom any forces whatsoever, and of the forces\nrequired to produce any motions, accurately proposed\nand demonstrated. And therefore we offer this work\nas mathematical principles of philosophy. For all the\ndifficulty of philosophy seems to consist in this: from the\nphenomena of motions to investigate the forces of\n<i>cat pain</i>, and then from these forces to\ndemonstrate the other phenomena.\n", true));  //5
 	bookshelf.add(new Item("How to Beat this Game", "\nStop reading this and get to work.\n", true));  //6
 
 	room.get(7).setCompat("Acid");      //Closet
@@ -110,9 +110,7 @@ public class Game{
 	closet.get(5).setNewForm("Wet Tissues");  
 	closet.get(4).setCompat("Wet Tissues");       //Marble
 	bathroom.get(0).setCompat("Paperclips");         
-	bathroom.get(5).setCompat("Tissues");
-
-	
+	bathroom.get(5).setCompat("Tissues");	
     }
 
     public ArrayList<Item> getRoom(){
@@ -141,6 +139,10 @@ public class Game{
 	catch (Exception e){}
     }
 
+    //determines whether points should be deducted from player's grade
+    //calls check method for puzzles
+    //if player answers incorrectly (3), they lose fgrade
+    //if player chooses to skip (2), they lose sgrade
     public boolean evaluate(int num, String ans){
 	int choice = ((Puzzle)room.get(num)).check(ans);
 	if (choice == 2){
@@ -152,6 +154,7 @@ public class Game{
 	return choice < 3;
     }
 
+    //checks if compartments are filled with correct objects
     public boolean checkComp(){
 	if (compartment.size() == 4){
 	    for (int i = 0;i < 4;i++){
@@ -166,11 +169,12 @@ public class Game{
 	}
     }
 
+    //player can choose to place an item in a compartment
+    //or take an item away
     public void fillComp(){
 	int i = 0;
-	int c, option;
-	String list;
-	int count;
+	int c, option, count;
+	String list;;
         while (i != 1){
 	    count = 0;
 	    list = "";
@@ -193,12 +197,13 @@ public class Game{
 		    System.out.println("\nAll spots are filled");
 		}
 		else {
-		    System.out.println(inventory.list());
+		    System.out.println(inventory);
 		    option = this.AskUserI("\nWhich object do you want to place?\n");
 		    try {
-			System.out.println("\nYou placed the " + inventory.get().get(option) + " in the compartment");
-			if (answer.contains(inventory.get().get(option).getName())){
-			    System.out.println("\nThe compartment you place the " + inventory.get().get(option) + " in glows faintly");
+			Item item = inventory.get().get(option);
+			System.out.println("\nYou placed the " + item + " in the compartment");
+			if (answer.contains(item.getName())){
+			    System.out.println("\nThe compartment you place the " + item + " in glows faintly");
 			}
 			compartment.add(inventory.get().remove(option));
 		    }
@@ -230,6 +235,8 @@ public class Game{
 	}
     }
 
+    //prints description for door, checks answer
+    //game is cleared when all five doors have been passed
     public void checkDoor(){
 	int i = 0;
 	String ans;
@@ -266,7 +273,9 @@ public class Game{
 	    gameWon = true;
 	}
     }
-            
+
+    //presents choices depending on what object the player initially chooses to interact with
+    //bulk of interactions is here            
     public void interact(Item thing){
 	int c;
 	int i;
@@ -675,6 +684,10 @@ public class Game{
 	}
     }
 
+    //allows player to choose two items to combine
+    //if player chooses two valid objects from inventory,
+    //both objects are moved to end of inventory
+    //will combine the last two items in inventory if choiceMade is true
     public void toCombine(){
 	int i = 0;
 	int a;
@@ -699,6 +712,9 @@ public class Game{
 	}
     }
 
+
+    //equipped items will atomatically be used on any main object player explores
+    //stores equipped item as string
     public void toEquip(){
 	int i = 0;
 	int c;
@@ -724,14 +740,16 @@ public class Game{
 	}
     }
   
+    //used for Puzzles
     public String AskUserS(String mToUser){
 	String s = "";
 	Scanner sc = new Scanner(System.in);
-	System.out.println(mToUser);
+	System.out.println(mToUser);      //presents option to player
 	s = sc.nextLine();
-	return s;
+	return s;                        //returns player's choice
     }
 
+    //used for all other interactions
     public int AskUserI(String mToUser){
 	String s = "";
 	Scanner sc = new Scanner(System.in);

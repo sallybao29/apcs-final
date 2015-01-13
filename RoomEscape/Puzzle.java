@@ -1,6 +1,5 @@
 public class Puzzle extends Item{
-    private final String answer;
-    private final String smessage;
+    private final String answer, smessage;
     private boolean solved;
    
 
@@ -19,6 +18,8 @@ public class Puzzle extends Item{
 	return solved;
     }
 
+    //if player enters correct answer or "skip", puzzle will be solved
+    //if player skips, dire repercussions will be in store
     public int check(String attempt){
 	if (attempt.equals(answer) || attempt.equals("skip")){
 	    solved = true;

@@ -3,6 +3,8 @@ import java.util.ArrayList;
 public class Inventory{
     private static ArrayList<Item> inventory = new ArrayList<Item>();
 
+    //if item is takeable, add to inventory
+    //otherwise print discouraging message
     public void take(Item a){
 	if (a.canGet() == true){
 	    inventory.add(a);
@@ -17,6 +19,7 @@ public class Inventory{
 	return inventory;
     }
 
+    //retrieves item from inventory when only name is known
     public Item find(String name){
 	for (int i = 0;i < inventory.size();i++){
 	    if (name.equals(inventory.get(i).getName())){
@@ -26,6 +29,9 @@ public class Inventory{
 	return null;
     }
 
+    //checks for compatibility between two items
+    //if compatible, changes description and name of items,
+    //showing they have interacted with each other
     public void combine(Item a, Item b){
 	String name;
 	String aname = a.getName(),
@@ -49,7 +55,7 @@ public class Inventory{
     }
 
 
-    public String list(){
+    public String toString(){
 	String s = "";
 	for (int i = 0;i < inventory.size();i++){
 	    s += "[" + i + "]";

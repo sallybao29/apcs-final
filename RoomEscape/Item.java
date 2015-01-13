@@ -46,7 +46,6 @@ public class Item{
 	newDescript = s;
     }
 
-
     public String getCompat(){
 	return compatible;
     }
@@ -75,6 +74,10 @@ public class Item{
 	used = true;
     }
 
+
+    //method checks whether two items are compatible, if so,
+    //other will be used on this
+    //this will always be something unlockable or interactable
     public boolean toUse(Item other, String message){
 	if (other == null){
 	    return false;

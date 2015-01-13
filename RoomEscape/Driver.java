@@ -79,7 +79,7 @@ public class Driver{
 	    else if (r == 2){
 		int c = 0;
 		while (c != 4){
-		    	System.out.println(stuff.list() + "\n");
+		    	System.out.println(stuff + "\n");
 		    c = d.AskUser("\n[1]Inspect an item, [2]Combine items, [3]Equip items, [4]Exit Inventory\n");
 		    if (c == 1){
 			int choice = d.AskUser("\nWhich item would you like to inspect?\n");
