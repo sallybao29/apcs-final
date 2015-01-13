@@ -4,6 +4,7 @@ apcs-final
 Project Information
 ----------
 Name: Puzzle-ception! :)
+
 Group Members: Sally Bao and Xiuzhen (Tiffany) Lei 
 
 What's the project?: A really cool (but kind of difficult) escape game!
