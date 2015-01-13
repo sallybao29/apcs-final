@@ -7,7 +7,7 @@ Name: Puzzle-ception! :)
 
 Group Members: Sally Bao and Xiuzhen (Tiffany) Lei 
 
-What's the project?: A cruelly difficult and unfair escape game. Will, at times, seem as if it were intentionally made to be impossible and trying. 
+What's the project?: A cruelly difficult escape game. Will, at times, seem as if it were intentionally made to be impossible and trying. 
 
 Log
 ----------
