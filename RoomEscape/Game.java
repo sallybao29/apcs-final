@@ -694,10 +694,11 @@ public class Game{
 	int i = 0;
 	int a;
 	boolean choiceMade = false;
+	String[] temp = new String[2]; 
 	while (i != 2){
 	    a = this.AskUserI("\nItem " + (i + 1) + ": ");
 	    if (a >= 0 && a < inventory.get().size()){
-	        inventory.get().add(inventory.get().remove(a));
+		temp[i] = inventory.get().get(a).getName();
 		i++;
 		choiceMade = true;
 	    }
@@ -710,7 +711,7 @@ public class Game{
 	    }
 	}
 	if (choiceMade == true){
-	    inventory.combine(inventory.get().get(inventory.get().size() - 2), inventory.get().get(inventory.get().size() - 1));
+	    inventory.combine(inventory.find(temp[0]), inventory.find(temp[1]));
 	}
     }
 
