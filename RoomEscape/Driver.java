@@ -43,7 +43,8 @@ public class Driver{
 	while (g.gameWon() == false && endGame == false){
 
 	    int r = d.AskUser("\n[1]Inspect an object, [2]Look at Inventory, [3]Exit Game\n");
-	    if (r == 1){
+	    switch(r){
+	    case 1:
 		int i = 0;
 		while (i != 1 && g.gameWon() == false){
 		    int inspect = d.AskUser("\nYou want to inspect... \n[0]Bed\n[1]Desk\n[2]Bag\n[3]Rug\n[4]Trash can\n[5]Bookshelf\n[6]Poster\n[7]Closet\n[8]Bathroom door\n[9]Ceiling\n[10]Door\n[11]Nothing. Let's go back to the main menu\n");
@@ -53,14 +54,15 @@ public class Driver{
 			while (i2 != 1){
 			    System.out.println("\nWhat do you want to do with it?");
 			    int c = d.AskUser("[1]Inspect further, [2]Move on\n");
-			    if (c == 1){
+			    switch(c){
+			    case 1:
 				g.interact(g.getRoom().get(inspect));
 				i2 = 1;
-			    }
-			    else if (c == 2){
+				break;
+			    case 2:
 				i2 = 1;
-			    }
-			    else{
+				break;
+			    default:
 				System.out.println(g.getM());
 			    }
 			}
@@ -75,36 +77,39 @@ public class Driver{
 			System.out.println(g.getM());
 		    }
 		}
-	    }
-	    else if (r == 2){
+		break;
+	    case 2:
 		int c = 0;
 		while (c != 4){
-		    	System.out.println(stuff + "\n");
+		    System.out.println(stuff + "\n");
 		    c = d.AskUser("\n[1]Inspect an item, [2]Combine items, [3]Equip items, [4]Exit Inventory\n");
-		    if (c == 1){
+		    switch(r){
+		    case 1:
 			int choice = d.AskUser("\nWhich item would you like to inspect?\n");
 			try{
-			System.out.println(stuff.get().get(choice).getDescript());
+			    System.out.println(stuff.get().get(choice).getDescript());
 			}
 			catch(Exception e){
 			    System.out.println(g.getM());
 			}
-		    }
-		    else if (c == 2){
+			break;
+		    case 2:
 			g.toCombine();
-		    }
-		    else if (c == 3){
+			break;
+		    case 3:
 			g.toEquip();
+			break;
 		    }
 		}
-	    }
-	    else if (r == 3){
+		break;
+	    case 3:
 		endGame = true;
-	    }
-	    else {
+		break;
+	    default:
 		System.out.println(g.getM());
-	    }
-	}	
+	    }	
+	}
+
 	if (endGame){
 	    System.out.println("What?! You Quit? Such a disappointment.");
 	}
