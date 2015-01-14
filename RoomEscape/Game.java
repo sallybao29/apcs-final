@@ -687,31 +687,32 @@ public class Game{
     }
 
     //allows player to choose two items to combine
-    //if player chooses two valid objects from inventory,
-    //both objects are moved to end of inventory
-    //will combine the last two items in inventory if choiceMade is true
+    //if player chooses a valid object from inventory,
+    //it is stored in a tempoaray arraylist
     public void toCombine(){
-	int i = 0;
-	int a;
-	boolean choiceMade = false;
-	String[] temp = new String[2]; 
-	while (i != 2){
-	    a = this.AskUserI("\nItem " + (i + 1) + ": ");
-	    if (a >= 0 && a < inventory.get().size()){
-		temp[i] = inventory.get().get(a).getName();
-		i++;
-		choiceMade = true;
-	    }
-	    else if (a == -2){
-		choiceMade = false;
-		i = 2;
-	    }
-	    else {
-		System.out.println(msg);
-	    }
+	if (inventory.get().size() < 2){
+	    System.out.println("\nNot enough items in inventory");
 	}
-	if (choiceMade == true){
-	    inventory.combine(inventory.find(temp[0]), inventory.find(temp[1]));
+	else {
+	    int i = 0;
+	    int a;
+	    ArrayList<String> temp = new ArrayList<String>();
+	    while (i != 2){
+		a = this.AskUserI("\nItem " + (i + 1) + ": ");
+		if (a >= 0 && a < inventory.get().size()){
+		    temp.add(inventory.get().get(a).getName());
+		    i++;
+		}
+		else if (a == -2){
+		    i = 2;
+		}
+		else {
+		    System.out.println(msg);
+		}
+	    }
+	    if (temp.size() == 2){
+		inventory.combine(inventory.find(temp.get(0)), inventory.find(temp.get(1)));
+	    }
 	}
     }
 
