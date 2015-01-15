@@ -77,7 +77,7 @@ public class EightGamePuzzle{
     
     //checks to see if the board is unscrambled after the user's new move
     public void check(){
-	if (Arrays.deepEquals(board[][], ans[][])){
+	if (Arrays.deepEquals(board, ans)){
 	    System.out.println("\nFinal board: \n" + toString());
 	    solved = true;
 	}
