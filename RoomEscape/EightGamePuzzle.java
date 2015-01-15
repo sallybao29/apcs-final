@@ -26,7 +26,6 @@ public class EightGamePuzzle{
 		current += 1;
 	    }
 	}
-	current = 0;
 	ans = board; //sets the unscrambled board as the answer to the puzzle
 	boardScrambler(numScram); //scrambles the board for every new play
     }
@@ -78,9 +77,7 @@ public class EightGamePuzzle{
     
     //checks to see if the board is unscrambled after the user's new move
     public void check(){
-	if (Arrays.equals(board[0], ans[0])&&
-	    Arrays.equals(board[1], ans[1])&&
-	    Arrays.equals(board[2], ans[2])){
+	if (Arrays.deepEquals(board[][], ans[][])){
 	    System.out.println("\nFinal board: \n" + toString());
 	    solved = true;
 	}

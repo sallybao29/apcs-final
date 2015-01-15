@@ -113,6 +113,7 @@ public class Game{
 	bathroom.get(5).setCompat("Tissues");	
     }
 
+    /*----------------------------------------- GETS AND SETS ---------------------------------------------------*/
     public ArrayList<Item> getRoom(){
 	return room;
     }
@@ -138,6 +139,34 @@ public class Game{
 	}
 	catch (Exception e){}
     }
+
+    public String getBooks(){
+	String booklist = "";
+	for (int a = 0;a < bookshelf.size();a++){
+	    booklist += "[" + (a + 1) + "]";
+	    booklist += bookshelf.get(a);
+	    booklist += "\n";
+	}
+	return booklist;
+    }
+
+    public String getComp(){
+	int count = 0;
+	String list = "<< The Compartments >>\n\n";
+	for (int a = 0;a < compartment.size();a++){
+	    list += "[" + (count + 1) + "]" + compartment.get(a) + "\n";
+	    count++;
+	}
+	for (int b = count;b < 4;b++){
+	    list += "[" + (b + 1) + "]";
+	    list += "empty";
+	    list += "\n";
+	}
+	return list;
+    }
+
+    /*------------------------------------------- GETS AND SETS ---------------------------------------------------*/
+
 
     //determines whether points should be deducted from player's grade
     //calls check method for puzzles
@@ -175,22 +204,8 @@ public class Game{
 	int i = 0;
 	int c, option, count;
 	String list;;
-        while (i != 1){
-	    count = 0;
-	    list = "";
-	    list += "<< The Compartments >>\n\n";
-	    for (int a = 0;a < compartment.size();a++){
-		list += "[" + (count) + "]";
-		list += compartment.get(a);
-		list += "\n";
-		count++;
-	    }
-	    for (int b = count;b < 4;b++){
-		list += "[" + b + "]";
-		list += "empty";
-		list += "\n";
-	    }
-	    System.out.println(list);
+        while (i != 1){	   
+	    System.out.println(getComp());
 	    c = this.AskUserI("\n[1]Place an object\n[2]Take an object\n[3]Back to door\n");
 	    switch (c){
 	    case 1:
@@ -275,21 +290,59 @@ public class Game{
 	}
     }
 
+    //presents choices depending on what object the player initially chooses to interact with    
+    public void interact(String thing){
+	switch(thing){
+	case "Bed":
+	    interactBed();
+	    break;
+	case "Desk":
+	    interactDesk();
+	    break;
+	case "Bag":
+	    interactBag();	      
+	    break;
+	case "Rug":
+	    interactRug(); 
+	    break;
+	case "Trash Can":
+	    interactTrashCan();
+	    break;
+	case "Bookshelf":
+	    interactBookShelf();
+	    break;
+	case "Poster":
+	    interactPoster();
+	    break;
+	case "Closet":
+	    interactCloset();
+	    break;
+	case "Bathroom":
+	    interactBathroom();
+	    break;
+	case "Vent":
+	    interactVent();
+	}
+    }
+
 
     public void interactBed(){
+	int c;
 	int i = 0;
 	while (i != 1){
 	    c = this.AskUserI("\n[1]Check under the blankets\n[2]Check pillow\n[3]Look under bed\n[4]Already saw the bed\n");
 	    switch(c){
 	    case 1:
 		System.out.println("\nThere's nothing there\n");
+		break;
 	    case 2:
 		System.out.println(room.get(15).getDescript());
 		if (room.get(15).getStatus() == false){
 		    inventory.take(room.get(24));
 		    room.get(15).changeDescript("A fluffy fluff pillow. Just looking at it makes you want to lie down in bed");
 		    room.get(15).changeStatus();
-		}	    	      
+		}
+		break;	    	      
 	    case 3:
 		System.out.println("\nA colony of dust bunnies is thriving under the bed");
 		if (room.get(0).getStatus() == false){
@@ -301,8 +354,10 @@ public class Game{
 		else{
 		    System.out.println("You can't seem to reach it");
 		}
+		break;
 	    case 4:
 		i = 1;
+		break;
 	    default:
 		System.out.println(msg);
 	    }
@@ -310,7 +365,9 @@ public class Game{
     }
 
     public void interactDesk(){
-	i = 0;
+	int c;
+	int i = 0;
+	String s = "\nYou unlocked the desk drawer with the key.\nYou find a Blue index card with the number 8 on it and a note.";
 	while (i != 1){
 	    c = this.AskUserI("\n[1]Check laptop\n[2]Check pencil holder\n[3]Check drawer\n[4]Nope\n");
 	    switch(c){
@@ -323,6 +380,7 @@ public class Game{
 			System.out.println(room.get(11).getDescript());
 		    }	       
 		}
+		break;
 	    case 2:
 		System.out.println(room.get(12).getDescript());
 		if (room.get(12).getStatus() == false){
@@ -330,15 +388,372 @@ public class Game{
 		    inventory.take(room.get(16));
 		    room.get(12).changeStatus();
 		}
+		break;
 	    case 3:
 		System.out.println(room.get(13).getDescript());
 		if (room.get(13).getStatus() == false){
-		    if (room.get(13).toUse(inventory.find(equip), "\nYou unlocked the desk drawer with the key you found.\nIt slides open to reveal some goodies.\nYou find a Blue index card with the number 8 on it and a note.") == true){
+		    if (room.get(13).toUse(inventory.find(equip), s) == true){
 			inventory.take(room.get(29));
 			inventory.take(room.get(23));
 		    } 	   
 		}
+		break;
 	    case 4:
+		i = 1;
+		break;
+	    default:
+		System.out.println(msg);
+	    }
+	}
+    }
+
+    public boolean playEightGame(){
+	int c;
+	boolean solved = false;
+	int i = 0; 
+	System.out.println("\nYour phone displays an 8-Game Puzzle");
+	while (i != 1){
+	    c = this.AskUserI("\n[1]I want to play!\n[2]No thanks\n");
+	    switch(c){
+	    case 1:
+		System.out.println("\nEver played the 8-Game Puzzle? Here are the directions: \n   Your goal is to get the numbers to be in order from 0 to 9 \n   (with 0-2 in the first row, 3-5 in the second, and 6-8 in the third) \n   by moving the zero in any of the four directions \n   (left, up, right, down). Let's go! :)");
+		eightGame = new EightGamePuzzle();
+		eightGame.generateGame(5);
+		solved = eightGame.userSteps();
+		if (solved == true){
+		    System.out.println("\n\n You see a Red 6.");
+		    room.get(20).changeStatus();
+		    room.get(20).changeDescript("\nA phone displaying a Red 6");
+		    inventory.take(room.get(20));
+		    if (eightGame.getSkip()){
+			grade += sgrade;
+		    }
+		    else {
+			grade += fgrade;
+		    }
+		    i = 1;
+		}
+		else {
+		    grade += fgrade;
+		    System.out.println("\n\n Maybe next time.");
+		}		
+		break;
+	    case 2: i = 1; break;
+	    default: System.out.println(msg);
+	    }
+	}
+	return solved;
+    }
+  
+
+    public void interactBag(){
+	int c;
+	int i = 0;
+	while (i != 1){
+	    c = this.AskUserI("\n[1]Open small pocket\n[2]Look through notes\n[3]Move on\n");
+	    int i2, c2;
+	    String option;
+	    switch(c){
+	    case 1:
+		System.out.println("\nYou find your student metrocard, your student ID, your phone, and a few TicTacs");
+		i2 = 0;
+		if (room.get(20).getStatus() == false){
+		    option = "\n[1]Inspect phone, [2]Take the Tictacs, [3]Eh, I'll move on\n";
+		}
+		else {
+		    option = "\n[1]Dig deeper, [2]Take the Tictacs, [3]Eh, I'll move on\n";
+		}
+		while (i2 != 1){
+		    c2 = this.AskUserI(option);
+		    switch(c2){
+		    case 1:
+			if (room.get(20).getStatus() ==  true){
+			    System.out.println("You can't look any further");
+			}
+			else if (playEightGame() == true){
+			    room.get(20).changeStatus();
+			}
+			break;
+		    case 2:
+			System.out.println("\nEw, these are a few years old. Maybe you should leave them.");
+			break;
+		    case 3:
+			i2 = 1;
+			break;
+		    default:
+			System.out.println(msg);
+		    }
+		}
+		break;
+	    case 2:
+		System.out.println("\nLooking at these grades is depressing.");
+		if (room.get(19).getStatus() == false){
+		    System.out.println("\nYou find the evil math test that has landed you in this mess!");
+		    inventory.take(room.get(19));
+		    room.get(19).changeStatus();
+		}
+		break;
+	    case 3:
+		i = 1;
+		break;
+	    default:
+		System.out.println(msg);
+	    }
+	}
+    }
+
+    public void interactRug(){
+	int c;
+	int i = 0;
+	while (i != 1){
+	    c = this.AskUserI("\n[1]Flip rug\n[2]Nah\n");
+	    switch(c){
+	    case 1:
+		if (room.get(3).getStatus() == false){
+		    System.out.println("\nYou find a pair of scissors.");
+		    inventory.take(room.get(30));
+		    room.get(3).changeStatus();
+		    room.get(3).changeDescript("An ugly Pikachu rug");
+		}
+		else {
+		    System.out.println("How disappointing. There's nothing under it");
+		}
+		break;
+	    case 2:
+		i = 1;
+		break;
+	    default:
+		System.out.println(msg);
+	    }
+	}
+    }
+	    
+    public void interactTrashCan(){
+	int c;
+	int i = 0;
+	while (i != 1){
+	    c = this.AskUserI("\n[1]Rummage through trash can\n[2]How unsanitary!\n");
+	    switch(c){
+	    case 1:
+		if (room.get(4).getStatus() == false){
+		    System.out.println("\nYou found a rotten fig");
+		    inventory.take(room.get(18));
+		    room.get(4).changeStatus();
+		}
+		else {
+		    System.out.println("\nThere's only trash");
+		}
+		break;
+	    case 2:
+		i = 1;
+		break;
+	    default:
+		System.out.println(msg);
+	    }
+	}
+    }
+
+    public void interactBookShelf(){
+	int c;
+	int i = 0;
+	while (i != 1){
+	    String list = getBooks();
+	    c = this.AskUserI("\n[1]Look at book\n[2]Now's not the time!\n");
+	    switch(c){
+	    case 1:
+		int book = this.AskUserI(list);
+		if (book >= 0 && book < bookshelf.size()){
+		    System.out.println(bookshelf.get(book - 1).getDescript());
+		    int c2;
+		    int i2 = 0;
+		    while (i2 != 1){
+			c2 = this.AskUserI("\nTake book? [1]Yes, [2]No\n");
+			switch(c2){
+			case 1:
+			    inventory.take(bookshelf.remove(book - 1));
+			    i2 = 1;
+			    break;
+			case 2:
+			    i2 = 1;
+			    break;       
+			default:
+			    System.out.println(msg);
+			}
+		    }
+		}
+		break;		    		
+	    case 2:
+		i = 1;
+		break;
+	    default:
+		System.out.println(msg);
+	    }
+	}
+    }
+
+    public void interactPoster(){
+	int c;
+	int i = 0;
+	while (i != 1){
+	    c = this.AskUserI("\n[1]Inspect poster\n[2]Flip poster\n[3]Leave it\n");
+	    switch(c){
+	    case 1:
+		System.out.println("Something");
+		break;
+	    case 2:     
+		System.out.println("\nThere's a safe behind the poster!");
+		System.out.println(room.get(22).getDescript());
+		if (room.get(22).getStatus() == false){
+		    if (room.get(22).toUse(inventory.find(equip), "You blow the pencil shavings onto the keypad.\nThe fingerprints on the six key become visible") == false){
+			System.out.println("\nIf only there were a way to see what had been previously typed...");
+		    }
+		    else {
+			room.get(22).setNDescript("The safe where you stash your loot");
+		    }
+		}
+		if (((Puzzle)room.get(22)).getSolved() == false){			
+		    String ans  = this.AskUserS("\nEnter password: ");
+		    wait(1000);
+		    if (evaluate(22, ans) == true){
+			System.out.println("You find a bottle of acid in the safe");
+			inventory.take(room.get(28));
+		    }
+		}		   
+		break;		
+	    case 3:
+		i = 1;
+		break;
+	    default:
+		System.out.println(msg);
+	    }
+	}
+    }
+
+    public void interactCloset(){
+	int c;
+	int i = 0;
+	while (i != 1){
+	    c = this.AskUserI("\n[1]Slide open left door\n[2]Slide open right door\n[3]Move on\n"); 
+	    switch (c){
+	    case 1:
+		if (room.get(7).getStatus() == false){	      
+		    if (room.get(7).toUse(inventory.find(equip), "You use the acid to melt the hinge.") == false){
+			System.out.println("\nThe door is stuck. It's been a while since you last greased it.\n");
+		    }
+		}
+		else {
+		    System.out.println("\nYour clothes hang neatly in the closet, with a few storage boxes below it and a pile of books. A silver tin box sits on top of the pile");
+		    int i2 = 0;
+		    while (i2 != 1){
+			int c2 = this.AskUserI("\n[1]Check the pockets of your hoodie\n[2]Open storage boxes\n[3]Flip through books\n[4]Open tin box\n[5]Move on\n");
+			switch(c2){
+			case 1:
+			    System.out.println(closet.get(3).getDescript());
+			    if (closet.get(3).getStatus() == false){
+				System.out.println("\nYou find a marble and a pack of tissues");
+				inventory.take(closet.get(4));
+				inventory.take(closet.get(5));
+				closet.get(3).changeStatus();
+				closet.get(3).changeDescript("A spiffy hoody. You have already taken everything in the pockets.");
+			    }
+			    break;
+			case 2: System.out.println("\nNothing interesting. Just some old clothes you plan to donate"); break;
+			case 3:
+			    System.out.println(closet.get(7).getDescript());
+			    if (closet.get(7).getStatus() == false){
+				System.out.println("\nYou find an index card with four colored dots: Red, Blue, Green, and Purple");
+				inventory.take(closet.get(6));
+				closet.get(7).changeStatus();
+				closet.get(7).changeDescript("Some old books. That's all");
+			    }
+			    break;
+			case 4:
+			    System.out.println(closet.get(2).getDescript());
+			    if (closet.get(2).getStatus() == false){
+				System.out.println("\nYou find a screwdriver and some paper clips");
+				inventory.take(closet.get(0));
+				inventory.take(closet.get(1));
+				closet.get(2).changeStatus();
+			    }
+			    break;
+			case 5: i2 = 1; break;
+			default: System.out.println(msg); break;
+			}
+		    }
+		}
+		break;
+	    case 2:
+		System.out.println("The door is stuck.");
+		break;
+	    case 3:
+		i = 1;
+		break;
+	    default:
+	    System.out.println(msg);
+	    }
+	}
+    }
+
+    public void interactBathroom(){
+	int c;
+	int i = 0;
+	while (i != 1){
+	    c = this.AskUserI("\n[1]Open door\n[2]Don't need the toilet right now\n");
+	    switch(c){
+	    case 1:
+		System.out.println("\nYou have entered the bathroom. There is a medicine cabinet above the sink and a rug at your feet.");
+		int i2 = 0;
+		while (i2 != 1){
+		    int c2 = this.AskUserI("\n[1]Open medicine cabinet doors\n[2]Turn on faucet\n[3]Lift rug\n[4]Leave bathroom");
+		    switch(c2){
+		    case 1:
+			System.out.println("You see a little metal box, a bunch of toothpaste, and various medicine");
+			int i3 = 0;
+			while (i3 != 1){
+			    int c3 = this.AskUserI("\n[1]Open metal box\n[2]Close medicine cabinet door");
+			    switch(c3){
+			    case 1:
+				System.out.println(bathroom.get(0).getDescript());
+				if (bathroom.get(0).getStatus() == false){	 
+				    if (bathroom.get(0).toUse(inventory.find(equip), "You have unlocked the box using the paperclips! You find forceps and a Green index card with the number 9") == true){    
+					inventory.take(bathroom.get(1));
+					inventory.take(bathroom.get(2));
+				    }
+				}
+				break;
+			    case 2:
+				i3 = 1;
+				break;
+			    }
+			    break;
+			}
+		    case 2:
+			System.out.println(bathroom.get(5).getDescript());
+			if (bathroom.get(5).getStatus() == false){
+			    if (bathroom.get(5).toUse(inventory.find(equip), "You soaked the tissues in the water.") == true){
+				inventory.find(equip).setName(inventory.find(equip).getNewForm());
+			    }
+			}
+			break;
+		    case 3:
+			System.out.println(bathroom.get(4).getDescript());
+			if (bathroom.get(4).getStatus() == false){
+			    System.out.println("\nYou flip the rug and find a Purple index card with the number 0.\n");
+			    inventory.take(bathroom.get(3));
+			    bathroom.get(4).changeStatus();
+			    bathroom.get(4).changeDescript("\nA fuzzy bathroom rug. There is nothing under it\n");
+			}
+			break;
+		    case 4:
+			System.out.println("\nYou are back in your room");
+			i2 = 1;
+			break;
+		    default:
+			System.out.println(msg);
+		    }
+		}
+		break;
+	    case 2:
 		i = 1;
 	    default:
 		System.out.println(msg);
@@ -346,488 +761,31 @@ public class Game{
 	}
     }
 
-    public void interactBag(){
-	i = 0;
+    public void interactVent(){
+	int c;
+	int i = 0;
 	while (i != 1){
-	    c = this.AskUserI("\n[1]Open small pocket\n[2]Look through notes\n[3]Move on\n");
-	    int i2;
-	    int c2;
+	    c = this.AskUserI("\n[1]Check vent\n[2]Who cares?\n");
 	    switch(c){
 	    case 1:
-		System.out.println("\nYou find your student metrocard, your student ID, your phone, and a few TicTacs");
-		if (room.get(20).getStatus() == false){
-		    i2 = 0;
-		    while (i2 != 1){
-			c2 = this.AskUserI("\n[1]Inspect phone, [2]Take the Tictacs, [3]Eh, I'll move on\n");
-			switch(c2){
-			case 1:
-			    System.out.println("\nYour phone displays an 8-Game Puzzle");
-			    int i3 = 0;
-			    while (i3 != 1){
-				int c3 = this.AskUserI("\n[1]I want to play!\n[2]No thanks\n");
-				if (c3 == 1 && room.get(20).getStatus() == false){
-				    System.out.println("\nEver played the 8-Game Puzzle? Here are the directions: \n   Your goal is to get the numbers to be in order from 0 to 9 \n   (with 0-2 in the first row, 3-5 in the second, and 6-8 in the third) \n   by moving the zero in any of the four directions \n   (left, up, right, down). Let's go! :)");
-				    eightGame = new EightGamePuzzle();
-				    eightGame.generateGame(5);
-				    boolean solved = eightGame.userSteps();
-				    if (solved == true){
-					System.out.println("\n\n You see a Red 6.");
-					room.get(20).changeStatus();
-					room.get(20).changeDescript("\nA phone displaying a Red 6");
-					inventory.take(room.get(20));
-					if (eightGame.getSkip()){
-					    grade += sgrade;
-					}
-					else {
-					    grade += fgrade;
-					}
-					i2 = 1;
-					i3 = 1;
-				    }
-				    else {
-					grade += fgrade;
-					System.out.println("\n\n Maybe next time.");
-				    }
-				}
-				else if (c3 == 2){i3 = 1;}
-				else{System.out.println(msg);}
-			    }			    
-			case 2:
-			    System.out.println("\nEw, these are a few years old. Maybe you should leave them.");
-			case 3:
-			    i2 = 1;
-			default:
-			    System.out.println(msg);
-			}
-		    }
-		case 2:
-		    System.out.println("\nLooking at these grades is depressing.");
-		    if (room.get(19).getStatus() == false){
-			System.out.println("\nYou find the evil math test that has landed you in this mess!");
-			inventory.take(room.get(19));
-			room.get(19).changeStatus();
-		    }
-	        case 3:
-		    i = 1;
-	        default:
-		    System.out.println(msg);
+		System.out.println(room.get(14).getDescript());
+		if (room.get(14).getStatus() == false){
+		    String s = "You used the Phillips screwdriver to unscrew the cover.\nYou find a key and an apple inside.";
+		    if (room.get(14).toUse(inventory.find(equip), s)){
+			inventory.take(room.get(17));
+			inventory.take(room.get(21));
+		    }	        
 		}
+		break;
+	    case 2:
+		i = 1;
+		break;
+	    default:
+		System.out.println(msg);
 	    }
 	}
     }
-	    
 
-
-    //presents choices depending on what object the player initially chooses to interact with
-    //bulk of interactions is here            
-    public void interact(Item thing){
-	int c;
-	int i;
-	
-	if (thing.equals(room.get(0))){
-	    i = 0;
-	    while (i != 1){
-		c = this.AskUserI("\n[1]Check under the blankets\n[2]Check pillow\n[3]Look under bed\n[4]Already saw the bed\n");
-		if (c == 1){
-		    System.out.println("\nThere's nothing there\n");
-		}
-		else if (c == 2){
-		    System.out.println(room.get(15).getDescript());
-		    if (room.get(15).getStatus() == false){
-			inventory.take(room.get(24));
-			room.get(15).changeDescript("A fluffy fluff pillow. Just looking at it makes you want to lie down in bed");
-			room.get(15).changeStatus();
-		    }	    
-		}
-		else if (c == 3){
-		    System.out.println("\nA colony of dust bunnies is thriving under the bed");
-		    if (room.get(0).getStatus() == false){
-			System.out.println("There seems to be a piece of paper in the corner");
-			if (room.get(0).toUse(inventory.find(equip), "You used the forceps to grab the paper") == true){
-			    inventory.take(room.get(25));
-			}
-		    }
-		    else{
-			System.out.println("You can't seem to reach it");
-		    }
-		}
-		else if (c == 4){
-		    i = 1;
-		}
-		else{
-		    System.out.println(msg);
-		}
-	    }
-	}
-	if (thing.equals(room.get(1))){
-	    i = 0;
-	    while (i != 1){
-		c = this.AskUserI("\n[1]Check laptop\n[2]Check pencil holder\n[3]Check drawer\n[4]Nope\n"); 
-		if (c == 1){
-		    System.out.println(room.get(11).getDescript()); 
-		    if (((Puzzle)room.get(11)).getSolved() == false){
-			String ans = this.AskUserS("\nEnter Password: ");
-			wait(1000);
-			if (evaluate(11, ans) == true){
-			    System.out.println(room.get(11).getDescript());
-			}	       
-		    }
-		}
-		else if (c == 2){
-		    System.out.println(room.get(12).getDescript());
-		    if (room.get(12).getStatus() == false){
-			System.out.println("\nYou took a pencil");
-			inventory.take(room.get(16));
-			room.get(12).changeStatus();
-		    }
-		}
-		else if (c == 3){
-		    System.out.println(room.get(13).getDescript());
-		    if (room.get(13).getStatus() == false){
-			if (room.get(13).toUse(inventory.find(equip), "\nYou unlocked the desk drawer with the key you found.\nIt slides open to reveal some goodies.\nYou find a Blue index card with the number 8 on it and a note.") == true){
-			    inventory.take(room.get(29));
-			    inventory.take(room.get(23));
-			} 	   
-		    }
-		}
-		else if (c == 4){
-		    i = 1;
-		}
-		else{
-		    System.out.println(msg);
-		}
-	    }
-	}
-	if (thing.equals(room.get(2))){
-	    i = 0;
-	    while (i != 1){
-		c = this.AskUserI("\n[1]Open small pocket\n[2]Look through notes\n[3]Move on\n");
-		int i2;
-		int c2;
-		if (c == 1){
-		    System.out.println("\nYou find your student metrocard, your student ID, your phone, and a few TicTacs");
-		    if (room.get(20).getStatus() == false){
-			i2 = 0;
-			while (i2 != 1){
-			    c2 = this.AskUserI("\n[1]Inspect phone, [2]Take the Tictacs, [3]Eh, I'll move on\n");
-			    if (c2 == 1){
-				System.out.println("\nYour phone displays an 8-Game Puzzle");
-				int i3 = 0;
-				while (i3 != 1){
-				    int c3 = this.AskUserI("\n[1]I want to play!\n[2]No thanks\n");
-				    if (c3 == 1 && room.get(20).getStatus() == false){
-					System.out.println("\nEver played the 8-Game Puzzle? Here are the directions: \n   Your goal is to get the numbers to be in order from 0 to 9 \n   (with 0-2 in the first row, 3-5 in the second, and 6-8 in the third) \n   by moving the zero in any of the four directions \n   (left, up, right, down). Let's go! :)");
-					eightGame = new EightGamePuzzle();
-					eightGame.generateGame(5);
-					boolean solved = eightGame.userSteps();
-					if (solved == true){
-					    System.out.println("\n\n You see a Red 6.");
-					    room.get(20).changeStatus();
-					    room.get(20).changeDescript("\nA phone displaying a Red 6");
-					    inventory.take(room.get(20));
-					    if (eightGame.getSkip()){
-						grade += sgrade;
-					    }
-					    else {
-						grade += fgrade;
-					    }
-					    i2 = 1;
-					    i3 = 1;
-					}
-					else {
-					    grade += fgrade;
-					    System.out.println("\n\n Maybe next time.");
-					}
-				    }
-				    else if (c3 == 2){i3 = 1;}
-				    else{System.out.println(msg);}
-				}
-			    }
-			    else if (c2 == 2){System.out.println("\nEw, these are a few years old. Maybe you should leave them.");}
-			    else if (c2 == 3){i2 = 1;}
-			    else {System.out.println(msg);}
-			}
-		    }
-		}
-		else if (c == 2){
-		    System.out.println("\nLooking at these grades is depressing.");
-		    if (room.get(19).getStatus() == false){
-			System.out.println("\nYou find the evil math test that has landed you in this mess!");
-			inventory.take(room.get(19));
-			room.get(19).changeStatus();
-		    }
-		}
-		else if (c == 3){
-		    i = 1;
-		}
-		else{
-		    System.out.println(msg);
-		}
-	    }
-	}
-	if (thing.equals(room.get(3))){
-	    i = 0;
-	    while (i != 1){
-		c = this.AskUserI("\n[1]Flip rug\n[2]Nah\n");
-		if (c == 1){
-		    if (room.get(3).getStatus() == false){
-			System.out.println("\nYou find a pair of scissors.");
-			inventory.take(room.get(30));
-			room.get(3).changeStatus();
-			room.get(3).changeDescript("An ugly Pikachu rug");
-		    }
-		    else {
-			System.out.println("How disappointing. There's nothing under it");
-		    }
-		}
-		else if (c == 2){
-		    i = 1;
-		}
-		else{
-		    System.out.println(msg);
-		}
-	    }
-	}
-	if (thing.equals(room.get(4))){
-	    i = 0;
-	    while (i != 1){
-		c = this.AskUserI("\n[1]Rummage through trash can\n[2]How unsanitary!\n");
-		if (c == 1){
-		    if (room.get(4).getStatus() == false){
-		    System.out.println("\nYou found a rotten fig");
-		    inventory.take(room.get(18));
-		    room.get(4).changeStatus();
-		    }
-		    else {
-			System.out.println("\nThere's only trash");
-		    }
-		}
-		else if (c == 2){
-		    i = 1;
-		}
-		else{
-		    System.out.println(msg);
-		}
-	    }
-	}
-	if (thing.equals(room.get(5))){
-	    i = 0;
-	    while (i != 1){
-	    String booklist = "";
-	    for (int a = 0;a < bookshelf.size();a++){
-		booklist += "[" + (a + 1) + "]";
-		booklist += bookshelf.get(a);
-		booklist += "\n";
-	    }
-		c = this.AskUserI("\n[1]Look at book\n[2]Now's not the time!\n");
-		if (c == 1){
-		    int book = this.AskUserI(booklist);
-		    if (book >= 0 && book < bookshelf.size()){
-			System.out.println(bookshelf.get(book - 1).getDescript());
-			int c2;
-			int i2 = 0;
-			while (i2 != 1){
-			    c2 = this.AskUserI("\nTake book? [1]Yes, [2]No\n");
-			    if (c2 == 1){ 
-				inventory.take(bookshelf.remove(book - 1));
-				i2 = 1;
-			    }
-			    else if (c2 == 2){ 
-				i2 = 1;
-			    } 	
-			}
-		    }
-		    else {
-			System.out.println(msg);
-		    } 
-		}
-		else if (c == 2){
-		    i = 1;
-		}
-		else{
-		    System.out.println(msg);
-		}
-	    }
-	}
-	if(thing.equals(room.get(6))){
-	    i = 0;
-	    while (i != 1){
-		c = this.AskUserI("\n[1]Inspect poster\n[2]Flip poster\n[3]Leave it\n");
-		if (c == 1){
-		    System.out.println("Something");
-		}
-		else if (c == 2){      
-		    System.out.println("\nThere's a safe behind the poster!");
-		    System.out.println(room.get(22).getDescript());
-		    if (room.get(22).getStatus() == false){
-			if (room.get(22).toUse(inventory.find(equip), "You blow the pencil shavings onto the keypad.\nThe fingerprints on the six key become visible") == false){
-			    System.out.println("\nIf only there were a way to see what had been previously typed...");
-			}
-			else {
-			    room.get(22).setNDescript("The safe where you stash your loot");
-			}
-		    }
-		    if (((Puzzle)room.get(22)).getSolved() == false){			
-			String ans  = this.AskUserS("\nEnter password: ");
-			wait(1000);
-			if (evaluate(22, ans) == true){
-			    System.out.println("You find a bottle of acid in the safe");
-			    inventory.take(room.get(28));
-			}
-		    }
-		}
-		else if (c == 3){
-		    i = 1;
-		}     
-		else{
-		    System.out.println(msg);
-		}
-	    }
-	}
-	if(thing.equals(room.get(7))){
-	    i = 0;
-	    while (i != 1){
-		c = this.AskUserI("\n[1]Slide open left door\n[2]Slide open right door\n[3]Move on\n"); 
-		if (c == 1){
-		    if (room.get(7).getStatus() == false){	      
-			if (room.get(7).toUse(inventory.find(equip), "You use the acid to melt the hinge.") == false){
-			    System.out.println("\nThe door is stuck. It's been a while since you last greased it.\n");
-			}
-		    }
-		    else {
-			System.out.println("\nYour clothes hang neatly in the closet, with a few storage boxes below it and a pile of books. A silver tin box sits on top of the pile");
-			int i2 = 0;
-			while (i2 != 1){
-			    int c2 = this.AskUserI("\n[1]Check the pockets of your hoodie\n[2]Open storage boxes\n[3]Flip through books\n[4]Open tin box\n[5]Move on\n");
-			    if (c2 == 1){
-				System.out.println(closet.get(3).getDescript());
-				if (closet.get(3).getStatus() == false){
-				    System.out.println("\nYou find a marble and a pack of tissues");
-				    inventory.take(closet.get(4));
-				    inventory.take(closet.get(5));
-				    closet.get(3).changeStatus();
-				    closet.get(3).changeDescript("A spiffy hoody. You have already taken everything in the pockets.");
-				}
-			    }
-			    else if (c2 == 2){System.out.println("\nNothing interesting. Just some old clothes you plan to donate");}
-			    else if (c2 == 3){
-				System.out.println(closet.get(7).getDescript());
-				if (closet.get(7).getStatus() == false){
-				    System.out.println("\nYou find an index card with four colored dots: Red, Blue, Green, and Purple");
-				    inventory.take(closet.get(6));
-				    closet.get(7).changeStatus();
-				    closet.get(7).changeDescript("Some old books. That's all");
-				}
-			    }
-			    else if (c2 == 4){
-				System.out.println(closet.get(2).getDescript());
-				if (closet.get(2).getStatus() == false){
-				    System.out.println("\nYou find a screwdriver and some paper clips");
-				    inventory.take(closet.get(0));
-				    inventory.take(closet.get(1));
-				    closet.get(2).changeStatus();
-				}
-			    }
-			    else if (c2 == 5){i2 = 1;}
-			    else{System.out.println(msg);}
-			}
-		    }
-		}
-		else if (c == 2){
-		    System.out.println("The door is stuck.");
-		}
-		else if (c == 3){
-		    i = 1;
-		}
-		else{
-		    System.out.println(msg);
-		}
-	    }
-	}
-	if(thing.equals(room.get(8))){
-	    i = 0;
-	    while (i != 1){
-		c = this.AskUserI("\n[1]Open door\n[2]Don't need the toilet right now\n");
-		if (c == 1){
-		    System.out.println("\nYou have entered the bathroom. There is a medicine cabinet above the sink and a rug at your feet.");
-		    int i2 = 0;
-		    while (i2 != 1){
-			int c2 = this.AskUserI("\n[1]Open medicine cabinet doors\n[2]Turn on faucet\n[3]Lift rug\n[4]Leave bathroom");
-			if (c2 == 1){
-			    System.out.println("You see a little metal box, a bunch of toothpaste, and various medicine");
-			    int i3 = 0;
-			    while (i3 != 1){
-				int c3 = this.AskUserI("\n[1]Open metal box\n[2]Close medicine cabinet door");
-				if (c3 == 1){
-				    System.out.println(bathroom.get(0).getDescript());
-				    if (bathroom.get(0).getStatus() == false){	 
-					if (bathroom.get(0).toUse(inventory.find(equip), "You have unlocked the box using the paperclips! You find forceps and a Green index card with the number 9") == true){    
-					    inventory.take(bathroom.get(1));
-					    inventory.take(bathroom.get(2));
-					}
-				    }
-				}
-				else if (c3 == 2){
-				    i3 = 1;
-				}
-			    }
-			}
-			else if (c2 == 2){
-			    System.out.println(bathroom.get(5).getDescript());
-			    if (bathroom.get(5).getStatus() == false){
-				if (bathroom.get(5).toUse(inventory.find(equip), "You soaked the tissues in the water.") == true){
-				    inventory.find(equip).setName(inventory.find(equip).getNewForm());
-				}
-			    }
-			}
-			else if (c2 == 3){
-			    System.out.println(bathroom.get(4).getDescript());
-			    if (bathroom.get(4).getStatus() == false){
-				System.out.println("\nYou flip the rug and find a Purple index card with the number 0.\n");
-				inventory.take(bathroom.get(3));
-				bathroom.get(4).changeStatus();
-				bathroom.get(4).changeDescript("\nA fuzzy bathroom rug. There is nothing under it\n");
-			    }
-			}
-			else if (c2 == 4){
-			    System.out.println("\nYou are back in your room");
-			    i2 = 1;
-			}
-			else{
-			    System.out.println(msg);
-			}
-		    }
-		}
-		else if (c == 2){
-		    i = 1;
-		}
-		else{
-		    System.out.println(msg);
-		}
-	    }
-	}
-	if(thing.equals(room.get(9))){
-	    i = 0;
-	    while (i != 1){
-		c = this.AskUserI("\n[1]Check vent\n[2]Who cares?\n");
-		if (c == 1){
-		    System.out.println(room.get(14).getDescript());
-		    if (room.get(14).getStatus() == false){
-			if (room.get(14).toUse(inventory.find(equip), "You used the Phillips screwdriver to unscrew the cover.\nYou find a key and an apple inside.") == true){
-			    inventory.take(room.get(17));
-			    inventory.take(room.get(21));
-			}	        
-		    }
-		}
-		else if (c == 2){
-		    i = 1;
-		}
-		else{
-		    System.out.println(msg);
-		}
-	    }
-	}
-    }
 
     //allows player to choose two items to combine
     //if player chooses a valid object from inventory,

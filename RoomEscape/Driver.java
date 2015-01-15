@@ -56,7 +56,7 @@ public class Driver{
 			    int c = d.AskUser("[1]Inspect further, [2]Move on\n");
 			    switch(c){
 			    case 1:
-				g.interact(g.getRoom().get(inspect));
+				g.interact(g.getRoom().get(inspect).getName());
 				i2 = 1;
 				break;
 			    case 2:
@@ -83,7 +83,7 @@ public class Driver{
 		while (c != 4){
 		    System.out.println(stuff + "\n");
 		    c = d.AskUser("\n[1]Inspect an item, [2]Combine items, [3]Equip items, [4]Exit Inventory\n");
-		    switch(r){
+		    switch(c){
 		    case 1:
 			int choice = d.AskUser("\nWhich item would you like to inspect?\n");
 			try{
