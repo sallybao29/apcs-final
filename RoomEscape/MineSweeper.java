@@ -3,13 +3,13 @@ import java.util.*;
 public class MineSweeper {
     private String[][] board = new String[9][9];
     private String[][] ans = new String[9][9];
-    private boolean[][] show = new boolean[9][9];
+    private boolean[][] show = new boolean[9][9]; //tracks squares user has checked
     private boolean solved = false;
     private boolean quit = false;
     private boolean skip = false;
     private boolean lost = false;
-    private int mineNum = 5;
-    private int adjacent = 0;
+    private int mineNum = 5; //difficulty level based on number of mines
+    private int adjacent = 0; //number of mines nearby
 	
     public void setMineNum(int n){
 	mineNum = n;
@@ -36,7 +36,8 @@ public class MineSweeper {
 	for (int i = 0; i < board.length; i++) {
 	    for (int j = 0; j < board[i].length; j++) {
 		if (board[i][j] == null){
-					
+			
+		    //count number of mines nearby		
 		    hintHelper(i,j+1);
 		    hintHelper(i,j-1);
 		    hintHelper(i-1,j);
@@ -114,6 +115,8 @@ public class MineSweeper {
 	    }
 			
 	    show[choicex][choicey] = true;
+	    
+	    //if mine found
 	    if (ans[choicex][choicey] == "*"){
 		lost = true;
 	    }
