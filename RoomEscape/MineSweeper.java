@@ -122,8 +122,17 @@ public class MineSweeper {
 	    }
 	}
 	if (lost == true){
-	    System.out.println("Final Board: \n" + toString());
-	    System.out.println("Sorry, you have lost!");
+	    System.out.println("\nFinal Board: \n" + toString());
+	    System.out.println("\nSorry, you have lost!");
+	}
+	else if (quit == true){
+	    System.out.println("\nOh well. You'll still try again later, right?");
+	}
+	else if (skip == true){
+	    System.out.println("\nWHAT? You've skipped? But you're so close!");
+	}
+	else{
+	    System.out.println("\nYay, you've won! Good job clearing the field.");
 	}
     }
 		 
