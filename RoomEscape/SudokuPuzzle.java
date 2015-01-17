@@ -1,112 +1,140 @@
 import java.util.*;
 
-public class SudokuPuzzle{
-    private int[][] board = new int[9][9];
-    private int[][] ans = new int[9][9];
+public class MineSweeper {
+    private String[][] board = new String[9][9];
+    private String[][] ans = new String[9][9];
+    private boolean[][] show = new boolean[9][9];
     private boolean solved = false;
     private boolean quit = false;
-    private int[][] sections = new int[9][9];
-    private int[][] rows = new int[9][9];
-    private int[][] columns = new int[9][9];
-    private int s;
-    private int[] upTo = new int[9];
-
+    private boolean skip = false;
+    private boolean lost = false;
+    private int mineNum = 5;
+    private int adjacent = 0;
+	
+    public void setMineNum(int n){
+	mineNum = n;
+    }
+	
     public void generateGame(){
-	Random r = new Random();
-	int j = 0;
-	int c;
-	for (int i = 0; i < 9; i++){
-	    while (j < 9){
-		//System.out.println( i + "," + j);
-		c = r.nextInt(9) + 1;
-		if (possible(c,i,j)){
-
-		    // add to board
-		    board[i][j] = c;
-
-		    // keeping track... 
-		    rows[i][j] = c;
-		    columns[j][i] = c;
-
-		    sections[s][upTo[s]] = c;
-
-		    upTo[s] += 1;
-
-		    j += 1;
-		}
-	    } 
-	    upTo[s] = 0;
-	    j = 0;
-	}
-    }
-
-    public boolean possible(int num, int r, int c){
-	//checking row
-	for (int i = 0; i < 9; i++){
-	    if (rows[r][i] == num){
-		return false;
+	//set up mines
+	int r, c;
+	int prevAdj = -1;
+		
+	Random rand = new Random();
+		
+	while (mineNum > 0){
+	    r = rand.nextInt(9);
+	    c = rand.nextInt(9);
+			
+	    if (board[r][c] == null){
+		board[r][c] = "*";
+		mineNum -= 1;
 	    }
 	}
-
-	//checking columns
-	for (int i = 0; i < 9; i++){
-	    if (columns[c][i] == num){
-		return false;
-	    }
-	}
-
-	//checking 3 by 3 sections
-	s = findsection(r, c);
-
-	for (int i = 0; i < 9; i++){
-	    if (sections[s][i] == num){
-		return false;
-	    }
-	}
-
-	return true;
-    }
-
-    public int findsection(int r,int c){
-	if (r < 3){
-	    if (c < 3){return 0;}
-	    else if (c < 6){return 1;}
-	    else {return 2;}
-	}
-	else if (r < 6){
-	    if (c < 3){return 3;}
-	    else if (c < 6){return 4;}
-	    else {return 5;}
-	}
-	else{
-	    if (c < 3){return 6;}
-	    else if (c < 6){return 7;}
-	    else {return 8;}
-	}
-    }
-
-    public void showBoard(){
-	String ret = "";
-
-	for (int i = 0; i < 9; i++){
-	    for (int j = 0; j < 9; j++){
-		ret += board[i][j];
-		if (j == 2 || j == 5){
-		    ret += "|";
+		
+	//set up number hints
+	for (int i = 0; i < board.length; i++) {
+	    for (int j = 0; j < board[i].length; j++) {
+		if (board[i][j] == null){
+					
+		    hintHelper(i,j+1);
+		    hintHelper(i,j-1);
+		    hintHelper(i-1,j);
+		    hintHelper(i+1,j);
+		    hintHelper(i-1,j-1);
+		    hintHelper(i-1,j+1);
+		    hintHelper(i+1,j-1);
+		    hintHelper(i+1,j+1);
+					
+		    if (adjacent == 0){
+			board[i][j] = " ";
+		    }
+		    else{
+			board[i][j] = "" + adjacent;
+			adjacent = 0;
+		    }
 		}
 	    }
-	    ret += "\n";
-	    if (i == 2 || i == 5){
-		ret += "---+---+---\n";
+	}
+	ans = board;
+    }
+	
+    public void hintHelper(int a, int b){
+	try{
+	    if (board[a][b] == "*"){
+		adjacent += 1;
 	    }
 	}
-
-	System.out.println(ret);
+	catch(Exception e){
+	}
     }
-
+	
+    public String ansToString(){
+	String s = "-------------------------------------\n";
+	for (int i = 0; i < ans.length; i++) {
+	    for (int j = 0; j < ans[i].length; j++) {
+		s = s + "| " + ans[i][j] + " ";
+	    }
+	    s = s + "|\n-------------------------------------\n";
+	}
+	return s;
+    }
+	
+    public String toString(){
+	String s = "-------------------------------------\n";
+	for (int i = 0; i < board.length; i++) {
+	    for (int j = 0; j < board[i].length; j++) {
+		if (show[i][j] == true){
+		    s = s + "| " + board[i][j] + " ";
+		}
+		else{
+		    s += "|:::";
+		}
+	    }
+	    s = s + "|\n-------------------------------------\n";
+	}
+	return s;
+    }
+	
+    public void userInteract(){
+	while (solved == false && lost == false && quit == false && skip == false){
+	    System.out.println("Current Board: \n" + toString());
+	    String c = this.AskUser("x-coordinate, y-coordinate (or skip, or quit): ");
+	    int choicex = Integer.parseInt(c.substring(0,1));
+	    int choicey = Integer.parseInt(c.substring(2,3));
+			
+	    // allows the user to temporarily quit the puzzle
+	    if (c.equals("quit")){
+		quit = true;
+	    }
+			
+	    // allows the user to permanently skip the puzzle
+	    else if (c.equals("skip")){
+		skip = true;
+	    }
+			
+	    show[choicex][choicey] = true;
+	    if (ans[choicex][choicey] == "*"){
+		lost = true;
+	    }
+	}
+	if (lost == true){
+	    System.out.println("Final Board: \n" + toString());
+	    System.out.println("Sorry, you have lost!");
+	}
+    }
+		 
+    public String AskUser(String mToUser){
+	String s = "";
+	Scanner sc = new Scanner(System.in);
+	System.out.print(mToUser);
+	s = sc.nextLine();
+	return s;
+    }
+	
     public static void main(String[] args){
-	SudokuPuzzle s = new SudokuPuzzle();
-	s.generateGame();
-	s.showBoard();
+    	MineSweeper d = new MineSweeper();
+    	d.generateGame();
+    	d.userInteract();
     }
 }
