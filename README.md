@@ -55,4 +55,6 @@ Log
 
 -1/10/15 - Implemented point system. Added option to skip puzzles. - Sally 
 
--1/11/15 - Continued working on the Sudoku Puzzle (for the last door) - Tiffany
+-1/11/15 - Continued working on puzzle for the last door - Tiffany
+
+-1/17/15 - Changed puzzle for last door into MineSweeper. Basic MineSweeper working. - Tiffany
