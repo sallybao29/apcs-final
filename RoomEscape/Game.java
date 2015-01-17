@@ -260,7 +260,12 @@ public class Game{
 	    System.out.println("\nYou are at Door " + stage + "\n" + room.get(stage + 30).getDescript()); 
 	    int c = this.AskUserI("\nTry to solve the puzzle?\n[1]Yes\n[2]No\n");
 	    if (c == 1){
-		if (((Puzzle)room.get(stage + 30)).getSolved() == false){
+	    	if (stage == 5){
+	    	    MineSweeper m = new mineSweeper();
+	    	    m.generateGame();
+	    	    m.userInteract();
+	    	}
+		else if (((Puzzle)room.get(stage + 30)).getSolved() == false){
 		    if (stage == 3 && checkComp() == false){
 			System.out.println("\nIt looks like you'll have to fill the compartments first.");
 			fillComp();
