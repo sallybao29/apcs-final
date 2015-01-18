@@ -58,3 +58,5 @@ Log
 -1/11/15 - Continued working on puzzle for the last door - Tiffany
 
 -1/17/15 - Changed puzzle for last door into MineSweeper. Basic MineSweeper working. - Tiffany
+
+-1/17/15 - Fixed EightGamePuzzle bug. - Sally
