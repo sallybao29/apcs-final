@@ -60,3 +60,5 @@ Log
 -1/17/15 - Changed puzzle for last door into MineSweeper. Basic MineSweeper working. - Tiffany
 
 -1/17/15 - Fixed EightGamePuzzle bug. - Sally
+
+-1/18/15 - Labeled grid added to Minesweeper. Most of the connected empty squares along with most of their bordering hints appear when the user chooses an empty square connected to others. - Tiffany
