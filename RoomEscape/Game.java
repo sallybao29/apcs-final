@@ -49,9 +49,9 @@ public class Game{
 
 	/*------------------------------ Notes  -----------------------------------------*/
 	room.add(new Item("Note for Door 1", "\nI carry the world between my covers\nYou carry me between your hands\nOf letters I have many\nOf pages I have none\n", true));   //23
-	room.add(new Item("Note for Door 2", "Come on, you don't need a hint for something so simple", true)); //24
+	room.add(new Item("Note for Door 2", "The answer lies within four cards", true)); //24
 	room.add(new Item("Note for Door 3", "\nHidden flower\nForbidden fruit\nConvenient tool\nInstructive mute\n", true)); //25
-	room.add(new Item("Note for Door 4", "Did you mean: nag a ram?", true)); //26
+	room.add(new Item("Note for Door 4", "\nFind the clues between white sleeves\nThough in their form, they may decieve\nForsake the ones that cannot be\nAnd in the end there will be three\n\n", true)); //26
 	room.add(new Item("Note for Door 5", "Note", true)); //27
 	
 	room.add(new Item("Acid", "A nice bottle of 100% Hydrochloric Acid", true));  //28
@@ -90,11 +90,11 @@ public class Game{
 	/*------------------------------ The Bookshelf -----------------------------------------*/
 	
 	bookshelf.add(new Item("For the Love of Physics", "\nFrom the End of the Rainbow to the Edge of Time\nA Journey Through\nthe Wonders of Physics\nThe title page has been ripped out. The words 'sincere man' are scrawled across the first page\n", false));  //0
-	bookshelf.add(new Item("The Oedipus Cycle", "\nThe ancient myth of Oedipus, which still reverberates\nto this day, provided Sophocles with material for three\ngrea tragedies <i>Oedipus Rex, Oedipus at Colonus</i> and <i>Antigone</i> that\ntogether show how nobles are outragously lab, by\nrecounting the downfall of Oedipus, king of Thebes, his\ndeath in exile, and the action carried out after his death by his\ndaughter Antigone.\n", true));  //1
+	bookshelf.add(new Item("The Oedipus Cycle", "\nThe ancient myth of Oedipus, which still reverberates\nto this day, provided Sophocles with material for three\ngrea tragedies Oedipus Rex, Oedipus at Colonus and Antigone that\ntogether show how nobles are outragously lab, by\nrecounting the downfall of Oedipus, king of Thebes, his\ndeath in exile, and the action carried out after his death by his\ndaughter Antigone.\n", true));  //1
 	bookshelf.add(new Item("Principles of Quantum Mechanics", "It's full of equations and greek letters\n", true)); //3
 	bookshelf.add(new Item("Hamlet", "Readers have for the first time, a unique\nopportunity to study the three surviving texts of Hamlet\nexperienced by Shakespeare's contemporaries, fully\nmodernized and edited by leading scholars.\n", true));  //4
-	bookshelf.add(new Item("Philosophiae Naturalis Principia Mathematica", "\nRational Mechanics will be the science of motions resulting\nfrom any forces whatsoever, and of the forces\nrequired to produce any motions, accurately proposed\nand demonstrated. And therefore we offer this work\nas mathematical principles of philosophy. For all the\ndifficulty of philosophy seems to consist in this: from the\nphenomena of motions to investigate the forces of\n<i>cat pain</i>, and then from these forces to\ndemonstrate the other phenomena.\n", true));  //5
-	bookshelf.add(new Item("How to Beat this Game", "\nStop reading this and get to work.\n", true));  //6
+	bookshelf.add(new Item("Philosophiae Naturalis Principia Mathematica", "\nRational Mechanics will be the science of motions resulting\nfrom any forces whatsoever, and of the forces\nrequired to produce any motions, accurately proposed\nand demonstrated. And therefore we offer this work\nas mathematical principles of philosophy. For all the\ndifficulty of philosophy seems to consist in this: from the\nphenomena of motions to investigate the forces of\ncat pain, and then from these forces to\ndemonstrate the other phenomena.\n", true));  //5
+	bookshelf.add(new Item("How to Beat this Game", "\nStop reading this and take your mime.\n", true));  //6
 
 	room.get(7).setCompat("Acid");      //Closet
 	room.get(11).setNDescript("An emacs file is open. There is a piece of code on it:\n\nRandom r = new Random();\ndouble stress = r.nextDouble();\nboolean codeWorks = (r.nextInt(2) == 1);\npublic void writeCode()\n\tif (codeWorks){\n\t\tSystem.out.println(\"I am a GOD\");\n\t}\n\telse{\n\t\tif (stress > 0.7){\n\t\t\tsystem.out.println(\"RAGE QUIT\")\n\t\t\tSystem.exit(0);\n\t\t}\n\t\tcry();\n\t}\n}\n\nWhat could it mean?");   //Laptop
@@ -259,9 +259,10 @@ public class Game{
 	while (i != 1 && stage < 6){
 	    System.out.println("\nYou are at Door " + stage + "\n" + room.get(stage + 30).getDescript()); 
 	    int c = this.AskUserI("\nTry to solve the puzzle?\n[1]Yes\n[2]No\n");
-	    if (c == 1){
+	    switch (c){
+	    case 1:
 	    	if (stage == 5){
-	    	    MineSweeper m = new mineSweeper();
+	    	    MineSweeper m = new MineSweeper();
 	    	    m.generateGame();
 	    	    m.userInteract();
 	    	}
@@ -282,11 +283,10 @@ public class Game{
 			}
 		    }
 		}
-	    }
-	    else if (c == 2){
-		i = 1;
-	    }
-	    else {
+		break;
+	    case 2:
+		i = 1; break;
+	    default:
 		System.out.println(msg);
 	    }
 	}
@@ -460,18 +460,18 @@ public class Game{
 	    case 1:
 		System.out.println("\nYou find your student metrocard, your student ID, your phone, and a few TicTacs");
 		i2 = 0;
-		if (room.get(20).getStatus() == false){
-		    option = "\n[1]Inspect phone, [2]Take the Tictacs, [3]Eh, I'll move on\n";
-		}
-		else {
-		    option = "\n[1]Dig deeper, [2]Take the Tictacs, [3]Eh, I'll move on\n";
-		}
 		while (i2 != 1){
+		    if (room.get(20).getStatus() == false){
+			option = "\n[1]Inspect phone, [2]Take the Tictacs, [3]Eh, I'll move on\n";
+		    }
+		    else {
+			option = "\n[1]Dig deeper, [2]Take the Tictacs, [3]Eh, I'll move on\n";
+		    }
 		    c2 = this.AskUserI(option);
 		    switch(c2){
 		    case 1:
 			if (room.get(20).getStatus() ==  true){
-			    System.out.println("You can't look any further");
+			    System.out.println("\nThere is lint and a moldy sandwich at the bottom. You regret looking.");
 			}
 			else {
 			    playEightGame();
@@ -601,7 +601,7 @@ public class Game{
 	    c = this.AskUserI("\n[1]Inspect poster\n[2]Flip poster\n[3]Leave it\n");
 	    switch(c){
 	    case 1:
-		System.out.println("Something");
+		System.out.println("It is a poster of the periodic table of elements.");
 		break;
 	    case 2:     
 		System.out.println("\nThere's a safe behind the poster!");
@@ -846,6 +846,26 @@ public class Game{
 		System.out.println(msg);
 	    }
 	}
+    }
+
+    public String finalGrade(){
+	String letter = "";
+	if (grade < 65){
+	    letter = "F";
+	}
+	else if (grade < 75){
+	    letter = "D";
+	}
+	else if (grade < 85){
+	    letter = "C";
+	}
+	else if (grade < 95){
+	    letter = "B";
+	}
+	else{
+	    letter = "A";
+	}
+	return letter;
     }
   
     //used for Puzzles

@@ -19,14 +19,15 @@ public class EightGamePuzzle{
 
     public void generateGame(int numScram){
     	//creates the unscrambled board that every random board given to the user is based on
+	//creates answer which is unscrambled board
 	int current = 0;
 	for (int i = 0; i < board.length; i++) {
 	    for (int j = 0; j < board[i].length; j++) {
 		board[i][j] = current;
+		ans[i][j] = current;
 		current += 1;
 	    }
 	}
-	ans = board; //sets the unscrambled board as the answer to the puzzle
 	boardScrambler(numScram); //scrambles the board for every new play
     }
 
@@ -162,7 +163,7 @@ public class EightGamePuzzle{
     }
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~Testing~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    /*
+
     public static void main(String[] args){
 	EightGamePuzzle p = new EightGamePuzzle();
 	p.generateGame(5);
@@ -171,6 +172,6 @@ public class EightGamePuzzle{
 	    System.out.println("done"); 
 	}
     }
-    */
+
     
 }
