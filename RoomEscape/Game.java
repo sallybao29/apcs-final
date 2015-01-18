@@ -867,6 +867,22 @@ public class Game{
 	}
 	return letter;
     }
+
+    public void Scenario(){
+	String g = finalGrade();
+	switch(g){
+	case "A":
+	    break;
+	case "B":
+	    break;
+
+	case "C":
+	    break;
+	case "D":
+	    break;
+	case "F":
+	}
+    }
   
     //used for Puzzles
     public String AskUserS(String mToUser){
