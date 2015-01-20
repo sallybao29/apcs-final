@@ -100,6 +100,7 @@ public class EightGamePuzzle{
 	    // allows the user to permanently skip the puzzle
 	    else if (c.equals("skip")){
 		skip = true;
+		solve = true;
 	    }
 	    
 	    //board movements

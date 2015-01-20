@@ -49,10 +49,10 @@ public class Game{
 
 	/*------------------------------ Notes  -----------------------------------------*/
 	room.add(new Item("Note for Door 1", "\nI carry the world between my covers\nYou carry me between your hands\nOf letters I have many\nOf pages I have none\n", true));   //23
-	room.add(new Item("Note for Door 2", "The answer lies within four cards", true)); //24
+	room.add(new Item("Note for Door 2", "The answer lies within four cards\n", true)); //24
 	room.add(new Item("Note for Door 3", "\nHidden flower\nForbidden fruit\nConvenient tool\nInstructive mute\n", true)); //25
 	room.add(new Item("Note for Door 4", "\nFind the clues between white sleeves\nThough in their form, they may decieve\nForsake the ones that cannot be\nAnd in the end there will be three\n\nReplace the three where spaces lie\nBeware that rules may not apply\nTake the first of each and try\nTo solve the door or, failing, cry\n\n", true)); //26
-	room.add(new Item("Note for Door 5", "Note", true)); //27
+	room.add(new Item("Note for Door 5", "\nWhat kind of person doesn't know how to play MineSweeper?\nFlip all the tiles while avoiding the mines\nThe numbers in each tile give hints about the number of mines in that tile's neighborhood.\nHave fun. Lol not really.\n", true)); //27
 	
 	room.add(new Item("Acid", "A nice bottle of 100% Hydrochloric Acid", true));  //28
 	room.add(new Item("Blue Index Card", "A blue index card with the number 8", true)); //29
@@ -62,7 +62,7 @@ public class Game{
 	
 	room.add(new Puzzle("Door1", "A high-tech metal door. Gears and rivets run down its center.\nThere is no handle.\n", "1238359", "The password lights up in green and a confirming beep is heard.\nThe gears on the door spin rapidly, and the two sides part."));  //31
 	room.add(new Puzzle("Door2", "The sign on the door reads 'Color Code'.\n", "6890", "\nThe door slides upwards, revealing...?!\n"));  //32
-	room.add(new Puzzle("Door3", "A large set of imposing, stone doors.\nThere are graphic images carved onto its surface of people being impaled and defenestrated.\nFour small compartments rest at the foot of the door.\n", "Newton", "Without warning, the doors come crashing down. You manage to jump out of the way just they impact the floor and shatter into a milion pieces."));  //33
+	room.add(new Puzzle("Door3", "A large set of imposing, stone doors.\nThere are graphic images carved onto its surface of people being impaled and defenestrated.\nFour small compartments rest at the foot of the door.\n", "Newton", "Without warning, the doors come crashing down. You manage to jump out of the way just they impact the floor and shatter into a million pieces."));  //33
 	room.add(new Puzzle("Door4", "The door is divided into four separate sections that fit together like puzzle pieces. Mounted at their intersection is a shiny interface that displays some text:\n\nCaptain: What happen?\nMechanic: Somebody set up us the bomb.\nOperator: We get signal.\nCaptain: What!\nOperator: ---- ------ turn on.\nCaptain: It's you!!\nCATS: How are you gentlemen!!\nCATS: --- ---- ---- --- ------ -- --\nCATS: You are on the way to destruction.\nCaptain: What you say!!\nCATS: You have no chance to survive make your time.\nCATS: Ha ha ha ha...\nOperator: -------!!\nCaptain: Take off every 'ZIG'!!\nCaptain: You know what you doing.\nCaptain: Move 'ZIG'.\nCaptain: For great justice.\n\n", "Mac", "You easily slide the door open."));  //34
 	room.add(new Puzzle("Door5", "A door with random math symbols carved into it.\n", "", "You hear a click and slowly slide the door open."));  //35
 
@@ -90,7 +90,7 @@ public class Game{
 	/*------------------------------ The Bookshelf -----------------------------------------*/
 	
 	bookshelf.add(new Item("For the Love of Physics", "\nFrom the End of the Rainbow to the Edge of Time\nA Journey Through\nthe Wonders of Physics\nThe title page has been ripped out. The words 'sincere man' are scrawled across the first page\n", false));  //0
-	bookshelf.add(new Item("The Oedipus Cycle", "\nThe ancient myth of Oedipus, which still reverberates\nto this day, provided Sophocles with material for three\ngrea tragedies Oedipus Rex, Oedipus at Colonus and Antigone that\ntogether show how nobles are outragously lab, by\nrecounting the downfall of Oedipus, king of Thebes, his\ndeath in exile, and the action carried out after his death by his\ndaughter Antigone.\n", true));  //1
+	bookshelf.add(new Item("The Oedipus Cycle", "\nThe ancient myth of Oedipus, which still reverberates\nto this day, provided Sophocles with material for three\ngrea tragedies Oedipus Rex, Oedipus at Colonus and Antigone that\ntogether show how 'nobles are outrageously lab', by\nrecounting the downfall of Oedipus, king of Thebes, his\ndeath in exile, and the action carried out after his death by his\ndaughter Antigone.\n", true));  //1
 	bookshelf.add(new Item("Principles of Quantum Mechanics", "It's full of equations and greek letters\n", true)); //3
 	bookshelf.add(new Item("Hamlet", "Readers have for the first time, a unique\nopportunity to study the three surviving texts of Hamlet\nexperienced by Shakespeare's contemporaries, fully\nmodernized and edited by leading scholars.\n", true));  //4
 	bookshelf.add(new Item("Philosophiae Naturalis Principia Mathematica", "\nRational Mechanics will be the science of motions resulting\nfrom any forces whatsoever, and of the forces\nrequired to produce any motions, accurately proposed\nand demonstrated. And therefore we offer this work\nas mathematical principles of philosophy. For all the\ndifficulty of philosophy seems to consist in this: from the\nphenomena of motions to investigate the forces of\ncat pain, and then from these forces to\ndemonstrate the other phenomena.\n", true));  //5
@@ -176,6 +176,7 @@ public class Game{
 	int choice = ((Puzzle)room.get(num)).check(ans);
 	if (choice == 2){
 	    grade += sgrade;
+	    wait(2000);
 	}
 	else if(choice == 3){
 	    grade += fgrade;
@@ -258,7 +259,7 @@ public class Game{
 	String ans;
 	while (i != 1 && stage < 6){
 	    System.out.println("\nYou are at Door " + stage + "\n" + room.get(stage + 30).getDescript()); 
-	    int c = this.AskUserI("\nTry to solve the puzzle?\n[1]Yes\n[2]No\n");
+	    int c = this.AskUserI("\nTry to solve the puzzle?\n[1]Yes\n[2]Skip\n[3]No\n");
 	    switch (c){
 	    case 1:
 	    	if (stage == 5){
@@ -276,7 +277,7 @@ public class Game{
 			wait(1000);
 		        if (evaluate(stage + 30, ans) == true){
 			    if (stage < 5){
-				wait(2000);
+				wait(3000);
 				System.out.println("\nAlas, there is another door behind it\n");
 			    }
 			    stage++;
@@ -285,6 +286,11 @@ public class Game{
 		}
 		break;
 	    case 2:
+		System.out.println("A Puzzle of this level? Do you even try?");
+		evaluate(stage + 30, "skip");
+		stage++;
+		break;
+	    case 3:
 		i = 1; break;
 	    default:
 		System.out.println(msg);
@@ -888,7 +894,7 @@ public class Game{
 	    System.out.println("Dost thou not feel ashamed for displaying such delinquency?");
 	    break;
 	case "F":
-	    System.out.println("Son, you have failed for the final time. Forsake thy name and returneth from whence thy came.");
+	    System.out.println("Son, you have failed for the final time. Forsake thy name and returneth from whence thou came.");
 	}
     }
 
