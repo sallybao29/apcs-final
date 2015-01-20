@@ -51,7 +51,7 @@ public class Game{
 	room.add(new Item("Note for Door 1", "\nI carry the world between my covers\nYou carry me between your hands\nOf letters I have many\nOf pages I have none\n", true));   //23
 	room.add(new Item("Note for Door 2", "The answer lies within four cards", true)); //24
 	room.add(new Item("Note for Door 3", "\nHidden flower\nForbidden fruit\nConvenient tool\nInstructive mute\n", true)); //25
-	room.add(new Item("Note for Door 4", "\nFind the clues between white sleeves\nThough in their form, they may decieve\nForsake the ones that cannot be\nAnd in the end there will be three\n\n", true)); //26
+	room.add(new Item("Note for Door 4", "\nFind the clues between white sleeves\nThough in their form, they may decieve\nForsake the ones that cannot be\nAnd in the end there will be three\n\nReplace the three where spaces lie\nBeware that rules may not apply\nTake the first of each and try\nTo solve the door or, failing, cry\n\n", true)); //26
 	room.add(new Item("Note for Door 5", "Note", true)); //27
 	
 	room.add(new Item("Acid", "A nice bottle of 100% Hydrochloric Acid", true));  //28
@@ -870,19 +870,28 @@ public class Game{
 
     public void Scenario(){
 	String g = finalGrade();
+	System.out.println("Compiling score report...");
+	wait(3000);
+	System.out.println("You got a " + g);
+	wait(2000);
 	switch(g){
 	case "A":
+	    System.out.println("What an average grade. Well, it is adequate for now.");
 	    break;
 	case "B":
+	    System.out.println("You have proven yourself a base and below par student, but we will accept you back, as you have just barely passed.");
 	    break;
-
 	case "C":
+	    System.out.println("A catastrophic grade! Why do you even bother coming back?");
 	    break;
 	case "D":
+	    System.out.println("Dost thou not feel ashamed for displaying such delinquency?");
 	    break;
 	case "F":
+	    System.out.println("Son, you have failed for the final time. Forsake thy name and returneth from whence thy came.");
 	}
     }
+
   
     //used for Puzzles
     public String AskUserS(String mToUser){

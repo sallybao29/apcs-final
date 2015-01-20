@@ -115,6 +115,7 @@ public class Driver{
 	}
 	else{
 	    System.out.println("Yes! You're finally free!");
+	    g.Scenario();
 	}
     }
 
