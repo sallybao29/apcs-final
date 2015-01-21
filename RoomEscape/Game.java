@@ -429,8 +429,8 @@ public class Game{
 		System.out.println("\nEver played the 8-Game Puzzle? Here are the directions: \n   Your goal is to get the numbers to be in order from 0 to 9 \n   (with 0-2 in the first row, 3-5 in the second, and 6-8 in the third) \n   by moving the zero in any of the four directions \n   (left, up, right, down). Let's go! :)");
 		eightGame = new EightGamePuzzle();
 		eightGame.generateGame(5);
-		boolean solved = eightGame.userSteps();
-		if (solved == true){
+		boolean won = eightGame.userSteps();
+		if (won == true){
 		    System.out.println("\n\n You see a Red 6.");
 		    room.get(20).changeStatus();
 		    room.get(20).changeDescript("\nA phone displaying a Red 6");

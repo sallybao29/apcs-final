@@ -99,8 +99,8 @@ public class EightGamePuzzle{
 	    
 	    // allows the user to permanently skip the puzzle
 	    else if (c.equals("skip")){
+	        solved = true;
 		skip = true;
-		solve = true;
 	    }
 	    
 	    //board movements
@@ -132,11 +132,11 @@ public class EightGamePuzzle{
 		System.out.println("Invalid Move. Please try again.");
 	    }
 	}
-	if (solved == true){
-	    System.out.println("\nCongrats! :) You have unlocked your phone!");
-	}
-	else if (skip == true){
+	if (skip == true){
 	    System.out.println("\n:( You skipped? Oh well... Your phone is unlocked anyways.");
+	}
+	else if (solved == true){
+	    System.out.println("\nCongrats! :) You have unlocked your phone!");
 	}
 	else if (quit == true){
 	    System.out.println("\nSeriously? You've quit already? :(");
