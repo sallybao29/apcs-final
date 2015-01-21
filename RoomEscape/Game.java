@@ -294,7 +294,7 @@ public class Game{
 		}
 		break;
 	    case 2:
-		System.out.println("A Puzzle of this level? Do you even try?");
+		System.out.println("\nA Puzzle of this level? Do you even try?");
 		evaluate(stage + 30, "skip");
 		stage++;
 		break;
@@ -365,7 +365,7 @@ public class Game{
 	    case 3:
 		System.out.println("\nA colony of dust bunnies is thriving under the bed");
 		if (room.get(0).getStatus() == false){
-		    System.out.println("There seems to be a piece of paper in the corner");
+		    System.out.println("\nThere seems to be a piece of paper in the corner");
 		    if (room.get(0).toUse(inventory.find(equip), "You used the forceps to grab the paper") == true){
 			inventory.take(room.get(25));
 		    }
@@ -533,7 +533,7 @@ public class Game{
 		    room.get(3).changeDescript("An ugly Pikachu rug");
 		}
 		else {
-		    System.out.println("How disappointing. There's nothing under it");
+		    System.out.println("\nHow disappointing. There's nothing under it");
 		}
 		break;
 	    case 2:
@@ -632,7 +632,7 @@ public class Game{
 		    String ans  = this.AskUserS("\nEnter password: ");
 		    wait(1000);
 		    if (evaluate(22, ans) == true){
-			System.out.println("You find a bottle of acid in the safe");
+			System.out.println("\nYou find a bottle of acid in the safe");
 			inventory.take(room.get(28));
 		    }
 		}		   
@@ -700,7 +700,7 @@ public class Game{
 		}
 		break;
 	    case 2:
-		System.out.println("The door is stuck.");
+		System.out.println("\nThe door is stuck.");
 		break;
 	    case 3:
 		i = 1;
@@ -843,7 +843,7 @@ public class Game{
 	int c;
 	while (i != 1){
 	    if (equip.equals("None")){
-		System.out.println("Nothing is equipped");
+		System.out.println("\nNothing is equipped");
 	    }
 	    else {
 		System.out.println("Currently Equipped: " + equip);
