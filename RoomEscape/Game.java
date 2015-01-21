@@ -924,4 +924,12 @@ public class Game{
 	    return -1;
 	}
     }
+
+    public static void main(String[] args){
+	String s = "";
+	for(int i = 128;i < 255;i++){
+	    s += i + ": " + (char)i + "\n";
+	}
+	System.out.println(s);
+    }
 }
