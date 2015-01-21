@@ -111,10 +111,10 @@ public class Driver{
 	}
 
 	if (endGame){
-	    System.out.println("What?! You Quit? Such a disappointment.");
+	    System.out.println("\nWhat?! You Quit? Such a disappointment.");
 	}
 	else{
-	    System.out.println("Yes! You're finally free!");
+	    System.out.println("\nYes! You're finally free!");
 	    g.Scenario();
 	}
     }
