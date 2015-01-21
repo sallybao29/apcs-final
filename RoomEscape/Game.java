@@ -10,16 +10,17 @@ public class Game{
     private ArrayList<Item> bathroom = new ArrayList<Item>();
     private ArrayList<Item> bookshelf = new ArrayList<Item>();
     private ArrayList<Item> compartment = new ArrayList<Item>();
-    private ArrayList<String> answer = new ArrayList<String>(Arrays.asList("Apple", "Forceps", "Fig", "Philosophiae Naturalis Principia Mathematica"));
+    private ArrayList<String> answer = new ArrayList<String>(Arrays.asList("Apple", "Forceps", "Fig", "Philosophi" + (char)230 + " Naturalis Principia Mathematica"));
     private String msg = "\nPlease enter a valid choice", qsg = "Type 'return' to exit current option", ssg = "Type 'skip' to bypass a puzzle";
     private String equip = "None";
     private int grade = 100, sgrade = -10, fgrade = -1;
+    private String table;
 
     public Game(){   ///Setting up every single item in the room, labeled for convenience
 	gameWon = false;
 	stage = 1;
-	
-	/*------------------------------ The Main Room Stuff -----------------------------------------*/
+	table = makeTable();
+		/*------------------------------ The Main Room Stuff -----------------------------------------*/
 	
 	room.add(new Item("Bed", "Your bed. There's a blanket and a pillow and not much else.", false));        //0
 	room.add(new Item("Desk", "A relatively clean desk with a laptop and a pencil holder on it. It has two drawers.", false));   //1
@@ -27,7 +28,7 @@ public class Game{
 	room.add(new Item("Rug", "A hideous Pikachu rug you bought when you were ten. Maybe there's something under it?", false));  //3
 	room.add(new Item("Trash can", "Something stinks. You haven't taken the trash out for a while.", false));  //4
 	room.add(new Item("Bookshelf", "It's full of test prep books and encyclopedias.", false));  //5
-	room.add(new Item("Poster", "A poster of the periodic table of elements.",false));   //6
+	room.add(new Item("Poster", "A poster of the American Standard Code for Information Interchange",false));   //6
 	room.add(new Item("Closet", "A closet with sliding doors", "A closet with sliding doors. There is a gaping hole on the left door and the burning smell of acid.", false));   //7
 	room.add(new Item("Bathroom door", "The door to the bathroom", false));  //8
 	room.add(new Item("Ceiling", "There's a vent on the ceiling. Even in the dark, something glistens.", false));  //9
@@ -93,7 +94,7 @@ public class Game{
 	bookshelf.add(new Item("The Oedipus Cycle", "\nThe ancient myth of Oedipus, which still reverberates\nto this day, provided Sophocles with material for three\ngrea tragedies Oedipus Rex, Oedipus at Colonus and Antigone that\ntogether show how 'nobles are outrageously lab', by\nrecounting the downfall of Oedipus, king of Thebes, his\ndeath in exile, and the action carried out after his death by his\ndaughter Antigone.\n", true));  //1
 	bookshelf.add(new Item("Principles of Quantum Mechanics", "It's full of equations and greek letters\n", true)); //3
 	bookshelf.add(new Item("Hamlet", "Readers have for the first time, a unique\nopportunity to study the three surviving texts of Hamlet\nexperienced by Shakespeare's contemporaries, fully\nmodernized and edited by leading scholars.\n", true));  //4
-	bookshelf.add(new Item("Philosophiae Naturalis Principia Mathematica", "\nRational Mechanics will be the science of motions resulting\nfrom any forces whatsoever, and of the forces\nrequired to produce any motions, accurately proposed\nand demonstrated. And therefore we offer this work\nas mathematical principles of philosophy. For all the\ndifficulty of philosophy seems to consist in this: from the\nphenomena of motions to investigate the forces of\ncat pain, and then from these forces to\ndemonstrate the other phenomena.\n", true));  //5
+	bookshelf.add(new Item("Philosophi" + (char)230 + " Naturalis Principia Mathematica", "\nRational Mechanics will be the science of motions resulting\nfrom any forces whatsoever, and of the forces\nrequired to produce any motions, accurately proposed\nand demonstrated. And therefore we offer this work\nas mathematical principles of philosophy. For all the\ndifficulty of philosophy seems to consist in this: from the\nphenomena of motions to investigate the forces of\ncat pain, and then from these forces to\ndemonstrate the other phenomena.\n", true));  //5
 	bookshelf.add(new Item("How to Beat this Game", "\nStop reading this and take your mime.\n", true));  //6
 
 	room.get(7).setCompat("Acid");      //Closet
@@ -166,6 +167,13 @@ public class Game{
     }
 
     /*------------------------------------------- GETS AND SETS ---------------------------------------------------*/
+
+    public String makeTable(){
+	for(int i = 33;i < 127;i++){
+	    table += i + ": " + (char)i + "\n";
+	}
+	return table;
+    }
 
 
     //determines whether points should be deducted from player's grade
@@ -316,7 +324,7 @@ public class Game{
 	case "Rug":
 	    interactRug(); 
 	    break;
-	case "Trash Can":
+	case "Trash can":
 	    interactTrashCan();
 	    break;
 	case "Bookshelf":
@@ -328,10 +336,10 @@ public class Game{
 	case "Closet":
 	    interactCloset();
 	    break;
-	case "Bathroom":
+	case "Bathroom door":
 	    interactBathroom();
 	    break;
-	case "Vent":
+	case "Ceiling":
 	    interactVent();
 	}
     }
@@ -607,7 +615,7 @@ public class Game{
 	    c = this.AskUserI("\n[1]Inspect poster\n[2]Flip poster\n[3]Leave it\n");
 	    switch(c){
 	    case 1:
-		System.out.println("It is a poster of the periodic table of elements.");
+		System.out.println(table);
 		break;
 	    case 2:     
 		System.out.println("\nThere's a safe behind the poster!");
@@ -713,13 +721,13 @@ public class Game{
 		System.out.println("\nYou have entered the bathroom. There is a medicine cabinet above the sink and a rug at your feet.");
 		int i2 = 0;
 		while (i2 != 1){
-		    int c2 = this.AskUserI("\n[1]Open medicine cabinet doors\n[2]Turn on faucet\n[3]Lift rug\n[4]Leave bathroom");
+		    int c2 = this.AskUserI("\n[1]Open medicine cabinet doors\n[2]Turn on faucet\n[3]Lift rug\n[4]Leave bathroom\n");
 		    switch(c2){
 		    case 1:
-			System.out.println("You see a little metal box, a bunch of toothpaste, and various medicine");
+			System.out.println("\nYou see a little metal box, a bunch of toothpaste, and various medicine");
 			int i3 = 0;
 			while (i3 != 1){
-			    int c3 = this.AskUserI("\n[1]Open metal box\n[2]Close medicine cabinet door");
+			    int c3 = this.AskUserI("\n[1]Open metal box\n[2]Close medicine cabinet door\n");
 			    switch(c3){
 			    case 1:
 				System.out.println(bathroom.get(0).getDescript());
@@ -736,6 +744,7 @@ public class Game{
 			    }
 			    break;
 			}
+			break;
 		    case 2:
 			System.out.println(bathroom.get(5).getDescript());
 			if (bathroom.get(5).getStatus() == false){
@@ -923,13 +932,5 @@ public class Game{
 	    }
 	    return -1;
 	}
-    }
-
-    public static void main(String[] args){
-	String s = "";
-	for(int i = 128;i < 255;i++){
-	    s += i + ": " + (char)i + "\n";
-	}
-	System.out.println(s);
     }
 }
