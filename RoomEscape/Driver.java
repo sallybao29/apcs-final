@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.io.File;
 
 public class Driver{
 
@@ -42,7 +43,7 @@ public class Driver{
 
 	while (g.gameWon() == false && endGame == false){
 
-	    int r = d.AskUser("\n[1]Inspect an object, [2]Look at Inventory, [3]Exit Game\n");
+	    int r = d.AskUser("\n[1]Inspect an object, [2]Look at Inventory, [3]Exit Game, [4]See Walkthrough\n");
 	    switch(r){
 	    case 1:
 		int i = 0;
@@ -90,6 +91,9 @@ public class Driver{
 	    case 3:
 		endGame = true;
 		break;
+	    case 4:
+		showWalkthrough("Walkthrough.txt");
+		break;
 	    default:
 		System.out.println(g.getM());
 	    }	
@@ -101,6 +105,20 @@ public class Driver{
 	else{
 	    System.out.println("\nYes! You're finally free!");
 	    g.Scenario();
+	}
+    }
+
+    public static void showWalkthrough(String f){
+	Scanner sc = null;
+	try {
+	    sc = new Scanner(new File(f));
+	} catch (Exception e) {
+	    System.out.println("File not found");
+	    System.exit(0);
+	}
+	while (sc.hasNext()){
+	    String s = sc.next();
+	    System.out.println(s);
 	}
     }
 
