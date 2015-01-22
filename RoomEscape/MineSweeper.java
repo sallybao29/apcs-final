@@ -9,7 +9,7 @@ public class MineSweeper {
     private boolean quit = false;
     private boolean skip = false;
     private boolean lost = false;
-    private int mineNum = 10; //difficulty level based on number of mines
+    private int mineNum = 10;
     private int adjacent = 0; //number of mines nearby
 	
     public void setMineNum(int n){
@@ -18,7 +18,7 @@ public class MineSweeper {
 	
     public void generateGame(){
 	//set up mines
-	int r, c;		
+	int r, c;
 	Random rand = new Random();
 		
 	while (mineNum > 0){
@@ -115,8 +115,8 @@ public class MineSweeper {
     public void userInteract(){
 	System.out.println(ansToString());
 	while (solved == false && lost == false && quit == false && skip == false){
-	    System.out.println("Current Board: \n" + toString());
-	    String c = this.AskUser("Location (or skip, or quit): ");
+	    System.out.println("\n           Current Board: \n\n" + toString());
+	    String c = this.AskUser("Location (or skip, quit, or check): ");
 			
 	    // allows the user to temporarily quit the puzzle
 	    if (c.equals("quit")){
@@ -126,6 +126,15 @@ public class MineSweeper {
 	    // allows the user to permanently skip the puzzle
 	    else if (c.equals("skip")){
 		skip = true;
+	    }
+
+	    else if (c.equals("check")){
+	    	if (checkSolved() == true){
+	    	    solved = true;
+	    	}
+	    	else{
+	    	    System.out.println("\nSorry, keep trying!");
+	    	}
 	    }
 			
 	    else if (checkPossible(c) == true){
@@ -149,17 +158,18 @@ public class MineSweeper {
 	    }
 	}
 	if (lost == true){
-	    System.out.println("\nSorry, you have lost!");
+	    System.out.println("\n\nSorry, you have lost!");
 	}
 	else if (quit == true){
-	    System.out.println("\nOh well. You'll still try again later, right?");
+	    System.out.println("\n\nOh well. You'll still try again later, right?");
 	}
 	else if (skip == true){
-	    System.out.println("\nWHAT? You've skipped? But you're so close!");
+	    System.out.println("\n\nWHAT? You've skipped? But you're so close!");
 	}
 	else{
-	    System.out.println("\nYay, you've won! Good job clearing the field.");
+	    System.out.println("\n\n~***~ Yay, you've won! Good job clearing the field. ~***~");
 	}
+	wait(2000);
 	System.out.println("\nAnswer: \n");
 	System.out.println(ansToString());
     }
@@ -188,16 +198,15 @@ public class MineSweeper {
 		a--;
 	    }
 			
-	    else if (goingDown == true && b < board.length-1){
-		//revealRowEmpties(a,b,x,y);
-		System.out.println("[1]Next hints revealed");
+	    else if (goingDown == true && a < board.length-1){
+		System.out.println("[1]Below hints revealed");
 		revealEmptyHints(a,b,x,y,a-1);
 		goingDown = false;
 		b = y;
 	    }
 			
-	    else if (goingDown == false && b > 0){
-		System.out.println("[2]Next hints revealed");
+	    else if (goingDown == false){
+		System.out.println("[2]Above hints revealed");
 		revealEmptyHints(a,b,x,y,a+1);
 		break;
 	    }
@@ -234,7 +243,7 @@ public class MineSweeper {
 	    }
 			
 	    //finished row
-	    else if (goingRight == false && b >= 0){
+	    else if (goingRight == false){
 		show[a][b] = true;
 		break;
 	    }
@@ -244,7 +253,7 @@ public class MineSweeper {
     public void revealEmptyHints(int a, int b, int x, int y, int check){
 	boolean goingRight = true;
 
-	while (b > 0){
+	while (b >= 0){
 	    System.out.println(b);
 			
 	    if (goingRight == true && b == board[x].length-1){
@@ -268,7 +277,7 @@ public class MineSweeper {
 		b = y;
 	    }
 			
-	    else if (goingRight == false && b >= 0){
+	    else if (goingRight == false){
 		show[a][b] = true;
 		break;
 	    }
@@ -301,6 +310,30 @@ public class MineSweeper {
 	return false; 
     }
 	
+	
+    //checks if board has been solved (checks if only mines are left unrevealed)
+    public boolean checkSolved(){
+	int unrevealed = 0;
+	for (int i = 0; i < show.length; i++){
+	    for (int j = 0; j < show[i].length; j++){
+		if (unrevealed > mineNum){
+		    return false;
+		}
+		else if (show[i][j] == false && !ans[i][j].equals("*")){
+		    unrevealed += 1;
+		}
+	    }
+	}
+	return true;
+    }
+
+    public static void wait(int num){
+	try{
+	    Thread.sleep(num);
+	}
+	catch (Exception e){}
+    }
+
     //user input
     public String AskUser(String mToUser){
 	String s = "";
