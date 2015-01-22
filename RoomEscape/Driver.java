@@ -34,7 +34,7 @@ public class Driver{
 
 	stuff.take(g.getRoom().get(10));
 
-	System.out.println("\nYou take a look around. Your bed seems very messy now that you can see it. Your desk is next to your bed, with a trash can underneath it. Your bag sits on the floor next to your desk, and there is a large rug in the center of the room. There is a bookshelf in the corner and a poster on the wall. You also see your closet doors and the door to the bathroom.");
+	System.out.println("\nYou take a look around. Your bed is a visible mess, with tossed clothes peeking out of haphazardly strewn sheets. A poster looms over the bed like a nagging mother, reminding you to study every day. A desk of carved oak rests by your bed, its neatness a stark contrast to your pigsty of a bed. You are assaulted with the smell of rotting fruit coming from the trash can under the desk and quickly move on. Your deformed bag sits on the floor next to your desk, some of its contents spilled onto the burned fringes of the circular rug that lies in the center of the room. There is a decrepit bookshelf in the corner that threatens to fall apart as soon as a book is removed. You also see the sliding doors of your closet and the door to the bathroom.");
     
 	System.out.println("\nNow that you've taken a good look at your room, what do you want to do?");
 
@@ -49,23 +49,8 @@ public class Driver{
 		while (i != 1 && g.gameWon() == false){
 		    int inspect = d.AskUser("\nYou want to inspect... \n[0]Bed\n[1]Desk\n[2]Bag\n[3]Rug\n[4]Trash can\n[5]Bookshelf\n[6]Poster\n[7]Closet\n[8]Bathroom door\n[9]Ceiling\n[10]Door\n[11]Nothing. Let's go back to the main menu\n");
 		    if (inspect >= 0 && inspect < 10){
-			System.out.println(g.getRoom().get(inspect).getDescript());
-			int i2 = 0;
-			while (i2 != 1){
-			    System.out.println("\nWhat do you want to do with it?");
-			    int c = d.AskUser("[1]Inspect further, [2]Move on\n");
-			    switch(c){
-			    case 1:
-				g.interact(g.getRoom().get(inspect).getName());
-				i2 = 1;
-				break;
-			    case 2:
-				i2 = 1;
-				break;
-			    default:
-				System.out.println(g.getM());
-			    }
-			}
+			System.out.println(g.getRoom().get(inspect).getDescript());	      
+			g.interact(g.getRoom().get(inspect).getName());
 		    }
 		    else if (inspect == 10){
 			g.checkDoor();

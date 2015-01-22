@@ -10,7 +10,7 @@ public class Game{
     private ArrayList<Item> bathroom = new ArrayList<Item>();
     private ArrayList<Item> bookshelf = new ArrayList<Item>();
     private ArrayList<Item> compartment = new ArrayList<Item>();
-    private ArrayList<String> answer = new ArrayList<String>(Arrays.asList("Apple", "Forceps", "Fig", "Philosophi" + (char)230 + " Naturalis Principia Mathematica"));
+    private ArrayList<String> answer = new ArrayList<String>(Arrays.asList("Apple", "Forceps", "Fig", "Philosophi"+(char)230+" Naturalis Principia Mathematica"));
     private String msg = "\nPlease enter a valid choice", qsg = "Type 'return' to exit current option", ssg = "Type 'skip' to bypass a puzzle";
     private String equip = "None";
     private int grade = 100, sgrade = -10, fgrade = -1;
@@ -94,7 +94,7 @@ public class Game{
 	bookshelf.add(new Item("The Oedipus Cycle", "\nThe ancient myth of Oedipus, which still reverberates\nto this day, provided Sophocles with material for three\ngrea tragedies Oedipus Rex, Oedipus at Colonus and Antigone that\ntogether show how 'nobles are outrageously lab', by\nrecounting the downfall of Oedipus, king of Thebes, his\ndeath in exile, and the action carried out after his death by his\ndaughter Antigone.\n", true));  //1
 	bookshelf.add(new Item("Principles of Quantum Mechanics", "It's full of equations and greek letters\n", true)); //3
 	bookshelf.add(new Item("Hamlet", "Readers have for the first time, a unique\nopportunity to study the three surviving texts of Hamlet\nexperienced by Shakespeare's contemporaries, fully\nmodernized and edited by leading scholars.\n", true));  //4
-	bookshelf.add(new Item("Philosophi" + (char)230 + " Naturalis Principia Mathematica", "\nRational Mechanics will be the science of motions resulting\nfrom any forces whatsoever, and of the forces\nrequired to produce any motions, accurately proposed\nand demonstrated. And therefore we offer this work\nas mathematical principles of philosophy. For all the\ndifficulty of philosophy seems to consist in this: from the\nphenomena of motions to investigate the forces of\ncat pain, and then from these forces to\ndemonstrate the other phenomena.\n", true));  //5
+	bookshelf.add(new Item("Philosophi"+(char)230+" Naturalis Principia Mathematica", "\nRational Mechanics will be the science of motions resulting\nfrom any forces whatsoever, and of the forces\nrequired to produce any motions, accurately proposed\nand demonstrated. And therefore we offer this work\nas mathematical principles of philosophy. For all the\ndifficulty of philosophy seems to consist in this: from the\nphenomena of motions to investigate the forces of\ncat pain, and then from these forces to\ndemonstrate the other phenomena.\n", true));  //5
 	bookshelf.add(new Item("How to Beat this Game", "\nStop reading this and take your mime.\n", true));  //6
 
 	room.get(7).setCompat("Acid");      //Closet
@@ -105,7 +105,7 @@ public class Game{
 	room.get(30).setCompat("Pencil");     //Scissors
 	room.get(22).setCompat("Pencil Shavings");   //Safe
 	room.get(22).setNDescript("There are distinctive fingerprint marks on the six key");
-	room.get(14).setCompat("ScrewDriver");   //Vent
+	room.get(14).setCompat("Screwdriver");   //Vent
 	room.get(0).setCompat("Forceps");    //Bed
 	closet.get(5).setCompat("Marble");    //Tissues
 	closet.get(5).setNewForm("Wet Tissues");  
@@ -213,6 +213,7 @@ public class Game{
 	else if(choice == 3){
 	    grade += fgrade;
 	}
+	wait(2000);
 	return choice < 3;
     }
 
@@ -602,23 +603,28 @@ public class Game{
 	    c = this.AskUserI("\n[1]Look at book\n[2]Now's not the time!\n");
 	    switch(c){
 	    case 1:
-		int book = this.AskUserI(list);
-		if (book >= 0 && book < bookshelf.size()){
-		    System.out.println(bookshelf.get(book - 1).getDescript());
-		    int c2;
-		    int i2 = 0;
-		    while (i2 != 1){
-			c2 = this.AskUserI("\nTake book? [1]Yes, [2]No\n");
-			switch(c2){
-			case 1:
-			    inventory.take(bookshelf.remove(book - 1));
-			    i2 = 1;
-			    break;
-			case 2:
-			    i2 = 1;
-			    break;       
-			default:
-			    System.out.println(msg);
+		if (bookshelf.size() == 0){
+		    System.out.println("\nThere are no more books left");
+		}
+		else{
+		    int book = this.AskUserI(list);
+		    if (book >= 0 && book < bookshelf.size()){
+			System.out.println(bookshelf.get(book - 1).getDescript());
+			int c2;
+			int i2 = 0;
+			while (i2 != 1){
+			    c2 = this.AskUserI("\nTake book? [1]Yes, [2]No\n");
+			    switch(c2){
+			    case 1:
+				inventory.take(bookshelf.remove(book - 1));
+				i2 = 1;
+				break;
+			    case 2:
+				i2 = 1;
+				break;       
+			    default:
+				System.out.println(msg);
+			    }
 			}
 		    }
 		}
@@ -695,7 +701,6 @@ public class Game{
 				inventory.take(closet.get(4));
 				inventory.take(closet.get(5));
 				closet.get(3).changeStatus();
-				closet.get(3).changeDescript("A spiffy hoody. You have already taken everything in the pockets.");
 			    }
 			    break;
 			case 2: System.out.println("\nNothing interesting. Just some old clothes you plan to donate"); break;
@@ -748,7 +753,7 @@ public class Game{
 		    int c2 = this.AskUserI("\n[1]Open medicine cabinet doors\n[2]Turn on faucet\n[3]Lift rug\n[4]Leave bathroom\n");
 		    switch(c2){
 		    case 1:
-			System.out.println("\nYou see a little metal box, a bunch of toothpaste, and various medicine");
+			System.out.println("\nYou see a little metal box, a tube of Crest toothpaste, and various bottles of medicine");
 			int i3 = 0;
 			while (i3 != 1){
 			    int c3 = this.AskUserI("\n[1]Open metal box\n[2]Close medicine cabinet door\n");
@@ -866,16 +871,11 @@ public class Game{
 	int i = 0;
 	int c;
 	while (i != 1){
-	    if (equip.equals("None")){
-		System.out.println("\nNothing is equipped");
-	    }
-	    else {
-		System.out.println("Currently Equipped: " + equip);
-	    }
+	    System.out.println("Currently Equipped: " + equip);
 	    c = this.AskUserI("\nChoose an item: ");
 	    if (c >= 0 && c < inventory.get().size()){
 		equip = inventory.get().get(c).getName();
-		System.out.println("<< Equipped " + equip + " >>"); 
+		System.out.println("\n<< Equipped " + equip + " >>\n"); 
 		i = 1;
 	    }
 	    else if (c == -2){
@@ -936,9 +936,9 @@ public class Game{
     public String AskUserS(String mToUser){
 	String s = "";
 	Scanner sc = new Scanner(System.in);
-	System.out.println(mToUser);      //presents option to player
+	System.out.println(mToUser);    
 	s = sc.nextLine();
-	return s;                        //returns player's choice
+	return s;                       
     }
 
     //used for all other interactions

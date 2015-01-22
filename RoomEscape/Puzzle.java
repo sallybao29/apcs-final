@@ -10,10 +10,6 @@ public class Puzzle extends Item{
 	solved = false;
     }
 
-    public String getAnswer(){
-	return answer;
-    }
-
     public boolean getSolved(){
 	return solved;
     }

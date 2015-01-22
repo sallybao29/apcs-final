@@ -47,10 +47,10 @@ public class Inventory{
 		b.changeDescript(b.getNDescript());
 		name = b.getNewForm();
 	    }
-	    System.out.println("Created " + name + " from " + aname + " and " + bname);
+	    System.out.println("\n<< Created " + name + " from " + aname + " and " + bname + " >>");
 	}
 	else {
-	    System.out.println("Why would you combine " + aname + " and " + bname + "?");
+	    System.out.println("\nWhy would you combine " + aname + " and " + bname + "?");
 	}
     }
 
