@@ -166,11 +166,35 @@ public class Game{
 	return list;
     }
 
-    /*------------------------------------------- GETS AND SETS ---------------------------------------------------*/
+    /*------------------------------------------- GETS AND SETS -------------------------------------------------*/
+
+    //creates a table for certain ASCII characters / symbols (#s 33-127)
 
     public String makeTable(){
-	for(int i = 33;i < 127;i++){
-	    table += i + ": " + (char)i + "\n";
+	int current = 33;
+	table = "\n                               ~ASCII~\n";
+	table += "\n|-------+--------+--------+--------+--------+--------+--------+--------|\n";
+	while (current < 127){
+	    for(int i = 0; i < 8; i++){
+		if (current < 100){
+		    if (i == 0){
+			table += "|" + current + ": " + (char)current + "  |";
+		    }
+		    else{
+			table += " " + current + ": " + (char)current + "  |";
+		    }
+		}
+		else{
+		    if (i == 0){
+			table += "|" + current + ": " + (char)current + " |";
+		    }
+		    else{
+			table += " " + current + ": " + (char)current + " |";
+		    }
+		}
+		current += 1;
+	    }
+	    table += "\n|-------+--------+--------+--------+--------+--------+--------+--------|\n";
 	}
 	return table;
     }
