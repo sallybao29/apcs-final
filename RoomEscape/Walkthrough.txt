@@ -21,7 +21,7 @@ Log on to Laptop with Password from Marble
 Notice capital letters in Letter from Parents
 Find syntax errors in Java code 
 Convert missing syntax to numbers with ASCII table on Poster
-Pasword should be in order of appearance of missing syntax
+Password should be in order of appearance of missing syntax
 
 [ Stage 2 ]
 
@@ -34,7 +34,7 @@ Enter the 4 color code numbers (in the order the colors appear on the dotted ind
 
 [ Stage 3 ]
 
-Put Apple, Philosophiæ Naturalis Principia Mathematica, Fig, and Forceps into Compartments
+Put Apple, PhilosophiÃ¦ Naturalis Principia Mathematica, Fig, and Forceps into Compartments
 Enter Password: Newton
 
 [ Stage 4 ]
