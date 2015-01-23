@@ -538,7 +538,8 @@ public class Game{
 	    case 2:
 		System.out.println("\nLooking at these grades is depressing.");
 		if (room.get(19).getStatus() == false){
-		    System.out.println("\nYou find the evil math test that has landed you in this mess!");
+		    System.out.println("\nYou find a note and the evil math test that has landed you in this mess!");
+		    inventory.take(room.get(23));
 		    inventory.take(room.get(19));
 		    room.get(19).changeStatus();
 		}
@@ -618,6 +619,12 @@ public class Game{
 		    int book = this.AskUserI(list);
 		    if (book > 0 && book <= bookshelf.size()){
 			System.out.println(bookshelf.get(book - 1).getDescript());
+			if (bookshelf.get(book - 1).getName().equals("Hamlet") &&
+			    bookshelf.get(book - 1).getStatus() == false){
+			    System.out.println("\nYou find a slip of paper sticking out");
+			    inventory.take(room.get(26));
+			    bookshelf.get(book - 1).changeStatus();
+			}
 			int c2;
 			int i2 = 0;
 			while (i2 != 1){
@@ -670,8 +677,9 @@ public class Game{
 		    String ans  = this.AskUserS("\nEnter password: ");
 		    wait(1000);
 		    if (evaluate(22, ans) == true){
-			System.out.println("\nYou find a bottle of acid in the safe");
+			System.out.println("\nYou find a bottle of acid and a note in the safe");
 			inventory.take(room.get(28));
+			inventory.take(room.get(27));
 		    }
 		}		   
 		break;		
