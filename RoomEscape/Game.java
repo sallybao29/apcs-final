@@ -298,7 +298,15 @@ public class Game{
 	    	if (stage == 5){
 	    	    MineSweeper m = new MineSweeper();
 	    	    m.generateGame();
-	    	    m.userInteract();
+		    boolean won =  m.userInteract();
+		    if (won == true){
+			stage++;
+		    }
+		    else{
+			if (m.getLost()){
+			    grade += fgrade;
+			}
+		    }
 	    	}
 		else if (((Puzzle)room.get(stage + 30)).getSolved() == false){
 		    if (stage == 3 && checkComp() == false){

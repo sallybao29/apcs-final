@@ -7,10 +7,13 @@ public class MineSweeper {
     private String rows = "ABCDEFGHI";
     private boolean solved = false;
     private boolean quit = false;
-    private boolean skip = false;
     private boolean lost = false;
     private int mineNum = 12;
     private int adjacent = 0; //number of mines nearby
+
+    public boolean getLost(){
+	return lost;
+    }
 	
     public void setMineNum(int n){
 	mineNum = n;
@@ -112,21 +115,15 @@ public class MineSweeper {
 	return s;
     }
 	
-    public void userInteract(){
-	while (solved == false && lost == false && quit == false && skip == false){
+    public boolean userInteract(){
+	while (solved == false && lost == false && quit == false){
 	    System.out.println("\n           Current Board: \n\n" + toString());
-	    String c = this.AskUser("Location (or skip, quit, or check): ");
+	    String c = this.AskUser("Location (or skip, or check): ");
 			
 	    // allows the user to temporarily quit the puzzle
 	    if (c.equals("quit")){
 		quit = true;
 	    }
-			
-	    // allows the user to permanently skip the puzzle
-	    else if (c.equals("skip")){
-		skip = true;
-	    }
-
 	    else if (c.equals("check")){
 	    	if (checkSolved() == true){
 	    	    solved = true;
@@ -162,15 +159,13 @@ public class MineSweeper {
 	else if (quit == true){
 	    System.out.println("\n\nOh well. You'll still try again later, right?");
 	}
-	else if (skip == true){
-	    System.out.println("\n\nWHAT? You've skipped? But you're so close!");
-	}
 	else{
 	    System.out.println("\n\n~***~ Yay, you've won! Good job clearing the field. ~***~");
 	}
 	wait(2000);
 	System.out.println("\nAnswer: \n");
 	System.out.println(ansToString());
+	return solved;
     }
 	
     //show all the empty squares next to the one chosen
