@@ -11,7 +11,7 @@ public class Game{
     private ArrayList<Item> bookshelf = new ArrayList<Item>();
     private ArrayList<Item> compartment = new ArrayList<Item>();
     private ArrayList<String> answer = new ArrayList<String>(Arrays.asList("Apple", "Forceps", "Fig", "Philosophi"+(char)230+" Naturalis Principia Mathematica"));
-    private String msg = "\nPlease enter a valid choice", qsg = "Type 'return' to exit current option", ssg = "Type 'skip' to bypass a puzzle";
+    private String msg = "\nPlease enter a valid choice";
     private String equip = "None";
     private int grade = 100, sgrade = -10, fgrade = -1;
     private String table;
@@ -90,12 +90,14 @@ public class Game{
 
 	/*------------------------------ The Bookshelf -----------------------------------------*/
 	
-	bookshelf.add(new Item("For the Love of Physics", "\nFrom the End of the Rainbow to the Edge of Time\nA Journey Through\nthe Wonders of Physics\nThe title page has been ripped out. The words 'sincere man' are scrawled across the first page\n", false));  //0
-	bookshelf.add(new Item("The Oedipus Cycle", "\nThe ancient myth of Oedipus, which still reverberates\nto this day, provided Sophocles with material for three\ngrea tragedies Oedipus Rex, Oedipus at Colonus and Antigone that\ntogether show how 'nobles are outrageously lab', by\nrecounting the downfall of Oedipus, king of Thebes, his\ndeath in exile, and the action carried out after his death by his\ndaughter Antigone.\n", true));  //1
-	bookshelf.add(new Item("Principles of Quantum Mechanics", "It's full of equations and greek letters\n", true)); //3
-	bookshelf.add(new Item("Hamlet", "Readers have for the first time, a unique\nopportunity to study the three surviving texts of Hamlet\nexperienced by Shakespeare's contemporaries, fully\nmodernized and edited by leading scholars.\n", true));  //4
-	bookshelf.add(new Item("Philosophi"+(char)230+" Naturalis Principia Mathematica", "\nRational Mechanics will be the science of motions resulting\nfrom any forces whatsoever, and of the forces\nrequired to produce any motions, accurately proposed\nand demonstrated. And therefore we offer this work\nas mathematical principles of philosophy. For all the\ndifficulty of philosophy seems to consist in this: from the\nphenomena of motions to investigate the forces of\ncat pain, and then from these forces to\ndemonstrate the other phenomena.\n", true));  //5
-	bookshelf.add(new Item("How to Beat this Game", "\nStop reading this and take your mime.\n", true));  //6
+	bookshelf.add(new Item("For the Love of Physics", "\nFrom the End of the Rainbow to the Edge of Time\nA Journey Through\nthe Wonders of Physics\nThe title page has been ripped out.\nThe words 'sincere man' are scrawled across the first page\n", true));  //0
+	bookshelf.add(new Item("The Importance of Being Earnest", "\nWhenever Jack Worthing slips away to London from his Hertfordshire estate he says he is going to see his brother Ernest. Once there he keeps his privacy by calling himself Ernest - luckily so as his beloved Gwendolen declares she could only love an Ernest. Her cousin Algy is the one person who knows Jack's secret and one day he travels down to the estate, announcing himself to Jack's attractive ward Cecily as Ernest. Cecily is much taken with his name, so on Jack's return home and Gwendoen's unexpectedly arrival it becomes clear there are both too many and too few Ernests earnestly courting.\n", true)); //1
+	bookshelf.add(new Item("How to Beat this Game", "\nStop reading this and take your mime.\n", true));  //2
+	bookshelf.add(new Item("The Oedipus Cycle", "\nThe ancient myth of Oedipus, which still reverberates\nto this day, provided Sophocles with material for three\ngrea tragedies Oedipus Rex, Oedipus at Colonus and Antigone that\ntogether show how 'nobles are outrageously lab', by\nrecounting the downfall of Oedipus, king of Thebes, his\ndeath in exile, and the action carried out after his death by his\ndaughter Antigone.\n", true));  //3
+	bookshelf.add(new Item("Principles of Quantum Mechanics", "It's full of equations and greek letters\n", true)); //4
+	bookshelf.add(new Item("Hamlet", "Readers have for the first time, a unique\nopportunity to study 'cat pain'\nexperienced by Shakespeare's contemporaries, fully\nmodernized and edited by leading scholars.\n", true));  //5
+	bookshelf.add(new Item("Philosophi"+(char)230+" Naturalis Principia Mathematica", "\nRational Mechanics will be the science of motions resulting\nfrom any forces whatsoever, and of the forces\nrequired to produce any motions, accurately proposed\nand demonstrated. And therefore we offer this work\nas mathematical principles of philosophy. For all the\ndifficulty of philosophy seems to consist in this: from the\nphenomena of motions to investigate the forces of\nnature, and then from these forces to\ndemonstrate the other phenomena.\n", true));  //6
+
 
 	room.get(7).setCompat("Acid");      //Closet
 	room.get(11).setNDescript("An emacs file is open. There is a piece of code on it:\n\nRandom r = new Random();\ndouble stress = r.nextDouble();\nboolean codeWorks = (r.nextInt(2) == 1);\npublic void writeCode()\n\tif (codeWorks){\n\t\tSystem.out.println(\"I am a GOD\");\n\t}\n\telse{\n\t\tif (stress > 0.7){\n\t\t\tsystem.out.println(\"RAGE QUIT\")\n\t\t\tSystem.exit(0);\n\t\t}\n\t\tcry();\n\t}\n}\n\nWhat could it mean?");   //Laptop
@@ -130,10 +132,7 @@ public class Game{
     public String getM(){
 	return msg;
     }
-    public String getQ(){
-	return qsg;
-    }
-
+ 
     public static void wait(int num){
 	try{
 	    Thread.sleep(num);
@@ -608,7 +607,7 @@ public class Game{
 		}
 		else{
 		    int book = this.AskUserI(list);
-		    if (book >= 0 && book < bookshelf.size()){
+		    if (book > 0 && book <= bookshelf.size()){
 			System.out.println(bookshelf.get(book - 1).getDescript());
 			int c2;
 			int i2 = 0;

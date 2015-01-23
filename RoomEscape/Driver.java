@@ -17,17 +17,23 @@ public class Driver{
 
 	int player = d.AskUser("Are you a new player? [1]Yes [2]No\n");
 	if (player == 1){
-	    System.out.println("...Huh? Where is this?");
-	    wait(2000);
+	    System.out.println("In the course of playing this game, if you encounter\na Puzzle you cannot solve, you may forgo it by typing \"skip\"");
+	    wait(3000);
+	    System.out.println("Doing so will cost you ten points. Wrong answers will cost you one point.");
+	    wait(3000);
+	    System.out.println("Remember, there is never not a penalty for guessing.");
+	    wait(3000);
+	    System.out.print("We wish you the best of luck as you proceed. The game will now start...");
+	    wait(5000);
+	    System.out.println("\n\n...Huh? Where is this?");
+	    wait(3000);
 	    System.out.println("You are lying in bed...Is this your room?");
-	    wait(2000);
-	    System.out.println("It's too dark to see. You go to flip the lights on, but nothing happens.");
-	    wait(2000);
-	    System.out.println("Instead, you turn on your lamp. The room is dimly lit.");
-	    wait(2000);
+	    wait(3000);
+	    System.out.println("You turn on the lights. The room is dimly lit.");
+	    wait(3000);
 	    System.out.println("There is a piece of paper taped to the door.");
-	    wait(2000);
-	    System.out.println("It says: "+ g.getRoom().get(10).getDescript());
+	    wait(3000);
+	    System.out.println("\nIt says: "+ g.getRoom().get(10).getDescript());
 	    wait(5000);
 	}
 
@@ -35,8 +41,9 @@ public class Driver{
 
 	stuff.take(g.getRoom().get(10));
 
-	System.out.println("\nYou take a look around. Your bed is a visible mess, with tossed clothes peeking out of haphazardly strewn sheets. A poster looms over the bed like a nagging mother, reminding you to study every day. A desk of carved oak rests by your bed, its neatness a stark contrast to your pigsty of a bed. You are assaulted with the smell of rotting fruit coming from the trash can under the desk and quickly move on. Your deformed bag sits on the floor next to your desk, some of its contents spilled onto the burned fringes of the circular rug that lies in the center of the room. There is a decrepit bookshelf in the corner that threatens to fall apart as soon as a book is removed. You also see the sliding doors of your closet and the door to the bathroom.");
-    
+	wait(3000);
+	System.out.println("\nYou take a look around. Your bed is a visible mess, with tossed clothes\npeeking out of haphazardly strewn sheets. A poster looms over the bed\nlike a nagging mother, reminding you to study every day. A desk of carved oak\nrests by your bed, its neatness a stark contrast to your pigsty of a bed.\nYou are assaulted with the smell of rotting fruit\ncoming from the trash can under the desk and quickly move on.\nYour deformed bag sits on the floor next to your desk, some\nof its contents spilled onto the burned fringes of\nthe circular rug that lies in the center of the room. There is a\ndecrepit bookshelf in the corner that threatens to fall apart\nas soon as a book is removed. You also see the \nsliding doors of your closet and the door to the bathroom.");
+	wait(6000);
 	System.out.println("\nNow that you've taken a good look at your room, what do you want to do?");
 
 	boolean endGame = false;
@@ -78,6 +85,7 @@ public class Driver{
 			catch(Exception e){
 			    System.out.println(g.getM());
 			}
+			wait(3000);
 			break;
 		    case 2:
 			g.toCombine();
@@ -117,7 +125,7 @@ public class Driver{
 	    System.exit(0);
 	}
 	while (sc.hasNext()){
-	    String s = sc.next();
+	    String s = sc.nextLine();
 	    System.out.println(s);
 	}
     }

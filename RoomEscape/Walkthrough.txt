@@ -1,1 +1,53 @@
-Testing
+<< The Great Walkthrough >>
+Feast Your Eyes Upon This Magnificent Specimen
+***Warning: If you have skipped any stages prior to looking at this walkthrough,
+you may need to perform the actions intended for that stage to access items 
+that will appear in later stages***
+
+Let it be noted that items accessible by simply inspecting an object will not beincluded in the walkthrough.
+ 
+Stage 1
+Combine Pencil and Scissors
+Use Pencil Shavings on Safe to reveal Password
+Use Acid on Closet door
+Soak Tissue in Bathroom sink
+Combine Wet Tissue and Marble
+Log on to Laptop with Password from Marble
+Notice capital letters in Letter from Parents
+Find syntax errors in Java code 
+Convert missing syntax to numbers with ASCII table on Poster
+Pasword should be in order of appearance of missing syntax
+
+Stage 2
+Use Screwdriver to open Vent in ceiling
+Use Key to open Drawer
+Pass Eight Game in Bag
+Use Paper Clips to unlock Box in Medicine Cabinet
+Lift Rug in Bathroom
+Enter the 4 color code numbers (in the order the colors appear on the first index card) into Door 2
+
+Stage 3
+Put Apple, Philosophiæ Naturalis Principia Mathematica, Fig, and Forceps into Compartments
+Enter Password: Newton
+
+Stage 4
+Examine The Oedipus Cycle - clue "Nobles are outrageously lab"
+Examine For the Love of Physics - clue "Sincere man"
+Examine Hamlet - clue "Cat pain"
+Nobles are outrageously lab == All your base are belong to us
+Cat pain == Captain
+Sincere man == Main screen
+
+Operator: [Main screen] turn on. 
+Captain: It's you!! 
+CATS: How are you gentlemen!!
+CATS: [All your base are belong to us.] 
+CATS: You are on the way to destruction. 
+Captain: What you say!!
+CATS: You have no chance to survive make your time.
+CATS: Ha ha ha ha...
+Operator:[Captain]!!
+
+Take the first letter of each clue
+Enter Password: Mac
+<< The Great Walkthrough >>
