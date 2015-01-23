@@ -33,21 +33,19 @@ public class Inventory{
     //if compatible, changes description and name of items,
     //showing they have interacted with each other
     public void combine(Item a, Item b){
-	String name;
 	String aname = a.getName(),
 	    bname = b.getName();
 	if (a.getCompat().equals(b.getName())){
 	    if (!a.getNewForm().equals("None")){
 	        a.setName(a.getNewForm());
 		a.changeDescript(a.getNDescript());
-		name = a.getNewForm();
+		System.out.println("\n<< Created " + a.getNewForm() + " from " + aname + " and " + bname + " >>");
 	    }
 	    else {
 	        b.setName(b.getNewForm());
 		b.changeDescript(b.getNDescript());
-		name = b.getNewForm();
+		System.out.println("\n<< Created " + b.getNewForm() + " from " + aname + " and " + bname + " >>");
 	    }
-	    System.out.println("\n<< Created " + name + " from " + aname + " and " + bname + " >>");
 	}
 	else {
 	    System.out.println("\nWhy would you combine " + aname + " and " + bname + "?");

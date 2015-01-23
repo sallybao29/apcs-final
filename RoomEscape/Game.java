@@ -74,7 +74,7 @@ public class Game{
 	closet.add(new Item("Paperclips", "Some colorful paperclips. You know what they are!", true));  //1
 	closet.add(new Item("Tin Box", "A silver tin box used for storing cookies", false));            //2
 	closet.add(new Item("Hoodie", "A spiffy hoodie", false));   //3
-	closet.add(new Item("Marble", "A dirty marble caked in grease", "A lustrous marble. The word Python is written on it", true));  //4
+	closet.add(new Item("Dirty Marble", "A dirty marble caked in grease", "A lustrous marble. The word Python is written on it", true));  //4
 	closet.add(new Item("Tissues", "A pack of tissues like the kind you get from Chinese people on the street", "A pack of slightly wet tissues", true));  //5
 	closet.add(new Item("Index card", "An index card with four colored dots: Red, Blue, Green, Purple", true)); //6
 	closet.add(new Item("Books", "Some old books", false)); //7
@@ -109,9 +109,10 @@ public class Game{
 	room.get(22).setNDescript("There are distinctive fingerprint marks on the six key");
 	room.get(14).setCompat("Screwdriver");   //Vent
 	room.get(0).setCompat("Forceps");    //Bed
-	closet.get(5).setCompat("Marble");    //Tissues
+	closet.get(5).setCompat("Dirty Marble");    //Tissues
 	closet.get(5).setNewForm("Wet Tissues");  
 	closet.get(4).setCompat("Wet Tissues");       //Marble
+	closet.get(4).setNewForm("Marble");
 	bathroom.get(0).setCompat("Paperclips");         
 	bathroom.get(5).setCompat("Tissues");	
     }
