@@ -9,6 +9,8 @@ Group Members: Sally Bao and Xiuzhen (Tiffany) Lei
 
 What's the project?: A cruelly difficult escape game. Will, at times, seem as if it were intentionally made to be impossible and trying. 
 
+To Play: java Driver
+
 Log
 ----------
 -12/24/14 - Added Inventory and Game files. Game.java has item information. Edited Puzzle.java - Sally
