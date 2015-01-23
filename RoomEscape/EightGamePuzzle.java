@@ -162,17 +162,5 @@ public class EightGamePuzzle{
 	s = sc.nextLine();
 	return s;
     }
-
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~Testing~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    public static void main(String[] args){
-	EightGamePuzzle p = new EightGamePuzzle();
-	p.generateGame(5);
-	boolean a = p.userSteps();
-	if (!a){
-	    System.out.println("done"); 
-	}
-    }
-
     
 }
