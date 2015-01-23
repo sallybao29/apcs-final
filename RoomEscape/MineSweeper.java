@@ -9,7 +9,7 @@ public class MineSweeper {
     private boolean quit = false;
     private boolean skip = false;
     private boolean lost = false;
-    private int mineNum = 10;
+    private int mineNum = 12;
     private int adjacent = 0; //number of mines nearby
 	
     public void setMineNum(int n){
@@ -113,7 +113,6 @@ public class MineSweeper {
     }
 	
     public void userInteract(){
-	System.out.println(ansToString());
 	while (solved == false && lost == false && quit == false && skip == false){
 	    System.out.println("\n           Current Board: \n\n" + toString());
 	    String c = this.AskUser("Location (or skip, quit, or check): ");
@@ -183,60 +182,106 @@ public class MineSweeper {
 	while (a >= 0){
 			
 	    if (goingDown == true && a == board.length-1){
-		revealRowEmpties(a,b,x,y);
+		revealRowEmpties(a,b,x,y,"n");
 		goingDown = false;
 		a = x;
 	    }
 			
 	    else if (emptyHelper(a,b) == true && goingDown == true){
-		revealRowEmpties(a,b,x,y);
+		revealRowEmpties(a,b,x,y,"n");
 		a++;
 	    }
 			
 	    else if (emptyHelper(a,b) == true && goingDown == false){
-		revealRowEmpties(a,b,x,y);
+		revealRowEmpties(a,b,x,y,"n");
 		a--;
 	    }
-			
+  
 	    else if (goingDown == true && a < board.length-1){
-		System.out.println("[1]Below hints revealed");
-		revealEmptyHints(a,b,x,y,a-1);
+		revealRowEmpties(a,b,x,y,"down");
 		goingDown = false;
 		b = y;
 	    }
 			
 	    else if (goingDown == false){
-		System.out.println("[2]Above hints revealed");
-		revealEmptyHints(a,b,x,y,a+1);
+		revealRowEmpties(a,b,x,y,"up");
 		break;
 	    }
 			
 	}
     }
 	
-    public void revealRowEmpties(int a, int b, int x, int y){
+    public void revealRowEmpties(int a, int b, int x, int y, String h){
+	int check;
+	if (h == "up"){
+	    check = a+1;
+	}
+	else if (h == "down"){
+	    check = a-1;
+	}
+	else{
+	    check = a;
+	}
+	    
 	//reveal empty squares in each row
 	boolean goingRight = true;
 	while(b >= 0){
+
+	    // if certain squares extend beyond the lowest 
+	    if (h == "up"){
+		if (emptyHelper(a,b) == true && a > 0 && show[a-1][b] == false){
+		    revealEmpties(a,b);
+		}
+	    }
+	    if (h == "down"){
+		if (emptyHelper(a,b) == true && a < board.length-1 && show[a+1][b] == false){
+		    revealEmpties(a,b);
+		}
+	    }
+
 	    //if end of board reached
 	    if (goingRight == true && b == board[x].length-1){
+		if (a > 0 && check == a){
+		    show[a-1][b] = true;
+		}
+		if (a < board.length-1 && check == a){
+		    show[a+1][b] = true;
+		}
 		show[a][b] = true;
 		goingRight = false;
 		b = y;
 	    }
 			
 	    //reveals if empty
-	    else if (emptyHelper(a,b) == true && goingRight == true){
+	    else if (emptyHelper(check,b) == true && goingRight == true){
+		if (a > 0 && check == a){
+		    show[a-1][b] = true;
+		}
+		if (a < board.length-1 && check == a){
+		    show[a+1][b] = true;
+		}
 		show[a][b] = true;
 		b++;
 	    }
-	    else if (emptyHelper(a,b) == true && goingRight == false){
+	    else if (emptyHelper(check,b) == true && goingRight == false){
+		if (a > 0 && check == a){
+		    show[a-1][b] = true;
+		}
+		if (a < board.length-1 && check == a){
+		    show[a+1][b] = true;
+		}
 		show[a][b] = true;
 		b--;
 	    }
 			
 	    //reveals hint next to empty square
 	    else if (goingRight == true && b < board[x].length-1){
+		if (a > 0 && check == a){
+		    show[a-1][b] = true;
+		}
+		if (a < board.length-1 && check == a){
+		    show[a+1][b] = true;
+		}
 		show[a][b] = true;
 		goingRight = false;
 		b = y;
@@ -244,40 +289,12 @@ public class MineSweeper {
 			
 	    //finished row
 	    else if (goingRight == false){
-		show[a][b] = true;
-		break;
-	    }
-	}
-    }
-	
-    public void revealEmptyHints(int a, int b, int x, int y, int check){
-	boolean goingRight = true;
-
-	while (b >= 0){
-	    System.out.println(b);
-			
-	    if (goingRight == true && b == board[x].length-1){
-		show[a][b] = true;
-		goingRight = false;
-		b = y;
-	    }
-			
-	    else if (emptyHelper(check,b) == true && goingRight == true){
-		show[a][b] = true;
-		b++;
-	    }
-	    else if (emptyHelper(check,b) == true && goingRight == false){
-		show[a][b] = true;
-		b--;
-	    }
-			
-	    else if (goingRight == true && b < board[x].length-1){
-		show[a][b] = true;
-		goingRight = false;
-		b = y;
-	    }
-			
-	    else if (goingRight == false){
+		if (a > 0 && check == a){
+		    show[a-1][b] = true;
+		}
+		if (a < board.length-1 && check == a){
+		    show[a+1][b] = true;
+		}
 		show[a][b] = true;
 		break;
 	    }
