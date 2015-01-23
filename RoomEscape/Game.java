@@ -680,7 +680,7 @@ public class Game{
 			System.out.println("\nYou find a bottle of acid and a note in the safe");
 			inventory.take(room.get(28));
 			inventory.take(room.get(27));
-		    }
+		   }
 		}		   
 		break;		
 	    case 3:
@@ -793,9 +793,7 @@ public class Game{
 		    case 2:
 			System.out.println(bathroom.get(5).getDescript());
 			if (bathroom.get(5).getStatus() == false){
-			    if (bathroom.get(5).toUse(inventory.find(equip), "You soaked the tissues in the water.") == true){
-				inventory.find(equip).setName(inventory.find(equip).getNewForm());
-			    }
+			    bathroom.get(5).toUse(inventory.find(equip), "You soaked the tissues in the water.");	        
 			}
 			break;
 		    case 3:

@@ -23,6 +23,7 @@ public class Puzzle extends Item{
 		this.changeDescript(this.getNDescript());
 	    }
 	    System.out.println(smessage);
+	    this.changeStatus();
 	    if (attempt.equals("skip")){
 		return 2;
 	    }

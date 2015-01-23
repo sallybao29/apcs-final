@@ -87,6 +87,13 @@ public class Item{
 	    if (!this.newDescript.equals("None")){
 		this.description = this.newDescript;
 	    }
+	    if (!other.newform.equals("None")){
+		other.name = other.newform;
+		other.newform = "None";
+	    }
+	     if (!other.newDescript.equals("None")){
+		other.description = other.newDescript;
+	    }
 	    this.used = true;
 	    other.used = true;
 	}
