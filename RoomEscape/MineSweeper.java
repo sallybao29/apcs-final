@@ -5,14 +5,18 @@ public class MineSweeper {
     private String[][] ans = new String[9][9];
     private boolean[][] show = new boolean[9][9]; //tracks squares user has checked
     private String rows = "ABCDEFGHI";
-    private boolean solved = false;
-    private boolean quit = false;
-    private boolean lost = false;
+    private boolean solved = false, 
+	quit = false,
+	lost = false,
+	skip = false;
     private int mineNum = 12;
     private int adjacent = 0; //number of mines nearby
 
     public boolean getLost(){
 	return lost;
+    }
+    public boolean getSkip(){
+	return skip;
     }
 	
     public void setMineNum(int n){
@@ -116,24 +120,27 @@ public class MineSweeper {
     }
 	
     public boolean userInteract(){
-	while (solved == false && lost == false && quit == false){
+	while (!solved && !lost && !quit && !skip){
 	    System.out.println("\n           Current Board: \n\n" + toString());
-	    String c = this.AskUser("Location (or skip, or check): ");
+	    String c = this.AskUser("Location, skip, quit, or check: ");
 			
 	    // allows the user to temporarily quit the puzzle
-	    if (c.equals("quit")){
+	    switch(c){
+	    case "quit":
 		quit = true;
-	    }
-	    else if (c.equals("check")){
-	    	if (checkSolved() == true){
-	    	    solved = true;
-	    	}
-	    	else{
+		break;
+	    case "skip":
+		solved = true;
+		skip = true;
+		break;
+	    case "check":
+		solved = checkSolved();
+		if (!solved){
 	    	    System.out.println("\nSorry, keep trying!");
 	    	}
-	    }
-			
-	    else if (checkPossible(c) == true){
+		break;
+	    }			
+	    if (checkPossible(c) == true){
 		int choicex = rows.indexOf(c.substring(0,1).toUpperCase());
 		int choicey = Integer.parseInt(c.substring(1,2))-1;
 		show[choicex][choicey] = true;
@@ -155,6 +162,9 @@ public class MineSweeper {
 	}
 	if (lost == true){
 	    System.out.println("\n\nSorry, you have lost!");
+	}
+	else if (skip ==  true){
+	    System.out.println("\n\nYou skipped? But you were so close!");
 	}
 	else if (quit == true){
 	    System.out.println("\n\nOh well. You'll still try again later, right?");

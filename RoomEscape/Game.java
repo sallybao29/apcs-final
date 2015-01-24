@@ -15,6 +15,7 @@ public class Game{
     private String equip = "None";
     private int grade = 100, sgrade = -10, fgrade = -1;
     private String table;
+    private boolean filledRight = false;
 
     public Game(){   ///Setting up every single item in the room, labeled for convenience
 	gameWon = false;
@@ -63,7 +64,7 @@ public class Game{
 	
 	room.add(new Puzzle("Door1", "A high-tech metal door. Gears and rivets run down its center.\nThere is no handle.\n", "1238359", "The password lights up in green and a confirming beep is heard.\nThe gears on the door spin rapidly, and the two sides part."));  //31
 	room.add(new Puzzle("Door2", "The sign on the door reads 'Color Code'.\n", "6890", "\nThe door slides upwards, revealing...?!\n"));  //32
-	room.add(new Puzzle("Door3", "A large set of imposing, stone doors.\nThere are graphic images carved onto its surface of people being impaled and defenestrated.\nFour small compartments rest at the foot of the door.\n", "Newton", "Without warning, the doors come crashing down. You manage to jump out of the way just they impact the floor and shatter into a million pieces."));  //33
+	room.add(new Puzzle("Door3", "A large set of imposing, stone doors.\nThere are graphic images carved onto its surface of people being impaled and defenestrated.\nFour small compartments rest at the foot of the door.\n", "Newton", "Without warning, the doors come crashing down. You manage to jump out of the way just as they impact the floor and shatter into a million pieces."));  //33
 	room.add(new Puzzle("Door4", "The door is divided into four separate sections that fit together like puzzle pieces. Mounted at their intersection is a shiny interface that displays some text:\n\nCaptain: What happen?\nMechanic: Somebody set up us the bomb.\nOperator: We get signal.\nCaptain: What!\nOperator: ---- ------ turn on.\nCaptain: It's you!!\nCATS: How are you gentlemen!!\nCATS: --- ---- ---- --- ------ -- --\nCATS: You are on the way to destruction.\nCaptain: What you say!!\nCATS: You have no chance to survive make your time.\nCATS: Ha ha ha ha...\nOperator: -------!!\nCaptain: Take off every 'ZIG'!!\nCaptain: You know what you doing.\nCaptain: Move 'ZIG'.\nCaptain: For great justice.\n\n", "Mac", "You easily slide the door open."));  //34
 	room.add(new Puzzle("Door5", "A door with random math symbols carved into it.\n", "", "You hear a click and slowly slide the door open."));  //35
 
@@ -250,12 +251,12 @@ public class Game{
 		    System.out.println(inventory);
 		    option = this.AskUserI("\nWhich object do you want to place?\n");
 		    try {
-			Item item = inventory.get().get(option);
+			Item item = inventory.get().get(option - 1);
 			System.out.println("\nYou placed the " + item + " in the compartment");
 			if (answer.contains(item.getName())){
 			    System.out.println("\nThe compartment you place the " + item + " in glows faintly");
 			}
-			compartment.add(inventory.get().remove(option));
+			compartment.add(inventory.get().remove(option - 1));
 		    }
 		    catch (Exception e){
 			System.out.println(msg);
@@ -289,49 +290,70 @@ public class Game{
     //game is cleared when all five doors have been passed
     public void checkDoor(){
 	int i = 0;
-	String ans;
+	String ans = "";
 	while (i != 1 && stage < 6){
 	    System.out.println("\nYou are at Door " + stage + "\n" + room.get(stage + 30).getDescript()); 
-	    int c = this.AskUserI("\nTry to solve the puzzle?\n[1]Yes\n[2]Skip\n[3]No\n");
+	    int c = this.AskUserI("\nTry to solve the puzzle?\n[1]Yes\n[2]No\n");
 	    switch (c){
 	    case 1:
 	    	if (stage == 5){
 	    	    MineSweeper m = new MineSweeper();
 	    	    m.generateGame();
 		    boolean won =  m.userInteract();
-		    if (won == true){
+		    if (won){
 			stage++;
+			if (m.getSkip()){
+			    grade += sgrade;
+			}
 		    }
-		    else{
-			if (m.getLost()){
+		    else if (m.getLost()){
 			    grade += fgrade;
 			}
 		    }
-	    	}
-		else if (((Puzzle)room.get(stage + 30)).getSolved() == false){
-		    if (stage == 3 && checkComp() == false){
-			System.out.println("\nIt looks like you'll have to fill the compartments first.");
-			fillComp();
-		    }
-		    else {
-			ans = this.AskUserS("\nKey-in the passcode: ");
-			wait(1000);
-		        if (evaluate(stage + 30, ans) == true){
-			    if (stage < 5){
-				wait(3000);
-				System.out.println("\nAlas, there is another door behind it\n");
+		else if (((Puzzle)room.get(stage + 30)).getSolved() == false){	
+		    int i2 = 0;
+		    if (stage == 3){
+			while (i2 != 1){
+			    int c2 = this.AskUserI("\n[1]Fill compartments\n[2]Attempt answer\n[3]Return\n");
+			    filledRight = checkComp();
+			    switch(c2){
+			    case 1:
+				fillComp();
+				break;
+			    case 2:
+				ans = this.AskUserS("\nKey-in the passcode: ");
+				if (ans.equals("skip")){
+				    filledRight = true;
+				    i2 = 1;
+				}
+				else {
+				    System.out.println("\nYou did not place the correct objects into the compartments.\nTyping the answer has no effect.\n");
+				}
+				break;
+			    case 3:
+				i2 = 1;
+				break;
+			    default:
+				System.out.println(msg);
 			    }
-			    stage++;
+			}
+		    }
+		    else{
+			filledRight = true;			    	 
+			ans = this.AskUserS("\nKey-in the passcode: ");
+		    }		
+		    wait(1000);
+		    if (filledRight == true && evaluate(stage + 30, ans) == true){
+			stage++;
+			if (stage < 5){
+			    wait(2000);
+			    System.out.println("\nAlas, there is another door behind it\n");
+			    wait(2000);
 			}
 		    }
 		}
 		break;
 	    case 2:
-		System.out.println("\nA Puzzle of this level? Do you even try?");
-		evaluate(stage + 30, "skip");
-		stage++;
-		break;
-	    case 3:
 		i = 1; break;
 	    default:
 		System.out.println(msg);
@@ -398,7 +420,7 @@ public class Game{
 	    case 3:
 		System.out.println("\nA colony of dust bunnies is thriving under the bed");
 		if (room.get(0).getStatus() == false){
-		    System.out.println("\nThere seems to be a piece of paper in the corner");
+		    System.out.println("There seems to be a piece of paper in the corner");
 		    if (room.get(0).toUse(inventory.find(equip), "You used the forceps to grab the paper") == true){
 			inventory.take(room.get(25));
 		    }
@@ -680,6 +702,7 @@ public class Game{
 			System.out.println("\nYou find a bottle of acid and a note in the safe");
 			inventory.take(room.get(28));
 			inventory.take(room.get(27));
+			room.get(22).changeDescript("The safe where you stash your loot");
 		   }
 		}		   
 		break;		
